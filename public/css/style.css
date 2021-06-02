@@ -63,3 +63,18 @@ body {
   background-color: rgb(64, 145, 185);
   color: white;
 }
+
+#badgebutton {
+  margin-left: 15px;
+  background-color: #555;
+  color: white;
+  text-decoration: none;
+  padding: 5px 15px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+#badgebutton:hover {
+  background: #069;
+}
