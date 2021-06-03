@@ -1,6 +1,8 @@
 <div class="container">
-    <h1>Customer</h1>
-    <h3>Daftar Customer</h3>
+    <h1>Daftar Customer</h1>
+
+    <a class="editButton" href="<?= BASEURL; ?>/Customer/addPage">Tambah data </a>
+
 
     <table id="customers">
         <tr>
@@ -11,7 +13,7 @@
             <tr>
                 <td>
                     <?= $cust['customer_name']; ?>
-                    <a href="<?= BASEURL; ?>/Customer/detail/<?= $cust['customer_id']; ?>" id="badgebutton" style="float:right">Detail</a>
+                    <a href="<?= BASEURL; ?>/Customer/detail/<?= $cust['customer_id']; ?>" class="detailButton detail" style="float:right">Detail</a>
                 </td>
 
             </tr>
@@ -20,4 +22,5 @@
         <!-- ------------------------------------------------------------- -->
 
     </table>
+
 </div>

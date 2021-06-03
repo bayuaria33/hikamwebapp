@@ -18,4 +18,21 @@ class Customer extends Controller
         $this->view('customer/detail', $data);
         $this->view('templates/footer');
     }
+
+    public function addPage()
+    {
+        $data['judul'] = "Tambah data Customer";
+        $this->view('templates/header', $data);
+        $this->view('customer/addPage');
+        $this->view('templates/footer');
+    }
+
+
+    public function tambah()
+    {
+        if ($this->model('Customer_model')->tambahDataCustomer($_POST) > 0) {
+            header('Location: ' . BASEURL . '/Customer');
+            exit;
+        }
+    }
 }

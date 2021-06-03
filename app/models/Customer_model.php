@@ -21,4 +21,34 @@ class Customer_model
         $this->db->bind('customer_id', $customer_id);
         return $this->db->single();
     }
+
+
+    public function getCustomerId()
+    {
+        $this->db->query("SELECT customer_id FROM " . $this->table);
+        return $this->db->resultSet();
+    }
+
+    public function tambahDataCustomer($data)
+    {
+        $IdArray = $this->getCustomerId();          // wkwkwkwkwkkwkw
+        $lastId = end($IdArray);                    // satu block code ini cuman buat ngambil Id terakhir doang, soalnya gak autoincrement
+        $lastIdInt = (int)$lastId['customer_id'];   // wkwkwkwkwkkwkw
+        $newIdInt = $lastIdInt + 1;                 // wkwkwkwkwkkwkw
+
+
+        $query = "INSERT INTO " . $this->table . " VALUES(:customer_id, :customer_name, :alamat1, :alamat2, :no_telp1, :no_telp2, :email) ";
+        $this->db->query($query);
+        $this->db->bind('customer_id', $newIdInt);
+        $this->db->bind('customer_name', $data['customer_name']);
+        $this->db->bind('alamat1', $data['alamat1']);
+        $this->db->bind('alamat2', $data['alamat2']);
+        $this->db->bind('no_telp1', $data['no_telp1']);
+        $this->db->bind('no_telp2', $data['no_telp2']);
+        $this->db->bind('email', $data['email']);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }

@@ -29,6 +29,7 @@ class Database
     {
         $this->stmt = $this->dbh->prepare($query);
     }
+
     public function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
@@ -64,5 +65,10 @@ class Database
     {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function rowCount()
+    {
+        return $this->stmt->rowCount();
     }
 }
