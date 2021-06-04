@@ -31,6 +31,11 @@ class Customer extends Controller
     public function tambah()
     {
         if ($this->model('Customer_model')->tambahDataCustomer($_POST) > 0) {
+            Flasher::setFlash('Berhasil', 'ditambahkan');
+            header('Location: ' . BASEURL . '/Customer');
+            exit;
+        } else {
+            Flasher::setFlash('Gagal', 'ditambahkan');
             header('Location: ' . BASEURL . '/Customer');
             exit;
         }

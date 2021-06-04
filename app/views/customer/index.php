@@ -1,26 +1,29 @@
 <div class="container">
-    <h1>Daftar Customer</h1>
+    <div>
+        <br>
+        <?php Flasher::flash() ?>
+        <h1>Daftar Customer</h1>
 
-    <a class="editButton" href="<?= BASEURL; ?>/Customer/addPage">Tambah data </a>
+        <a class="editButton" href="<?= BASEURL; ?>/Customer/addPage">Tambah data </a>
 
 
-    <table id="customers">
-        <tr>
-            <th>Nama</th>
-        </tr>
-
-        <?php foreach ($data['cust'] as $cust) : ?>
+        <table id="customers">
             <tr>
-                <td>
-                    <?= $cust['customer_name']; ?>
-                    <a href="<?= BASEURL; ?>/Customer/detail/<?= $cust['customer_id']; ?>" class="detailButton detail" style="float:right">Detail</a>
-                </td>
-
+                <th>Nama</th>
             </tr>
-        <?php endforeach; ?>
 
-        <!-- ------------------------------------------------------------- -->
+            <?php foreach ($data['cust'] as $cust) : ?>
+                <tr>
+                    <td>
+                        <?= $cust['customer_name']; ?>
+                        <a href="<?= BASEURL; ?>/Customer/detail/<?= $cust['customer_id']; ?>" class="detailButton detail" style="float:right">Detail</a>
+                    </td>
 
-    </table>
+                </tr>
+            <?php endforeach; ?>
 
-</div>
+            <!-- ------------------------------------------------------------- -->
+
+        </table>
+
+    </div>
