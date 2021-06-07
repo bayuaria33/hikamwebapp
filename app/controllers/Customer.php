@@ -40,4 +40,16 @@ class Customer extends Controller
             exit;
         }
     }
+    public function hapus($customer_id)
+    {
+        if ($this->model('Customer_model')->hapusDataCustomer($customer_id) > 0) {
+            Flasher::setFlash('Berhasil', 'dihapus');
+            header('Location: ' . BASEURL . '/Customer');
+            exit;
+        } else {
+            Flasher::setFlash('Gagal', 'dihapus');
+            header('Location: ' . BASEURL . '/Customer');
+            exit;
+        }
+    }
 }

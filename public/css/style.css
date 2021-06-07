@@ -66,8 +66,8 @@ body {
 
 .detailButton {
   margin-left: 20px;
-  box-shadow: inset 0px 39px 0px -24px #e67a73;
-  background-color: #e4685d;
+  box-shadow: inset 0px 39px 0px -24px #7388e6;
+  background-color: #5d5fe4;
   border-radius: 4px;
   border: 1px solid #ffffff;
   display: inline-block;
@@ -77,18 +77,17 @@ body {
   font-size: 15px;
   padding: 6px 15px;
   text-decoration: none;
-  text-shadow: 0px 1px 0px #b23e35;
+  text-shadow: 0px 1px 0px #3735b2;
 }
 .detailButton:hover {
-  background-color: #ad4f48;
+  background-color: #2a3c63;
 }
 .detailButton:active {
   position: relative;
   top: 1px;
 }
-
-.editButton {
-  margin-bottom: 10px;
+.redButton {
+  margin-left: 20px;
   box-shadow: inset 0px 39px 0px -24px #e67a73;
   background-color: #e4685d;
   border-radius: 4px;
@@ -102,8 +101,30 @@ body {
   text-decoration: none;
   text-shadow: 0px 1px 0px #b23e35;
 }
-.editButton:hover {
+.redButton:hover {
   background-color: #ad4f48;
+}
+.redButton:active {
+  position: relative;
+  top: 1px;
+}
+.editButton {
+  margin-bottom: 10px;
+  box-shadow: inset 0px 39px 0px -24px #44c767;
+  background-color: #399652;
+  border-radius: 4px;
+  border: 1px solid #ffffff;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 6px 15px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #2d7e42;
+}
+.editButton:hover {
+  background-color: #266e39;
 }
 .editButton:active {
   position: relative;

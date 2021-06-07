@@ -51,4 +51,15 @@ class Customer_model
 
         return $this->db->rowCount();
     }
+
+    public function hapusDataCustomer($customer_id)
+    {
+        $query = "DELETE FROM " . $this->table . " WHERE customer_id = :customer_id";
+        $this->db->query($query);
+        $this->db->bind('customer_id', $customer_id);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
