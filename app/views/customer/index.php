@@ -17,6 +17,7 @@
                     <td>
                         <?= $cust['customer_name']; ?>
                         <a href="<?= BASEURL; ?>/Customer/hapus/<?= $cust['customer_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
+                        <a href="<?= BASEURL; ?>/Customer/editPage/<?= $cust['customer_id']; ?>" class="editButton" style="float:right">Edit</a>
                         <a href="<?= BASEURL; ?>/Customer/detail/<?= $cust['customer_id']; ?>" class="detailButton" style="float:right">Detail</a>
                     </td>
 

@@ -62,4 +62,27 @@ class Customer_model
 
         return $this->db->rowCount();
     }
+
+    public function editDataCustomer($data)
+    {
+        echo '<pre>', var_dump($data), '</pre>';
+        $query = "UPDATE " . $this->table . " SET customer_name=:customer_name, 
+        alamat1=:alamat1, 
+        alamat2 =:alamat2, 
+        no_telp1 =:no_telp1,
+        no_telp2 =:no_telp2, 
+        email=:email 
+            WHERE customer_id=:customer_id";
+        $this->db->query($query);
+        $this->db->bind('customer_id', $data['customer_id']);
+        $this->db->bind('customer_name', $data['customer_name']);
+        $this->db->bind('alamat1', $data['alamat1']);
+        $this->db->bind('alamat2', $data['alamat2']);
+        $this->db->bind('no_telp1', $data['no_telp1']);
+        $this->db->bind('no_telp2', $data['no_telp2']);
+        $this->db->bind('email', $data['email']);
+
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
 }

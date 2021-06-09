@@ -87,7 +87,6 @@ body {
   top: 1px;
 }
 .redButton {
-  margin-left: 20px;
   box-shadow: inset 0px 39px 0px -24px #e67a73;
   background-color: #e4685d;
   border-radius: 4px;
@@ -216,4 +215,8 @@ input[type="submit"]:hover {
 
 .closebtn:hover {
   color: black;
+}
+
+.hidden {
+  display: none;
 }
