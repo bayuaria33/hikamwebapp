@@ -85,4 +85,14 @@ class Customer_model
         $this->db->execute();
         return $this->db->rowCount();
     }
+
+    public function cariDataCustomer()
+    {
+        $keyword = $_POST['keyword'];
+        $query = "SELECT * FROM " . $this->table . " WHERE customer_name LIKE :keyword";
+        $this->db->query($query);
+        $this->db->bind('keyword', "%$keyword%");
+
+        return $this->db->resultSet();
+    }
 }

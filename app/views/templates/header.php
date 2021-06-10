@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman <?= $data['judul']; ?></title>
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/style.css">
-
 </head>
 
 <body>
@@ -15,7 +14,7 @@
         <li><a href="<?= BASEURL; ?>"> HIKAM WEB APP </a></li>
         <li><a href="<?= BASEURL; ?>"> Home </a></li>
         <li><a href="<?= BASEURL; ?>/Customer"> Customer </a></li>
-        <li><a href="<?= BASEURL; ?>/About"> About </a></li>
+        <!-- <li><a href="<?= BASEURL; ?>/About"> About </a></li> -->
 
         <li style="float:right"><a href="<?= BASEURL; ?>"> Login </a></li>
     </ul>

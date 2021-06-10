@@ -74,4 +74,13 @@ class Customer extends Controller
             exit;
         }
     }
+
+    public function cari()
+    {
+        $data['judul'] = "Daftar Customer";
+        $data['cust'] = $this->model('Customer_model')->cariDataCustomer();
+        $this->view('templates/header', $data);
+        $this->view('customer/index', $data);
+        $this->view('templates/footer');
+    }
 }
