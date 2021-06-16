@@ -14,6 +14,7 @@
         <li><a href="<?= BASEURL; ?>"> HIKAM WEB APP </a></li>
         <li><a href="<?= BASEURL; ?>"> Home </a></li>
         <li><a href="<?= BASEURL; ?>/Customer"> Customer </a></li>
+        <li><a href="<?= BASEURL; ?>/Supplier"> Supplier </a></li>
         <!-- <li><a href="<?= BASEURL; ?>/About"> About </a></li> -->
 
         <li style="float:right"><a href="<?= BASEURL; ?>"> Login </a></li>
