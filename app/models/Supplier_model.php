@@ -55,7 +55,7 @@ class Supplier_model
         return $this->db->rowCount();
     }
 
-    public function hapusDataSupplier($auplier_id)
+    public function hapusDataSupplier($supplier_id)
     {
         $query = "DELETE FROM " . $this->table . " WHERE supplier_id = :supplier_id";
         $this->db->query($query);
