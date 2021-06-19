@@ -12,7 +12,11 @@
             <button type="submit" style="max-width:100px;height:40px;margin-left:5px" id="tombolCari">Search</button>
         </form>
 
+<<<<<<< HEAD
         <table id="customers">
+=======
+        <table id="tabledetail">
+>>>>>>> 318a1a8b98484e5e296933f54e08fce33cb4f1c8
             <tr>
                 <th>Nama</th>
             </tr>
