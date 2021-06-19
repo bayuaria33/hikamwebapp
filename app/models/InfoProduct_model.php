@@ -22,6 +22,13 @@ class InfoProduct_model
         return $this->db->single();
     }
 
+    public function getProductInfoById($product_id) //BARU
+    {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE product_id=:product_id');
+        $this->db->bind('product_id', $product_id);
+        return $this->db->resultSet();
+    }
+
 
     public function getInfoProductId()
     {
@@ -37,10 +44,10 @@ class InfoProduct_model
 
     public function tambahDataInfoProduct($data)
     {
-        $IdArray = $this->getInfoProductId();          
-        $lastId = end($IdArray);                    
-        $lastIdInt = (int)$lastId['infoproduct_id'];   
-        $newIdInt = $lastIdInt + 1;                
+        $IdArray = $this->getInfoProductId();
+        $lastId = end($IdArray);
+        $lastIdInt = (int)$lastId['infoproduct_id'];
+        $newIdInt = $lastIdInt + 1;
 
 
         $query = "INSERT INTO " . $this->table . " VALUES(:infoproduct_id, :product_id, :product_avb, :supplier_id, :product_price, :product_update, :infoproduct_quantity) ";
@@ -84,7 +91,7 @@ class InfoProduct_model
         $this->db->bind('supplier_id', $data['supplier_id']);
         $this->db->bind('product_price', $data['product_price']);
         $this->db->bind('product_update', $data['product_update']);
-        
+
 
         $this->db->execute();
         return $this->db->rowCount();

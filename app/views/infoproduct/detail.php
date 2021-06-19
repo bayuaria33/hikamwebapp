@@ -14,7 +14,7 @@
             <button type="submit" style="max-width:100px;height:40px;margin-left:5px" id="tombolCari">Search</button>
         </form>
 
-        <table id="customers">
+        <table id="tabledetail">
             <tr>
                 <th>prodid</th>
                 <th>ketersediaan</th>
@@ -22,10 +22,10 @@
                 <th>Harga</th>
                 <th>updated</th>
                 <th>Action</th>
-                
+
 
             </tr>
-
+            <!-- <?= '<pre>', var_dump($data), '</pre>' ?> -->
             <?php foreach ($data['inprod'] as $inprod) : ?>
                 <tr>
                     <td>
@@ -43,9 +43,9 @@
                     <td>
                         <?= $inprod['product_update']; ?>
                     </td>
-                                    
+
                     <td>
-                    <a href="<?= BASEURL; ?>/InfoProduct/hapus/<?= $inprod['infoproduct_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
+                        <a href="<?= BASEURL; ?>/InfoProduct/hapus/<?= $inprod['infoproduct_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
                         <a href="<?= BASEURL; ?>/InfoProduct/editPage/<?= $inprod['infoproduct_id']; ?>" class="editButton" style="float:right">Edit</a>
                         <a href="<?= BASEURL; ?>/InfoProduct/detail/<?= $inprod['infoproduct_id']; ?>" class="detailButton" style="float:right">detail</a>
                     </td>
@@ -58,6 +58,3 @@
         </table>
 
     </div>
-
-
-

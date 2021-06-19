@@ -12,19 +12,17 @@
             <button type="submit" style="max-width:100px;height:40px;margin-left:5px" id="tombolCari">Search</button>
         </form>
 
-<<<<<<< HEAD
-        <table id="customers">
-=======
         <table id="tabledetail">
->>>>>>> 318a1a8b98484e5e296933f54e08fce33cb4f1c8
             <tr>
                 <th>Nama</th>
+                <th>Action</th>
             </tr>
 
             <?php foreach ($data['sup'] as $sup) : ?>
                 <tr>
                     <td>
                         <?= $sup['supplier_name']; ?>
+                    <td>
                         <a href="<?= BASEURL; ?>/Supplier/hapus/<?= $sup['supplier_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
                         <a href="<?= BASEURL; ?>/Supplier/editPage/<?= $sup['supplier_id']; ?>" class="editButton" style="float:right">Edit</a>
                         <a href="<?= BASEURL; ?>/Supplier/detail/<?= $sup['supplier_id']; ?>" class="detailButton" style="float:right">Detail</a>

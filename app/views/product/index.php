@@ -12,7 +12,7 @@
             <button type="submit" style="max-width:100px;height:40px;margin-left:5px" id="tombolCari">Search</button>
         </form>
 
-        <table id="customers">
+        <table id="tabledetail">
             <tr>
                 <th>Nama</th>
                 <th>Harga Jual</th>
@@ -45,7 +45,7 @@
                         <?= $prod['product_quantity']; ?>
                     </td>
                     <td>
-                    <a href="<?= BASEURL; ?>/Product/hapus/<?= $prod['product_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
+                        <a href="<?= BASEURL; ?>/Product/hapus/<?= $prod['product_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
                         <a href="<?= BASEURL; ?>/Product/editPage/<?= $prod['product_id']; ?>" class="editButton" style="float:right">Edit</a>
                         <a href="<?= BASEURL; ?>/InfoProduct/details/<?= $prod['product_id']; ?>" class="detailButton" style="float:right">Info Suplier</a>
                     </td>

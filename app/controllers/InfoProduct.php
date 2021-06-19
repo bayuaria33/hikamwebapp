@@ -22,7 +22,7 @@ class InfoProduct extends Controller
     public function details($product_id)
     {
         $data['judul'] = "Detail InfoProduct";
-        $data['inprod'] = $this->model('InfoProduct_model')->getInfoProductById($product_id);
+        $data['inprod'] = $this->model('InfoProduct_model')->getProductInfoById($product_id); //BARU
         $this->view('templates/header', $data);
         $this->view('infoproduct/detail', $data);
         $this->view('templates/footer');
