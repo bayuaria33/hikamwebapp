@@ -11,7 +11,12 @@
         <input type="number" id="product_sell_price" name="product_sell_price" autocomplete="off">
 
         <label for="unit">jenis Unit Product</label>
-        <input type="text" id="unit" name="unit" autocomplete="off">
+        <select name="unit" id="unit" autocomplete="off" value="<?= $data['prod']['unit']; ?>">
+            <option value="liter">Liter</option>
+            <option value="Kg">Kg</option>
+            <option value="Ton">Ton</option>
+            <option value="Kubik">Kubik</option>
+        </select>
 
         <label for="product_desc">Deskripsi Product</label>
         <input type="text" id="product_desc" name="product_desc" autocomplete="off">
