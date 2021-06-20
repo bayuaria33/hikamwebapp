@@ -47,7 +47,7 @@
                     <td>
                         <a href="<?= BASEURL; ?>/Product/hapus/<?= $prod['product_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
                         <a href="<?= BASEURL; ?>/Product/editPage/<?= $prod['product_id']; ?>" class="editButton" style="float:right">Edit</a>
-                        <a href="<?= BASEURL; ?>/InfoProduct/details/<?= $prod['product_id']; ?>" class="detailButton" style="float:right">Info Suplier</a>
+                        <a href="<?= BASEURL; ?>/InfoProduct/detailSupp/<?= $prod['product_id']; ?>" class="detailButton" style="float:right">Info Supplier</a>
                     </td>
 
                 </tr>

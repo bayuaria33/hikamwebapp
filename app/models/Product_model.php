@@ -12,7 +12,12 @@ class Product_model
 
     public function getAllProduct()
     {
-        $this->db->query('SELECT product_id, product_name, product_sell_price, unit, product_desc, DATE(product_updated) AS product_updated, product_quantity FROM ' . $this->table);
+        $this->db->query('SELECT 
+                            product_id, product_name, 
+                            product_sell_price, unit, 
+                            product_desc, 
+                            DATE(product_updated) AS product_updated, 
+                            product_quantity FROM ' . $this->table);
         return $this->db->resultSet();
     }
 
