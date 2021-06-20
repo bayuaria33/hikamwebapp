@@ -31,10 +31,10 @@ class Supplier_model
 
     public function tambahDataSupplier($data)
     {
-        $IdArray = $this->getSupplierId();          // wkwkwkwkwkkwkw
-        $lastId = end($IdArray);                    // satu block code ini cuman buat ngambil Id terakhir doang, soalnya gak autoincrement
-        $lastIdInt = (int)$lastId['supplier_id'];   // wkwkwkwkwkkwkw
-        $newIdInt = $lastIdInt + 1;                 // wkwkwkwkwkkwkw
+        $IdArray = $this->getSupplierId();          
+        $lastId = end($IdArray);                    
+        $lastIdInt = (int)$lastId['supplier_id'];   
+        $newIdInt = $lastIdInt + 1;                 
 
 
         $query = "INSERT INTO " . $this->table . " VALUES(:supplier_id, :supplier_name, :sales_name, :norek1, :norek2, :alamat1, :alamat2, :no_telp1, :no_telp2, :email) ";
