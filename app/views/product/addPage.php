@@ -14,10 +14,10 @@
         <input type="text" id="unit" name="unit" autocomplete="off">
 
         <label for="product_desc">Deskripsi Product</label>
-        <input type="number" id="product_desc" name="product_desc" autocomplete="off">
+        <input type="text" id="product_desc" name="product_desc" autocomplete="off">
 
-        <label for="product_updated">update Product</label>
-        <input type="text" id="product_updated" name="product_updated" autocomplete="off">
+        <!-- <label for="product_updated">update Product</label>
+        <input type="text" id="product_updated" name="product_updated" autocomplete="off"> -->
 
         <label for="product_quantity">Quantity Product</label>
         <input type="number" id="product_quantity" name="product_quantity" autocomplete="off">

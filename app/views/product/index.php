@@ -30,7 +30,7 @@
                         <?= $prod['product_name']; ?>
                     </td>
                     <td>
-                        <?= $prod['product_sell_price']; ?>
+                        <?= number_format($prod['product_sell_price'], 2); ?>
                     </td>
                     <td>
                         <?= $prod['unit']; ?>
