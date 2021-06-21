@@ -10,23 +10,6 @@ class Product extends Controller
         $this->view('templates/footer');
     }
 
-    // public function detail($product_id)
-    // {
-    //     $data['judul'] = "Detail Product";
-    //     $data['prod'] = $this->model('Product_model')->getProductById($product_id);
-    //     $this->view('templates/header', $data);
-    //     $this->view('product/detail', $data);
-    //     $this->view('templates/footer');
-    // }
-
-    // public function detail($product_id)
-    // {
-    //     $data['judul'] = "Detail Product";
-    //     $data['prod'] = $this->model('InfoProduct_model')->getInfoProductById($product_id);
-    //     $this->view('templates/header', $data);
-    //     $this->view('infoproduct/index', $data);
-    //     $this->view('templates/footer');
-    // }
 
     public function addPage()
     {

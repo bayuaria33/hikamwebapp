@@ -1,12 +1,12 @@
 <div class="container">
-    <h1>Tambah info Supplier</h1>
+    <h1>Tambah info Supplier <?= $data['prod']['product_name']; ?></h1>
     <a class="editButton" href="<?= BASEURL; ?>/Product/index">Kembali</a>
 
 
     <form action="<?= BASEURL; ?>/InfoProduct/tambah" method="post">
 
         <label class="hidden" for="product_id">Id Product</label>
-        <input class="hidden" type="hidden" id="product_id" name="product_id" autocomplete="off" value="<?= $data['inprod'][0]['product_id']; ?>">
+        <input class="hidden" type="hidden" id="product_id" name="product_id" autocomplete="off" value="<?= $data['prod']['product_id']; ?>">
 
         <label for="product_avb">Ketersedian Barang</label>
         <select name="product_avb" id="product_avb" autocomplete="off">

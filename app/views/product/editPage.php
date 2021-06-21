@@ -21,14 +21,14 @@
             <option value="Ton">Ton</option>
             <option value="Kubik">Kubik</option>
         </select>
-        
+
         <label for="product_desc">Deskrisi Produk</label>
         <input type="text" id="product_desc" name="product_desc" autocomplete="off" value="<?= $data['prod']['product_desc']; ?>">
 
         <label for="product_quantity">Quantity Produk</label>
-        <input type="text" id="product_quantity" name="product_quantity" autocomplete="off" value="<?= $data['prod']['product_quantity']; ?>">
+        <input type="number" id="product_quantity" name="product_quantity" autocomplete="off" value="<?= $data['prod']['product_quantity']; ?>">
 
-        
+
         <input type="submit" value="Submit">
     </form>
 

@@ -1,30 +1,20 @@
 <?php
 class InfoProduct extends Controller
 {
-    // public function index()
-    // {
-    //     $data['judul'] = "Daftar InfoProduct";
-    //     $data['inprod'] = $this->model('InfoProduct_model')->getAllInfoProduct();   // BELUM TERPAKAI
-    //     //echo '<pre>', var_dump($data), '</pre>';
-    //     $this->view('templates/header', $data);
-    //     $this->view('infoproduct/index', $data);
-    //     $this->view('templates/footer');
-    // }
+
 
     public function detailSupp($product_id)
     {
         $data['inprod'] = $this->model('InfoProduct_model')->getAllProductSupp($product_id); //BARU
-        $data['judul'] = $data['inprod'][0]['product_name'];
-        //echo '<pre>', var_dump($data), '</pre>';
+        $data['judul'] = "Detail Info Product";
+        //echo '<pre>', var_dump($data, $newIdInt), '</pre>';
         if (!empty($data['inprod'])) {
             $this->view('templates/header', $data);
             $this->view('infoproduct/index', $data);
             $this->view('templates/footer');
-        } else {                                            // SOLUSI SEMENTARA
-            //TODO $data ISEMPTY                            // SAMPAI 
-            Flasher::setFlash('Gagal', 'dibuka');           // ADD INFO PRODUCT
-            header('Location: ' . BASEURL . '/Product');    // DITAMBAHKAN
-            exit;                                           //
+        } else {
+            $data['judul'] = "Tambah New Info Product";
+            $this->addNewPage($product_id);
         }
     }
 
@@ -32,11 +22,27 @@ class InfoProduct extends Controller
     {
         $data['suppliers'] = $this->model('Supplier_model')->getAllSupplier();
         $data['judul'] = "Tambah data InfoProduct";
-        $data['inprod'] = $this->model('InfoProduct_model')->getAllProductSupp($infoproduct_id); //BARU
+        $data['inprod'] = $this->model('InfoProduct_model')->getAllProductSupp($infoproduct_id); //BARU //GANTI INI
+        //echo '<pre>', var_dump($data), '</pre>';
+        echo "masuk add page";
         $this->view('templates/header', $data);
         $this->view('infoproduct/addPage', $data);
         $this->view('templates/footer');
     }
+
+    public function addNewPage($product_id)
+    {
+        $data['suppliers'] = $this->model('Supplier_model')->getAllSupplier();
+        $data['prod'] = $this->model('Product_model')->getProductById($product_id);
+
+        $data['judul'] = "Tambah Data Supplier " . $data['prod']['product_name'];
+        $this->view('templates/header', $data);
+        $this->view('infoproduct/addNewPage', $data);
+        $this->view('templates/footer');
+    }
+
+
+
     public function editPage($infoproduct_id)
     {
         $data['judul'] = "Edit data Supplier Product ";
