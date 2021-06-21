@@ -1,15 +1,15 @@
 <?php
 class InfoProduct extends Controller
 {
-    public function index()
-    {
-        $data['judul'] = "Daftar InfoProduct";
-        $data['inprod'] = $this->model('InfoProduct_model')->getAllInfoProduct();
-        //echo '<pre>', var_dump($data), '</pre>';
-        $this->view('templates/header', $data);
-        $this->view('infoproduct/index', $data);
-        $this->view('templates/footer');
-    }
+    // public function index()
+    // {
+    //     $data['judul'] = "Daftar InfoProduct";
+    //     $data['inprod'] = $this->model('InfoProduct_model')->getAllInfoProduct();   // BELUM TERPAKAI
+    //     //echo '<pre>', var_dump($data), '</pre>';
+    //     $this->view('templates/header', $data);
+    //     $this->view('infoproduct/index', $data);
+    //     $this->view('templates/footer');
+    // }
 
     public function detailSupp($product_id)
     {

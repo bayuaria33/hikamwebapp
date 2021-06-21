@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>Edit data Supplier</h1>
+    <h1>Update info Supplier</h1>
     <a href="<?= BASEURL; ?>/InfoProduct/detailSupp/<?= $data['inprod']['product_id']; ?>" class="editButton">Kembali</a> <br>
 
     <form action="<?= BASEURL; ?>/InfoProduct/edit" method="post">
@@ -8,7 +8,7 @@
         <input class="hidden" type="hidden" id="infoproduct_id" name="infoproduct_id" autocomplete="off" value="<?= $data['inprod']['infoproduct_id']; ?>">
 
         <label for="supplier_name">Supplier</label>
-        <input type="text" id="supplier_name" name="supplier_name" autocomplete="off" value="<?= $data['inprod']['supplier_name']; ?>">
+        <input type="text" id="supplier_name" disabled="disabled" name="supplier_name" autocomplete="off" value="<?= $data['inprod']['supplier_name']; ?>">
 
         <label for="product_avb">Ketersediaan </label>
         <select name="product_avb" id="product_avb">
