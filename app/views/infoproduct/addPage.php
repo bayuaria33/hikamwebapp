@@ -1,24 +1,35 @@
 <div class="container">
     <h1>Tambah info Suplier</h1>
-    <a class="editButton" href="<?= BASEURL; ?>/InfoProduct">Kembali</a>
+    <a class="editButton" href="<?= BASEURL; ?>/Product/index">Kembali</a>
 
 
     <form action="<?= BASEURL; ?>/InfoProduct/tambah" method="post">
-        <label for="product_id">id Product</label>
-        <input type="number" id="product_id" name="product_id" autocomplete="off">
+        
+        <label class="hidden" for="product_id">Id Product</label>
+        <input class="hidden" type="hidden" id="product_id" name="product_id" autocomplete="off" value="<?= $data['inprod'][0]['product_id']; ?>">
+        
+        <label for="product_avb">Ketersedian Barang</label>
+        <select name="product_avb" id="product_avb" autocomplete="off">
+            <option value="Ready">Ready</option>
+            <option value="Habis">Habis</option>
+            <option value="inden">Inden</option>
+        
+        </select>
 
-        <label for="product_avb">Ketersediaan produk</label>
-        <input type="number" id="product_avb" name="product_avb" autocomplete="off">
-
-        <label for="supplier_id">pilih suplier</label>
-        <input type="text" id="supplier_id" name="suplier_id" autocomplete="off">
+        <label for="product_avb">pilih Supplier</label>
+        <select name="supplier_name" id="supplier_name">
+            
+            <?php foreach ($data['suppliers'] as $sup) : ?>
+                                    
+                <option value="<?= $sup['supplier_name']; ?>"><?= $sup['supplier_name']; ?></option>
+                                
+            <?php endforeach; ?>
+        </select>
 
         <label for="product_price">Harga Product</label>
         <input type="number" id="product_price" name="product_price" autocomplete="off">
 
-        <label for="product_update">update Product</label>
-        <input type="text" id="product_update" name="product_update" autocomplete="off">
-        
+    
         <input type="submit" value="Submit">
     </form>
 

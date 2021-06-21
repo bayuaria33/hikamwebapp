@@ -16,7 +16,7 @@
         <li><a href="<?= BASEURL; ?>/Customer"> Customer </a></li>
         <li><a href="<?= BASEURL; ?>/Supplier"> Supplier </a></li>
         <li><a href="<?= BASEURL; ?>/Product"> Product </a></li>
-        <li><a href="<?= BASEURL; ?>/InfoProduct"> InfoProduct </a></li>
+        <!-- <li><a href="<?= BASEURL; ?>/InfoProduct"> InfoProduct </a></li> -->
         <!-- <li><a href="<?= BASEURL; ?>/About"> About </a></li> -->
 
         <li style="float:right"><a href="<?= BASEURL; ?>"> Login </a></li>

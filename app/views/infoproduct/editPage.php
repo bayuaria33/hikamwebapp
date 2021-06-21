@@ -1,32 +1,26 @@
 <div class="container">
-    <h1>Edit data Product</h1>
-    <a class="editButton" href="<?= BASEURL; ?>/Product">Kembali</a>
+    <h1>Update info Supplier</h1>
+    <a href="<?= BASEURL; ?>/InfoProduct/detailSupp/<?= $data['inprod']['product_id']; ?>" class="editButton">Kembali</a> <br>
 
-    <form action="<?= BASEURL; ?>/Product/edit" method="post">
+    <form action="<?= BASEURL; ?>/InfoProduct/edit" method="post">
 
+        <label class="hidden" for="infoproduct_id">Id infoProduct</label>
+        <input class="hidden" type="hidden" id="infoproduct_id" name="infoproduct_id" autocomplete="off" value="<?= $data['inprod']['infoproduct_id']; ?>">
 
-        <label class="hidden" for="product_id">Id Product</label>
-        <input class="hidden" type="hidden" id="product_id" name="product_id" autocomplete="off" value="<?= $data['prod']['product_id']; ?>">
+        <label for="supplier_name">Supplier</label>
+        <input type="text" id="supplier_name" disabled="disabled" name="supplier_name" autocomplete="off" value="<?= $data['inprod']['supplier_name']; ?>">
 
-        <label for="product_name">Nama Product</label>
-        <input type="text" id="product_name" name="product_name" autocomplete="off" value="<?= $data['prod']['product_name']; ?>">
+        <label for="product_avb">Ketersediaan </label>
+        <select name="product_avb" id="product_avb">
+            <option value="Ready">Ready</option>
+            <option value="Not Ready">Not Ready</option>
+        </select>
 
-        <label for="product_desc">deskripsi Product</label>
-        <input type="text" id="product_desc" name="product_desc" autocomplete="off" value="<?= $data['prod']['product_desc']; ?>">
-
-        <label for="product_sell_price">Harga Jual Product</label>
-        <input type="number" id="product_sell_price" name="product_sell_price" autocomplete="off" value="<?= $data['prod']['product_sell_price']; ?>">
-
-        <label for="unit">Unit Product</label>
-        <input type="text" id="unit" name="unit" autocomplete="off" value="<?= $data['prod']['unit']; ?>">
-
-        <label for="product_updated">Update Product</label>
-        <input type="number" id="product_updated" name="product_updated" autocomplete="off" value="<?= $data['prod']['product_updated']; ?>">
-
-        <label for="product_quantity">Quantity Product</label>
-        <input type="number" id="product_quantity" name="product_quantity" autocomplete="off" value="<?= $data['prod']['product_quantity']; ?>">
-
+        <label for="product_price">Harga </label>
+        <input type="number" id="product_price" name="product_price" autocomplete="off" value="<?= $data['inprod']['product_price']; ?>">
         <input type="submit" value="Submit">
+
+
     </form>
 
 </div>

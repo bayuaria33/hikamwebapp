@@ -12,7 +12,12 @@ class Product_model
 
     public function getAllProduct()
     {
-        $this->db->query('SELECT * FROM ' . $this->table);
+        $this->db->query('SELECT 
+                            product_id, product_name, 
+                            product_sell_price, unit, 
+                            product_desc, 
+                            DATE(product_updated) AS product_updated, 
+                            product_quantity FROM ' . $this->table);
         return $this->db->resultSet();
     }
 
@@ -32,10 +37,10 @@ class Product_model
 
     public function tambahDataProduct($data)
     {
-        $IdArray = $this->getProductId();          
-        $lastId = end($IdArray);                    
-        $lastIdInt = (int)$lastId['product_id'];   
-        $newIdInt = $lastIdInt + 1;                
+        $IdArray = $this->getProductId();
+        $lastId = end($IdArray);
+        $lastIdInt = (int)$lastId['product_id'];
+        $newIdInt = $lastIdInt + 1;
 
 
         $query = "INSERT INTO " . $this->table . " VALUES(:product_id, :product_name, :product_sell_price, :unit, :product_desc, :product_updated, :product_quantity) ";
