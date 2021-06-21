@@ -58,12 +58,12 @@ class InfoProduct_model
         $time = date("Y-m-d", $t);
 
         var_dump($data);
-        $query = "INSERT INTO " . $this->table . " (infoproduct_id, product_id, supplier_name, product_avb, product_price, product_updated) VALUES(:infoproduct_id, :product_id, :supplier_name, :product_avb, :product_price, :product_updated)";
+        $query = "INSERT INTO " . $this->table . " VALUES(:infoproduct_id, :product_id, :product_avb, :supplier_name, :product_price, :product_updated)";
         $this->db->query($query);
         $this->db->bind('infoproduct_id', $newIdInt);
         $this->db->bind('product_id', $data['product_id']);
-        $this->db->bind('supplier_name', $data['supplier_name']);
         $this->db->bind('product_avb', $data['product_avb']);
+        $this->db->bind('supplier_name', $data['supplier_name']);
         $this->db->bind('product_price', $data['product_price']);
         $this->db->bind('product_updated', $time);
         $this->db->execute();
