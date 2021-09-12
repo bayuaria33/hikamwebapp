@@ -24,7 +24,7 @@ class InfoProduct extends Controller
         $data['judul'] = "Tambah data InfoProduct";
         $data['inprod'] = $this->model('InfoProduct_model')->getAllProductSupp($infoproduct_id); //BARU //GANTI INI
         //echo '<pre>', var_dump($data), '</pre>';
-        echo "masuk add page";
+        //echo "masuk add page";
         $this->view('templates/header', $data);
         $this->view('infoproduct/addPage', $data);
         $this->view('templates/footer');

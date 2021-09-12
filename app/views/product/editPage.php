@@ -22,7 +22,7 @@
             <option value="Kubik">Kubik</option>
         </select>
 
-        <label for="product_desc">Deskrisi Produk</label>
+        <label for="product_desc">Deskripsi Produk</label>
         <input type="text" id="product_desc" name="product_desc" autocomplete="off" value="<?= $data['prod']['product_desc']; ?>">
 
         <label for="product_quantity">Quantity Produk</label>
