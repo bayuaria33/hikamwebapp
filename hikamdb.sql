@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2021 at 07:35 AM
+-- Generation Time: Sep 12, 2021 at 10:19 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -56,7 +56,6 @@ INSERT INTO `customer` (`customer_id`, `customer_name`, `alamat1`, `alamat2`, `n
 CREATE TABLE `delivery_order` (
   `DO_id` varchar(255) NOT NULL,
   `PO_id` varchar(255) DEFAULT NULL,
-  `product_id` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `delivery_date` date NOT NULL,
   `driver` varchar(255) NOT NULL,
@@ -70,8 +69,40 @@ CREATE TABLE `delivery_order` (
 -- Dumping data for table `delivery_order`
 --
 
-INSERT INTO `delivery_order` (`DO_id`, `PO_id`, `product_id`, `customer_id`, `delivery_date`, `driver`, `armada`, `quantity`, `unit`, `note`) VALUES
-('HAI2004/DO/2021', 'HAI2004/PO/2001', 30002, 1002, '2021-05-19', '', '', 5000, 'Kg', '');
+INSERT INTO `delivery_order` (`DO_id`, `PO_id`, `customer_id`, `delivery_date`, `driver`, `armada`, `quantity`, `unit`, `note`) VALUES
+('HAI2004/DO/2021', 'HAI2004/PO/2001', 1002, '2021-05-19', '', '', 5000, 'Kg', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `infoproduct`
+--
+
+CREATE TABLE `infoproduct` (
+  `infoproduct_id` int(4) NOT NULL,
+  `product_id` int(4) NOT NULL,
+  `product_avb` varchar(25) NOT NULL,
+  `product_desc` varchar(255) NOT NULL,
+  `unit` varchar(255) NOT NULL,
+  `supplier_name` varchar(25) NOT NULL,
+  `product_price` int(20) NOT NULL,
+  `product_updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `infoproduct`
+--
+
+INSERT INTO `infoproduct` (`infoproduct_id`, `product_id`, `product_avb`, `product_desc`, `unit`, `supplier_name`, `product_price`, `product_updated`) VALUES
+(1001, 1, 'Ready', 'Packing = 30 Kg/Bag', 'Kg', 'PT Kimia ABC Indonesia', 125000, '2021-09-12 08:03:07'),
+(1002, 1, 'Ready', 'Packing = 25 Kg/Bag', 'Kg', 'Alchemindo XYZ', 120000, '2021-09-12 07:47:44'),
+(1003, 2, 'Ready', 'Packing = 25 Kg/Bag', 'Kg', 'PT Kimia ABC Indonesia', 150000, '2021-09-12 07:47:44'),
+(1004, 2, 'Ready', 'Packing = 25 Kg/Bag', 'Kg', 'Alchemindo XYZ', 130000, '2021-09-12 07:47:44'),
+(1005, 3, 'Ready', 'Packing = 25 Kg/Bag', 'Kg', 'PT Kimia ABC Indonesia', 10000, '2021-09-12 07:47:44'),
+(1006, 4, 'Ready', 'Packing = 25 Kg/Bag', 'Kg', 'PT Permata Kimia ', 90000, '2021-09-12 07:47:44'),
+(1007, 4, 'Ready', 'Packing = 25 Kg/Bag', 'Kg', 'Alchemindo XYZ', 120000, '2021-09-12 07:47:44'),
+(1008, 5, 'Ready', 'Packing = 25 Kg/Bag', 'Kg', 'PT Kimia ABC Indonesia', 20000, '2021-09-12 07:47:44'),
+(1009, 6, 'Ready', '1 Ton/Bag', 'Ton', 'PT Kimia ABC Indonesia', 125000, '2021-09-12 08:14:42');
 
 -- --------------------------------------------------------
 
@@ -98,19 +129,38 @@ INSERT INTO `invoice` (`invoice_id`, `PO_id`, `DO_id`, `other_expenses`, `status
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `po_line`
+--
+
+CREATE TABLE `po_line` (
+  `PO_id` varchar(255) NOT NULL,
+  `PO_line_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `po_line`
+--
+
+INSERT INTO `po_line` (`PO_id`, `PO_line_id`, `product_id`, `quantity`) VALUES
+('HAI0102/PO/2021', 1001, 1, 4),
+('HAI0102/PO/2021', 1002, 2, 3),
+('HAI0102/PO/2021', 1003, 3, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
-  `Product_id` int(11) NOT NULL,
-  `Product_name` varchar(255) NOT NULL,
-  `Product_availability` tinyint(1) NOT NULL,
-  `supplier_id` int(11) DEFAULT NULL,
-  `Product_price` decimal(10,0) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
   `product_sell_price` decimal(10,0) DEFAULT NULL,
   `unit` varchar(25) DEFAULT NULL,
-  `Product_desc` varchar(255) NOT NULL,
-  `Product_updated` date NOT NULL,
+  `product_desc` varchar(255) NOT NULL,
+  `product_updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `product_quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -118,11 +168,13 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`Product_id`, `Product_name`, `Product_availability`, `supplier_id`, `Product_price`, `product_sell_price`, `unit`, `Product_desc`, `Product_updated`, `product_quantity`) VALUES
-(30001, 'Ammonium Bifluoride', 1, 2001, '200000', NULL, 'Kg', 'Packing = 25 Kg/Bag', '2021-05-04', 35),
-(30002, 'Ammonium Bifluoride', 1, 2002, '180000', NULL, 'Kg', 'Packing = 25 Kg/Bag', '2021-05-06', 16),
-(30003, 'Ammonium Hydroxide', 1, 2003, '10000', NULL, 'Kg', 'Biaya Kemasan/Kg = Rp 6000', '2021-05-18', 20),
-(30004, 'Ammonium Hydroxide', 0, 2004, '9000', NULL, 'Kg', 'Biaya Kemasan/Kg = Rp 4000', '2021-05-05', 0);
+INSERT INTO `product` (`product_id`, `product_name`, `product_sell_price`, `unit`, `product_desc`, `product_updated`, `product_quantity`) VALUES
+(1, 'Ammonium Bifluoride UH', '25000', 'liter', 'Packing = 25 Kg/Bag', '2021-08-30 07:04:10', 35),
+(2, 'Ammonium Bifluoride BK', '24000', 'Kg', 'Packing = 25 Kg/Bag', '2021-05-05 17:00:00', 16),
+(3, 'Ammonium Hydroxide NO', '13000', 'Kg', 'Biaya Kemasan/Kg = Rp 6000', '2021-05-17 17:00:00', 20),
+(4, 'Ammonium Hydroxide ACL', '75000', 'liter', 'Biaya Kemasan/Kg = Rp 4000', '2021-06-21 07:21:58', 10),
+(5, 'asam nitrat', '200000', 'liter', 'Packing = 25 Kg/Bag', '2021-08-30 07:05:01', 30),
+(6, 'Nitric Acid', '200000', 'Ton', '1 Ton/Bag', '2021-09-12 08:09:47', 12);
 
 -- --------------------------------------------------------
 
@@ -133,20 +185,16 @@ INSERT INTO `product` (`Product_id`, `Product_name`, `Product_availability`, `su
 CREATE TABLE `purchase_order` (
   `PO_id` varchar(255) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `quantity` int(11) NOT NULL,
-  `unit` varchar(255) NOT NULL,
-  `purchase_date` date DEFAULT NULL,
-  `note` varchar(255) DEFAULT NULL
+  `purchase_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `purchase_order`
 --
 
-INSERT INTO `purchase_order` (`PO_id`, `customer_id`, `product_id`, `quantity`, `unit`, `purchase_date`, `note`) VALUES
-('HAI0102/PO/2021', 1001, 30001, 10, 'Kg', '2021-05-15', '1. Barang dikirim paling telat tanggal 19 Mei 2021'),
-('HAI2004/PO/2001', 1002, 30002, 15, 'Kg', '2021-05-19', '1. Pembayaran 30 Hari setelah barang diterima');
+INSERT INTO `purchase_order` (`PO_id`, `customer_id`, `purchase_date`) VALUES
+('HAI0102/PO/2021', 1001, '2021-05-15'),
+('HAI2004/PO/2001', 1002, '2021-05-19');
 
 -- --------------------------------------------------------
 
@@ -208,8 +256,13 @@ ALTER TABLE `customer`
 ALTER TABLE `delivery_order`
   ADD PRIMARY KEY (`DO_id`),
   ADD KEY `fk_do_customer` (`customer_id`),
-  ADD KEY `fk_do_product` (`product_id`),
   ADD KEY `fk_do_po` (`PO_id`);
+
+--
+-- Indexes for table `infoproduct`
+--
+ALTER TABLE `infoproduct`
+  ADD PRIMARY KEY (`infoproduct_id`);
 
 --
 -- Indexes for table `invoice`
@@ -220,25 +273,41 @@ ALTER TABLE `invoice`
   ADD KEY `fk_invc_DO` (`DO_id`) USING BTREE;
 
 --
+-- Indexes for table `po_line`
+--
+ALTER TABLE `po_line`
+  ADD PRIMARY KEY (`PO_line_id`),
+  ADD KEY `fk_pol_po` (`PO_id`),
+  ADD KEY `fk_pol_product` (`product_id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`Product_id`),
-  ADD KEY `fk_product` (`supplier_id`);
+  ADD PRIMARY KEY (`product_id`);
 
 --
 -- Indexes for table `purchase_order`
 --
 ALTER TABLE `purchase_order`
   ADD PRIMARY KEY (`PO_id`),
-  ADD KEY `fk_po_customer` (`customer_id`),
-  ADD KEY `fk_po_product` (`product_id`);
+  ADD KEY `fk_po_customer` (`customer_id`);
 
 --
 -- Indexes for table `supplier`
 --
 ALTER TABLE `supplier`
   ADD PRIMARY KEY (`supplier_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `infoproduct`
+--
+ALTER TABLE `infoproduct`
+  MODIFY `infoproduct_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1010;
 
 --
 -- Constraints for dumped tables
@@ -249,8 +318,7 @@ ALTER TABLE `supplier`
 --
 ALTER TABLE `delivery_order`
   ADD CONSTRAINT `fk_do_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_do_po` FOREIGN KEY (`PO_id`) REFERENCES `purchase_order` (`PO_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_do_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`Product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_do_po` FOREIGN KEY (`PO_id`) REFERENCES `purchase_order` (`PO_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `invoice`
@@ -260,17 +328,17 @@ ALTER TABLE `invoice`
   ADD CONSTRAINT `fk_invc_PO` FOREIGN KEY (`PO_id`) REFERENCES `purchase_order` (`PO_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `product`
+-- Constraints for table `po_line`
 --
-ALTER TABLE `product`
-  ADD CONSTRAINT `fk_product` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`supplier_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `po_line`
+  ADD CONSTRAINT `fk_pol_po` FOREIGN KEY (`PO_id`) REFERENCES `purchase_order` (`PO_id`),
+  ADD CONSTRAINT `fk_pol_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
 
 --
 -- Constraints for table `purchase_order`
 --
 ALTER TABLE `purchase_order`
-  ADD CONSTRAINT `fk_po_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_po_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`Product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_po_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
