@@ -19,7 +19,9 @@
                 <!-- <th>Product Name</th> -->
                 <th>Supplier</th>
                 <th>Ketersediaan</th>
-                <th>Harga</th>
+                <th>Deskripsi</th>
+                <th>Unit</th>
+                <th>Harga Beli</th>
                 <th>Updated</th>
                 <th>Action</th>
 
@@ -33,6 +35,12 @@
                     </td>
                     <td>
                         <?= $inprod['product_avb']; ?>
+                    </td>
+                    <td>
+                        <?= $inprod['product_desc']; ?>
+                    </td>
+                    <td>
+                        <?= $inprod['unit']; ?>
                     </td>
                     <td>
                         <?= number_format($inprod['product_price']); ?>
@@ -50,7 +58,7 @@
 
                         <a href="#" class="detailButton" style="float:right;margin-left: 0px;">Check File</a>
                         <a href="<?= BASEURL; ?>/InfoProduct/hapus/<?= $inprod['infoproduct_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
-                        <a href="<?= BASEURL; ?>/InfoProduct/editPage/<?= $inprod['infoproduct_id']; ?>" class="editButton" style="float:right">Update</a>
+                        <a href="<?= BASEURL; ?>/InfoProduct/editPage/<?= $inprod['infoproduct_id']; ?>" class="editButton" style="float:right">Edit</a>
                     </td>
 
                 </tr>

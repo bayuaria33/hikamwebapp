@@ -21,7 +21,10 @@ class InfoProduct_model
         infoproduct_id,
         product.product_id AS product_id, 
         product.product_name AS product_name, 
-        product_avb, supplier_name, 
+        product_avb, 
+        infoproduct.product_desc AS product_desc, 
+        infoproduct.unit AS unit, 
+        supplier_name, 
         product_price, 
         DATE(infoproduct.product_updated) AS product_updated
         FROM infoproduct 
@@ -58,11 +61,13 @@ class InfoProduct_model
         $time = date("Y-m-d", $t);
 
         var_dump($data);
-        $query = "INSERT INTO " . $this->table . " VALUES(:infoproduct_id, :product_id, :product_avb, :supplier_name, :product_price, :product_updated)";
+        $query = "INSERT INTO " . $this->table . " VALUES(:infoproduct_id, :product_id, :product_avb, :product_desc, :unit, :supplier_name, :product_price, :product_updated)";
         $this->db->query($query);
         $this->db->bind('infoproduct_id', $newIdInt);
         $this->db->bind('product_id', $data['product_id']);
         $this->db->bind('product_avb', $data['product_avb']);
+        $this->db->bind('product_desc', $data['product_desc']);
+        $this->db->bind('unit', $data['unit']);
         $this->db->bind('supplier_name', $data['supplier_name']);
         $this->db->bind('product_price', $data['product_price']);
         $this->db->bind('product_updated', $time);
@@ -88,11 +93,15 @@ class InfoProduct_model
         $query = "UPDATE " . $this->table . " SET 
         product_avb=:product_avb, 
         supplier_name =:supplier_name, 
+        product_desc =:product_desc,
+        unit =:unit, 
         product_price =:product_price
             WHERE infoproduct_id=:infoproduct_id";
         $this->db->query($query);
         $this->db->bind('infoproduct_id', $data['infoproduct_id']);
         $this->db->bind('product_avb', $data['product_avb']);
+        $this->db->bind('product_desc', $data['product_desc']);
+        $this->db->bind('unit', $data['unit']);
         $this->db->bind('supplier_name', $data['supplier_name']);
         $this->db->bind('product_price', $data['product_price']);
 

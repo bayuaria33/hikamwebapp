@@ -2,7 +2,7 @@
     <div>
         <br>
         <?php Flasher::flash() ?>
-        <h1>Daftar Product</h1>
+        <h1>Daftar Product Inventory</h1>
         <br>
 
         <a class="editButton" href="<?= BASEURL; ?>/Product/addPage">Tambah data </a>

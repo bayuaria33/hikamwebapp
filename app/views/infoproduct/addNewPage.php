@@ -26,6 +26,12 @@
             <?php endforeach; ?>
         </select>
 
+        <label for="product_desc">Deskripsi</label>
+        <input type="text" id="product_desc" name="product_desc" autocomplete="off">
+
+        <label for="unit">Unit</label>
+        <input type="text" id="unit" name="unit" autocomplete="off">
+
         <label for="product_price">Harga Product</label>
         <input type="number" id="product_price" name="product_price" autocomplete="off">
 
