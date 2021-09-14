@@ -30,7 +30,12 @@
         <input type="text" id="product_desc" name="product_desc" autocomplete="off">
 
         <label for="unit">Unit</label>
-        <input type="text" id="unit" name="unit" autocomplete="off">
+        <select name="unit" id="unit" autocomplete="off" value="<?= $data['inprod']['unit']; ?>">
+            <option value="liter">Liter</option>
+            <option value="Kg">Kg</option>
+            <option value="Ton">Ton</option>
+            <option value="Kubik">Kubik</option>
+        </select>
 
         <label for="product_price">Harga Product</label>
         <input type="number" id="product_price" name="product_price" autocomplete="off">

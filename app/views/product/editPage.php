@@ -1,7 +1,7 @@
 <div class="container">
     <h1>Edit data Product</h1>
     <a class="editButton" href="<?= BASEURL; ?>/Product">Kembali</a>
-
+    <!-- <?php echo '<pre>', var_dump($data), '</pre>'; ?> -->
     <form action="<?= BASEURL; ?>/Product/edit" method="post">
 
 
