@@ -2,7 +2,7 @@
     <h1>Tambah info Supplier</h1>
     <a class="editButton" href="<?= BASEURL; ?>/Product/index">Kembali</a>
 
-
+    <!-- <?php echo '<pre>', var_dump($data), '</pre>'; ?> -->
     <form action="<?= BASEURL; ?>/InfoProduct/tambah" method="post">
 
         <label class="hidden" for="product_id">Id Product</label>
@@ -13,10 +13,9 @@
             <option value="Ready">Ready</option>
             <option value="Habis">Habis</option>
             <option value="inden">Inden</option>
-
         </select>
 
-        <label for="product_avb">pilih Supplier</label>
+        <label for="supplier_name">pilih Supplier</label>
         <select name="supplier_name" id="supplier_name">
 
             <?php foreach ($data['suppliers'] as $sup) : ?>
