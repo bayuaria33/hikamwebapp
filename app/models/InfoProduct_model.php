@@ -54,7 +54,7 @@ class InfoProduct_model
     public function tambahDataInfoProduct($data)
     {
         $IdArray = $this->getInfoProductId();
-        $lastId = end($IdArray);
+        $lastId = max($IdArray);
         $lastIdInt = (int)$lastId['infoproduct_id'];
         $newIdInt = $lastIdInt + 1;
         $t = time();

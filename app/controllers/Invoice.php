@@ -10,12 +10,9 @@ class Invoice extends Controller
         $this->view('templates/footer');
     }
 
-    public function detail($invoice_id)
+    function InvoiceDateFormat($invoice_id)
     {
-        $data['judul'] = "Detail Invoice";
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
-
-
 
         $invoice_date_day = date("d", strtotime($data['invc']['invoice_date']));
         $invoice_date_month = date("m", strtotime($data['invc']['invoice_date']));
@@ -23,24 +20,44 @@ class Invoice extends Controller
         $invoice_date_month_format = $dateObj->format('F');
         $invoice_date_year = date("Y", strtotime($data['invc']['invoice_date']));
 
+        $date = $invoice_date_day . " - " . $invoice_date_month_format . " - " .  $invoice_date_year;
+        return $date;
+    }
+
+    function DueDateFormat($invoice_id)
+    {
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
+
         $due_date_day = date("d", strtotime($data['invc']['due_date']));
         $due_date_month = date("m", strtotime($data['invc']['due_date']));
         $dateObj   = DateTime::createFromFormat('!m', $due_date_month);
         $due_date_month_format = $dateObj->format('F');
         $due_date_year = date("Y", strtotime($data['invc']['due_date']));
 
-        //Bikin invoice number jadi HAI200X/INV/2021
+        $date = $due_date_day . " - " . $due_date_month_format . " - " .  $due_date_year;
+        return $date;
+    }
+
+    function invoiceString($invoice_id)
+    {
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
+
         $h = "HAI";
         $s = "/";
         $i = "INV";
+        $invoice_date_year = date("Y", strtotime($data['invc']['invoice_date']));
         $invoice_number = $h . $invoice_id . $s . $i . $s . $invoice_date_year;
-        $data['invoice_number'] = $invoice_number;
+        return $invoice_number;
+    }
 
-        //Get month string
+    public function detail($invoice_id)
+    {
+        $data['judul'] = "Detail Invoice";
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
 
-
-        $data['invoice_date_format'] = $invoice_date_day . " - " . $invoice_date_month_format . " - " .  $invoice_date_year;
-        $data['due_date_format'] = $due_date_day . " - " . $due_date_month_format . " - " .  $due_date_year;
+        $data['invoice_number'] = $this->invoiceString($data['invc']['invoice_id']);
+        $data['invoice_date_format'] = $this->InvoiceDateFormat($data['invc']['invoice_id']);
+        $data['due_date_format'] = $this->DueDateFormat($data['invc']['invoice_id']);
 
         $this->view('templates/header', $data);
         $this->view('Invoice/detail', $data);
@@ -114,5 +131,44 @@ class Invoice extends Controller
         $this->view('templates/header', $data);
         $this->view('Invoice/index', $data);
         $this->view('templates/footer');
+    }
+
+    public function item($invoice_id)
+    {
+        $data['judul'] = "Detail Item Invoice";
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
+        $data['invc_item'] = $this->model('Invoice_model')->getInvoiceItem($invoice_id);
+        $data['cust'] = $this->model('Invoice_model')->getInvoiceCust($data['invc']['customer_name']);
+        $data['invoice_number'] = $this->invoiceString($data['invc']['invoice_id']);
+        $data['invoice_date_format'] = $this->InvoiceDateFormat($data['invc']['invoice_id']);
+        $data['due_date_format'] = $this->DueDateFormat($data['invc']['invoice_id']);
+        $data['test'] = $this->model('Invoice_model')->getInvoiceItemId($invoice_id);
+        $this->view('templates/header', $data);
+        $this->view('Invoice/Item', $data);
+        $this->view('templates/footer');
+    }
+
+    public function addItemPage($invoice_id)
+    {
+        $data['product'] = $this->model('Product_model')->getAllProduct();
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
+        $data['judul'] = "Tambah Item Invoice";
+        $this->view('templates/header', $data);
+        $this->view('invoice/addItemPage', $data);
+        $this->view('templates/footer');
+    }
+
+    public function tambahItem($invoice_id)
+    {
+        $url = BASEURL . '/Invoice' . '/Item' . '/' . $invoice_id;
+        if ($this->model('Invoice_model')->tambahDataInvoiceItem($_POST) > 0) {
+            Flasher::setFlash('Berhasil', 'ditambahkan');
+            header("Location: $url");
+            exit;
+        } else {
+            Flasher::setFlash('Gagal', 'ditambahkan');
+            header("Location: $url");
+            exit;
+        }
     }
 }

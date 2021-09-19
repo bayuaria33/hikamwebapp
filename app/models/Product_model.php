@@ -38,7 +38,7 @@ class Product_model
     public function tambahDataProduct($data)
     {
         $IdArray = $this->getProductId();
-        $lastId = end($IdArray);
+        $lastId = max($IdArray);
         $lastIdInt = (int)$lastId['product_id'];
         $newIdInt = $lastIdInt + 1;
 

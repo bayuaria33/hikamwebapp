@@ -35,9 +35,7 @@
 
                     <td>
                         <a href="<?= BASEURL; ?>/Invoice/hapus/<?= $invc['invoice_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
-                        <a href="<?= BASEURL; ?>/Invoice/editPage/<?= $invc['invoice_id']; ?>" class="editButton" style="float:right">Edit</a>
-                        <a href="<?= BASEURL; ?>/Invoice/detail/<?= $invc["invoice_id"]; ?>" class="editButton" style="float:right">Items</a>
-                        <a href="<?= BASEURL; ?>/Invoice/detail/<?= $invc["invoice_id"]; ?>" class="detailButton" style="float:right">Detail</a>
+                        <a href="<?= BASEURL; ?>/Invoice/item/<?= $invc["invoice_id"]; ?>" class="editButton" style="float:right">Detail</a>
                     </td>
 
                 </tr>

@@ -32,7 +32,7 @@ class Customer_model
     public function tambahDataCustomer($data)
     {
         $IdArray = $this->getCustomerId();          // wkwkwkwkwkkwkw
-        $lastId = end($IdArray);                    // satu block code ini cuman buat ngambil Id terakhir doang, soalnya gak autoincrement
+        $lastId = max($IdArray);                    // satu block code ini cuman buat ngambil Id terakhir doang, soalnya gak autoincrement
         $lastIdInt = (int)$lastId['customer_id'];   // wkwkwkwkwkkwkw
         $newIdInt = $lastIdInt + 1;                 // wkwkwkwkwkkwkw
 
