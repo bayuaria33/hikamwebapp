@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2021 at 10:19 AM
+-- Generation Time: Sep 19, 2021 at 11:27 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -50,31 +50,6 @@ INSERT INTO `customer` (`customer_id`, `customer_name`, `alamat1`, `alamat2`, `n
 -- --------------------------------------------------------
 
 --
--- Table structure for table `delivery_order`
---
-
-CREATE TABLE `delivery_order` (
-  `DO_id` varchar(255) NOT NULL,
-  `PO_id` varchar(255) DEFAULT NULL,
-  `customer_id` int(11) DEFAULT NULL,
-  `delivery_date` date NOT NULL,
-  `driver` varchar(255) NOT NULL,
-  `armada` varchar(255) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `unit` varchar(255) NOT NULL,
-  `note` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `delivery_order`
---
-
-INSERT INTO `delivery_order` (`DO_id`, `PO_id`, `customer_id`, `delivery_date`, `driver`, `armada`, `quantity`, `unit`, `note`) VALUES
-('HAI2004/DO/2021', 'HAI2004/PO/2001', 1002, '2021-05-19', '', '', 5000, 'Kg', '');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `infoproduct`
 --
 
@@ -102,7 +77,42 @@ INSERT INTO `infoproduct` (`infoproduct_id`, `product_id`, `product_avb`, `produ
 (1006, 4, 'Ready', 'Packing = 25 Kg/Bag', 'Kg', 'PT Permata Kimia ', 90000, '2021-09-12 07:47:44'),
 (1007, 4, 'Ready', 'Packing = 25 Kg/Bag', 'Kg', 'Alchemindo XYZ', 120000, '2021-09-12 07:47:44'),
 (1008, 5, 'Ready', 'Packing = 25 Kg/Bag', 'Kg', 'PT Kimia ABC Indonesia', 20000, '2021-09-12 07:47:44'),
-(1009, 6, 'Ready', '1 Ton/Bag', 'Ton', 'PT Kimia ABC Indonesia', 125000, '2021-09-12 08:14:42');
+(1009, 6, 'Ready', '1 Ton/Bag', 'Ton', 'PT Kimia ABC Indonesia', 125000, '2021-09-12 08:14:42'),
+(1010, 7, 'Ready', '1 Kg/Bag', 'Kg', 'PT Kimia ABC Indonesia', 45000, '2021-09-13 17:00:00'),
+(1011, 7, 'Ready', '1 Kg/Bag', 'Kg', 'Alchemindo XYZ', 48000, '2021-09-13 17:00:00'),
+(1012, 7, 'Ready', '1 Kg/Bag', 'Kg', 'PT Berlian Chemicals ', 42000, '2021-09-15 17:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invc_item`
+--
+
+CREATE TABLE `invc_item` (
+  `invc_item_id` int(11) NOT NULL,
+  `invoice_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `invc_item`
+--
+
+INSERT INTO `invc_item` (`invc_item_id`, `invoice_id`, `product_id`, `quantity`, `price`) VALUES
+(1001, 2004, 1, 5, '25000'),
+(1002, 2004, 2, 3, '24000'),
+(1003, 2004, 6, 2, '200000'),
+(1004, 2005, 1, 1, '1'),
+(1005, 2005, 2, 2, '2'),
+(1006, 2005, 3, 3, '3'),
+(1007, 2006, 1, 1, '1'),
+(1008, 2006, 2, 2, '2'),
+(1009, 2006, 3, 3, '3'),
+(1010, 2006, 4, 4, '4'),
+(1011, 2004, 3, 3, '3'),
+(1012, 2004, 7, 7, '7');
 
 -- --------------------------------------------------------
 
@@ -111,42 +121,24 @@ INSERT INTO `infoproduct` (`infoproduct_id`, `product_id`, `product_avb`, `produ
 --
 
 CREATE TABLE `invoice` (
-  `invoice_id` varchar(255) NOT NULL,
-  `PO_id` varchar(255) DEFAULT NULL,
-  `DO_id` varchar(255) DEFAULT NULL,
+  `invoice_id` int(11) NOT NULL,
+  `customer_name` varchar(255) DEFAULT NULL,
+  `invoice_date` date DEFAULT NULL,
   `other_expenses` varchar(255) DEFAULT NULL,
-  `status_pembayaran` smallint(6) DEFAULT NULL,
-  `due_date` date DEFAULT NULL
+  `status_pembayaran` varchar(12) DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `PO_id` int(11) DEFAULT NULL,
+  `DO_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `invoice`
 --
 
-INSERT INTO `invoice` (`invoice_id`, `PO_id`, `DO_id`, `other_expenses`, `status_pembayaran`, `due_date`) VALUES
-('HAI2004/INV/2021', 'HAI2004/PO/2001', 'HAI2004/DO/2021', NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `po_line`
---
-
-CREATE TABLE `po_line` (
-  `PO_id` varchar(255) NOT NULL,
-  `PO_line_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `po_line`
---
-
-INSERT INTO `po_line` (`PO_id`, `PO_line_id`, `product_id`, `quantity`) VALUES
-('HAI0102/PO/2021', 1001, 1, 4),
-('HAI0102/PO/2021', 1002, 2, 3),
-('HAI0102/PO/2021', 1003, 3, 5);
+INSERT INTO `invoice` (`invoice_id`, `customer_name`, `invoice_date`, `other_expenses`, `status_pembayaran`, `due_date`, `PO_id`, `DO_id`) VALUES
+(2004, 'PT Ahmad Prasetyo Industri', '2021-09-01', 'Tidak ada', 'Lunas', '2021-08-31', 0, 0),
+(2005, 'PT Jaki Yuhari Maju', '2021-09-03', 'none', 'Lunas', '2021-09-01', 0, 0),
+(2006, 'PT Hakim Abadi Nusantara', '2021-08-29', 'Tidak ada', 'Lunas', '2021-09-04', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -174,27 +166,8 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_sell_price`, `unit
 (3, 'Ammonium Hydroxide NO', '13000', 'Kg', 'Biaya Kemasan/Kg = Rp 6000', '2021-05-17 17:00:00', 20),
 (4, 'Ammonium Hydroxide ACL', '75000', 'liter', 'Biaya Kemasan/Kg = Rp 4000', '2021-06-21 07:21:58', 10),
 (5, 'asam nitrat', '200000', 'liter', 'Packing = 25 Kg/Bag', '2021-08-30 07:05:01', 30),
-(6, 'Nitric Acid', '200000', 'Ton', '1 Ton/Bag', '2021-09-12 08:09:47', 12);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `purchase_order`
---
-
-CREATE TABLE `purchase_order` (
-  `PO_id` varchar(255) NOT NULL,
-  `customer_id` int(11) DEFAULT NULL,
-  `purchase_date` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `purchase_order`
---
-
-INSERT INTO `purchase_order` (`PO_id`, `customer_id`, `purchase_date`) VALUES
-('HAI0102/PO/2021', 1001, '2021-05-15'),
-('HAI2004/PO/2001', 1002, '2021-05-19');
+(6, 'Nitric Acid', '200000', 'Ton', '1 Ton/Bag', '2021-09-12 08:09:47', 12),
+(7, 'Kalsium Hipoklorit', '50000', 'Kg', '1Kg/Bag', '2021-09-14 09:24:54', 5);
 
 -- --------------------------------------------------------
 
@@ -251,47 +224,30 @@ ALTER TABLE `customer`
   ADD PRIMARY KEY (`customer_id`);
 
 --
--- Indexes for table `delivery_order`
---
-ALTER TABLE `delivery_order`
-  ADD PRIMARY KEY (`DO_id`),
-  ADD KEY `fk_do_customer` (`customer_id`),
-  ADD KEY `fk_do_po` (`PO_id`);
-
---
 -- Indexes for table `infoproduct`
 --
 ALTER TABLE `infoproduct`
   ADD PRIMARY KEY (`infoproduct_id`);
 
 --
+-- Indexes for table `invc_item`
+--
+ALTER TABLE `invc_item`
+  ADD PRIMARY KEY (`invc_item_id`),
+  ADD KEY `fk_invcit_invc` (`invoice_id`),
+  ADD KEY `fk_invcit_product` (`product_id`);
+
+--
 -- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
-  ADD PRIMARY KEY (`invoice_id`),
-  ADD KEY `fk_invc_PO` (`PO_id`),
-  ADD KEY `fk_invc_DO` (`DO_id`) USING BTREE;
-
---
--- Indexes for table `po_line`
---
-ALTER TABLE `po_line`
-  ADD PRIMARY KEY (`PO_line_id`),
-  ADD KEY `fk_pol_po` (`PO_id`),
-  ADD KEY `fk_pol_product` (`product_id`);
+  ADD PRIMARY KEY (`invoice_id`);
 
 --
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`);
-
---
--- Indexes for table `purchase_order`
---
-ALTER TABLE `purchase_order`
-  ADD PRIMARY KEY (`PO_id`),
-  ADD KEY `fk_po_customer` (`customer_id`);
 
 --
 -- Indexes for table `supplier`
@@ -307,38 +263,18 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `infoproduct`
 --
 ALTER TABLE `infoproduct`
-  MODIFY `infoproduct_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1010;
+  MODIFY `infoproduct_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1013;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `delivery_order`
+-- Constraints for table `invc_item`
 --
-ALTER TABLE `delivery_order`
-  ADD CONSTRAINT `fk_do_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_do_po` FOREIGN KEY (`PO_id`) REFERENCES `purchase_order` (`PO_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `invoice`
---
-ALTER TABLE `invoice`
-  ADD CONSTRAINT `fk_in_delivery` FOREIGN KEY (`DO_id`) REFERENCES `delivery_order` (`DO_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_invc_PO` FOREIGN KEY (`PO_id`) REFERENCES `purchase_order` (`PO_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `po_line`
---
-ALTER TABLE `po_line`
-  ADD CONSTRAINT `fk_pol_po` FOREIGN KEY (`PO_id`) REFERENCES `purchase_order` (`PO_id`),
-  ADD CONSTRAINT `fk_pol_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
-
---
--- Constraints for table `purchase_order`
---
-ALTER TABLE `purchase_order`
-  ADD CONSTRAINT `fk_po_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `invc_item`
+  ADD CONSTRAINT `fk_invcit_invc` FOREIGN KEY (`invoice_id`) REFERENCES `invoice` (`invoice_id`),
+  ADD CONSTRAINT `fk_invcit_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
