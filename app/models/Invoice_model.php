@@ -31,6 +31,7 @@ class Invoice_model
         return $this->db->single();
     }
 
+
     public function getinvoiceId()
     {
         $this->db->query("SELECT invoice_id FROM " . $this->table);
@@ -153,5 +154,40 @@ class Invoice_model
         $this->db->query('SELECT * FROM ' . $this->table3 . ' WHERE customer_name=:customer_name');
         $this->db->bind('customer_name', $customer_name);
         return $this->db->single();
+    }
+
+    public function getInvoiceItembyId($invc_item_id)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table2 .
+            ' WHERE invc_item_id LIKE ' . $invc_item_id);
+        return $this->db->single();
+    }
+
+    public function editDataItemInvoice($data)
+    {
+        $query = "UPDATE " . $this->table2 . " SET  
+        invoice_id =:invoice_id,
+        product_id =:product_id,
+        quantity =:quantity, 
+        price =:price
+            WHERE invc_item_id=:invc_item_id";
+        $this->db->query($query);
+        $this->db->bind('invc_item_id', $data['invc_item_id']);
+        $this->db->bind('invoice_id', $data['invoice_id']);
+        $this->db->bind('product_id', $data['product_id']);
+        $this->db->bind('quantity', $data['quantity']);
+        $this->db->bind('price', $data['price']);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+    public function hapusDataInvoiceItem($invc_item_id)
+    {
+        $query = "DELETE FROM " . $this->table2 . " WHERE invc_item_id = :invc_item_id";
+        $this->db->query($query);
+        $this->db->bind('invc_item_id', $invc_item_id);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
     }
 }

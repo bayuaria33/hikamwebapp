@@ -73,6 +73,8 @@
                 <td>
                     <?= $data['invc']['status_pembayaran']; ?>
                 </td>
+
+
             </tr>
             <tr>
                 <td>
@@ -81,14 +83,15 @@
                 <td>
                     <?= $data['invc']['PO_id']; ?>
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <b>DO ID</b>
                 </td>
                 <td>
                     <?= $data['invc']['DO_id']; ?>
                 </td>
+            </tr>
+            <tr>
+
             </tr>
         </table>
 
@@ -119,7 +122,7 @@
 
                     <td>
                         <a href="<?= BASEURL; ?>/Invoice/hapusItem/<?= $invc['invc_item_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
-                        <a href="<?= BASEURL; ?>/Invoice/editItem/<?= $invc['invc_item_id']; ?>" class="editButton" style="float:right">Edit</a>
+                        <a href="<?= BASEURL; ?>/Invoice/editItemPage/<?= $invc['invc_item_id']; ?>" class="editButton" style="float:right">Edit</a>
                     </td>
 
                 </tr>

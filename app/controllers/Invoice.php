@@ -171,4 +171,48 @@ class Invoice extends Controller
             exit;
         }
     }
+
+
+    public function editItemPage($invc_item_id)
+    {
+        $data['judul'] = "Edit Item Invoice ";
+        $data['product'] = $this->model('Product_model')->getAllProduct();
+        $data['invc_item'] = $this->model('Invoice_model')->getInvoiceItembyId($invc_item_id);
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($data['invc_item']['invoice_id']);
+        //echo '<pre>', var_dump($data), '</pre>';
+        $this->view('templates/header', $data);
+        $this->view('Invoice/editItemPage', $data);
+        $this->view('templates/footer');
+    }
+
+    public function editItem($invoice_id)
+    {
+        $url = BASEURL . '/Invoice' . '/Item' . '/' . $invoice_id;
+        if ($this->model('Invoice_model')->editDataItemInvoice($_POST) > 0) {
+            Flasher::setFlash('Berhasil', 'diubah');
+            header("Location: $url");
+            exit;
+        } else {
+            Flasher::setFlash('Gagal', 'diubah');
+            header("Location: $url");
+
+            exit;
+        }
+    }
+
+    public function hapusItem($invc_item_id)
+    {
+        $data['invc_item'] = $this->model('Invoice_model')->getInvoiceItembyId($invc_item_id);
+
+        $url = BASEURL . '/Invoice' . '/Item' . '/' . $data['invc_item']['invoice_id'];
+        if ($this->model('Invoice_model')->hapusDataInvoiceItem($invc_item_id) > 0) {
+            Flasher::setFlash('Berhasil', 'dihapus');
+            header("Location: $url");
+            exit;
+        } else {
+            Flasher::setFlash('Gagal', 'dihapus');
+            header("Location: $url");
+            exit;
+        }
+    }
 }
