@@ -7,7 +7,7 @@
         <a href="<?= BASEURL; ?>/Invoice/editPage/<?= $data['invc']['invoice_id']; ?>" class="editButton">Edit</a>
         <a href="<?= BASEURL; ?>/Invoice/generatePDF/<?= $data['invc']['invoice_id']; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Generate PDF</a>
         <br>
-        <?php echo '<pre>', var_dump($data), '</pre>'; ?>
+        <!-- <?php echo '<pre>', var_dump($data), '</pre>'; ?> -->
         <!-- tabel detail invoice -->
         <table id="tabledetail">
             <tr>
