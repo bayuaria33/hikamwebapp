@@ -133,7 +133,7 @@ class Invoice extends Controller
         $this->view('templates/footer');
     }
 
-    public function item($invoice_id)
+    public function getItemDetails($invoice_id)
     {
         $data['judul'] = "Detail Item Invoice";
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
@@ -142,7 +142,12 @@ class Invoice extends Controller
         $data['invoice_number'] = $this->invoiceString($data['invc']['invoice_id']);
         $data['invoice_date_format'] = $this->InvoiceDateFormat($data['invc']['invoice_id']);
         $data['due_date_format'] = $this->DueDateFormat($data['invc']['invoice_id']);
-        $data['test'] = $this->model('Invoice_model')->getInvoiceItemId($invoice_id);
+        return $data;
+    }
+    public function item($invoice_id)
+    {
+        $data = $this->getItemDetails($invoice_id);
+
         $this->view('templates/header', $data);
         $this->view('Invoice/Item', $data);
         $this->view('templates/footer');
@@ -214,5 +219,111 @@ class Invoice extends Controller
             header("Location: $url");
             exit;
         }
+    }
+
+    public function generatePDF($invoice_id)
+    {
+        $data = $this->getItemDetails($invoice_id);
+        $filename = $data['invc']['invoice_id'] . '-' . $data['invc']['customer_name'] . '-Invoice';
+        $pdf = new FPDF('P', 'mm', 'A4');
+
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 21);
+        //Cell(width , height , text , border , end line , [align] )
+
+        $pdf->Cell(189, 6, '', 1, 1);
+        $pdf->Cell(189, 6, 'Invoice', 1, 1, 'C');
+        $pdf->Cell(189, 6, '', 1, 1);
+        $pdf->Cell(189, 10, '', 0, 1); //end of line
+        //set font to arial, regular, 12pt
+        $pdf->SetFont('Arial', '', 12);
+
+        $pdf->Cell(50, 5, 'Nomor Invoice', 0, 0);
+        $pdf->Cell(80, 5, ': ' . $data['invoice_number'], 0, 0);
+        $pdf->Cell(30, 5, 'Nomor PO: ', 0, 0);
+        $pdf->Cell(80, 5, $data['invc']['PO_id'], 0, 0);
+        $pdf->Cell(59, 5, '', 0, 1); //end of line
+
+        $pdf->Cell(50, 5, 'Nama Customer', 0, 0);
+        $pdf->Cell(80, 5, ': ' . $data['cust']['customer_name'], 0, 0);
+        $pdf->Cell(30, 5, 'Nomor DO: ', 0, 0);
+        $pdf->Cell(80, 5, $data['invc']['DO_id'], 0, 0);
+        $pdf->Cell(59, 5, '', 0, 1); //end of line
+
+        $pdf->Cell(50, 5, 'Alamat Customer', 0, 0);
+        $pdf->Cell(50, 5, ': ' . $data['cust']['alamat1'], 0, 0);
+        $pdf->Cell(59, 5, '', 0, 1); //end of line
+
+        $pdf->Cell(50, 5, '', 0, 0);
+        $pdf->Cell(50, 5, ': ' . $data['cust']['alamat2'], 0, 0);
+        $pdf->Cell(59, 5, '', 0, 1); //end of line
+
+        $pdf->Cell(50, 5, 'Nomor Telepon', 0, 0);
+        $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 0);
+        $pdf->Cell(25, 5, 'Invoice #', 0, 0);
+        $pdf->Cell(34, 5, ': ' . $data['invc']['invoice_id'], 0, 1); //end of line
+
+        $pdf->Cell(50, 5, '', 0, 0);
+        $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp2'], 0, 0);
+        $pdf->Cell(25, 5, 'Customer ID', 0, 0);
+        $pdf->Cell(34, 5, ': ' . $data['cust']['customer_id'], 0, 1); //end of line
+
+        //make a dummy empty cell as a vertical spacer
+        $pdf->Cell(189, 10, '', 0, 1); //end of line
+
+        $pdf->Cell(50, 5, 'Jumlah Uang', 0, 0);
+        $pdf->Cell(80, 5, ':', 0, 1);
+
+        //make a dummy empty cell as a vertical spacer
+        $pdf->Cell(189, 10, '', 'B', 1); //end of line
+
+
+        $pdf->Cell(50, 5, 'Untuk Pembayaran', 0, 0);
+        $pdf->Cell(50, 5, ': ', 0, 1);
+
+        //make a dummy empty cell as a vertical spacer
+        $pdf->Cell(189, 10, '', 0, 1); //end of line
+
+        //invoice contents
+        $pdf->SetFont('Arial', 'B', 12);
+
+        $pdf->Cell(105, 5, 'Description', 1, 0);
+        $pdf->Cell(25, 5, 'Quantity', 1, 0);
+        $pdf->Cell(25, 5, 'Unit', 1, 0);
+        $pdf->Cell(34, 5, 'Price per Unit', 1, 1); //end of line
+
+        $pdf->SetFont('Arial', '', 12);
+
+        //Numbers are right-aligned so we give 'R' after new line parameter
+
+
+        $sum = 0;
+        foreach ($data['invc_item'] as $invc_item) {
+            $pdf->Cell(105, 5, $invc_item['product_name'], 1, 0);
+            $pdf->Cell(25, 5, $invc_item['quantity'], 1, 0);
+            $pdf->Cell(25, 5, $invc_item['unit'], 1, 0);
+            $pdf->Cell(34, 5, $invc_item['price'], 1, 1, 'R'); //end of line
+            $sum += $invc_item['price'] * $invc_item['quantity'];
+        }
+
+        //summary
+        $pdf->Cell(130, 5, '', 0, 0);
+        $pdf->Cell(22, 5, 'Subtotal', 0, 0);
+        $pdf->Cell(7, 5, 'Rp', 1, 0);
+        $pdf->Cell(30, 5, $sum, 1, 1, 'R'); //end of line
+
+        $pdf->Cell(130, 5, '', 0, 0);
+        $pdf->Cell(22, 5, 'PPN 10%', 0, 0);
+        $pdf->Cell(7, 5, 'Rp', 1, 0);
+        $taxed = $sum * 0.01;
+        $pdf->Cell(30, 5, $taxed, 1, 1, 'R'); //end of line
+
+        $pdf->Cell(130, 5, '', 0, 0);
+        $pdf->Cell(22, 5, 'Total Due', 0, 0);
+        $pdf->Cell(7, 5, 'Rp', 1, 0);
+        $pdf->Cell(30, 5, $sum - $taxed, 1, 1, 'R'); //end of line
+
+
+        $pdf->Output('I', $filename);
     }
 }
