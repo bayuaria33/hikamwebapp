@@ -42,7 +42,7 @@ class Product_model
             $newIdInt = "1001";
         } else {
             $lastId = max($IdArray);
-            $lastIdInt = (int)$lastId['customer_id'];
+            $lastIdInt = (int)$lastId['product_id'];
             $newIdInt = $lastIdInt + 1;
         }
 

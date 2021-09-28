@@ -53,42 +53,47 @@ class InfoProduct extends Controller
         $this->view('templates/footer');
     }
 
-    public function edit()
+    public function edit($product_id)
     {
+        $url = BASEURL . '/InfoProduct' . '/DetailSupp' . '/' . $product_id;
         if ($this->model('InfoProduct_model')->editDataInfoProduct($_POST) > 0) {
             Flasher::setFlash('Berhasil', 'diubah');
-            header('Location: ' . BASEURL . '/Product');
+            header("Location: $url");
             exit;
         } else {
             Flasher::setFlash('Gagal', 'diubah');
-            header('Location: ' . BASEURL . '/Product');
+            header("Location: $url");
             exit;
         }
     }
 
 
-    public function tambah()
+    public function tambah($product_id)
     {
+        $url = BASEURL . '/InfoProduct' . '/DetailSupp' . '/' . $product_id;
         if ($this->model('InfoProduct_model')->tambahDataInfoProduct($_POST) > 0) {
             Flasher::setFlash('Berhasil', 'ditambahkan');
-            header('Location: ' . BASEURL . '/Product');
+            header("Location: $url");
             exit;
         } else {
             Flasher::setFlash('Gagal', 'ditambahkan');
-            header('Location: ' . BASEURL . '/Product');
+            header("Location: $url");
             exit;
         }
     }
 
     public function hapus($infoproduct_id)
     {
+        $data['inprod'] = $this->model('InfoProduct_model')->getInfoProductById($infoproduct_id);
+        $url = BASEURL . '/InfoProduct' . '/DetailSupp' . '/' . $data['inprod']['product_id'];
+
         if ($this->model('InfoProduct_model')->hapusDataInfoProduct($infoproduct_id) > 0) {
             Flasher::setFlash('Berhasil', 'dihapus');
-            header('Location: ' . BASEURL . '/Product');
+            header("Location: $url");
             exit;
         } else {
             Flasher::setFlash('Gagal', 'dihapus');
-            header('Location: ' . BASEURL . '/Product');
+            header("Location: $url");
             exit;
         }
     }

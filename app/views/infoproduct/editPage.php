@@ -2,7 +2,7 @@
     <h1>Update info Supplier</h1>
     <a href="<?= BASEURL; ?>/InfoProduct/detailSupp/<?= $data['inprod']['product_id']; ?>" class="editButton">Kembali</a> <br>
 
-    <form action="<?= BASEURL; ?>/InfoProduct/edit" method="post">
+    <form action="<?= BASEURL; ?>/InfoProduct/edit/<?= $data['inprod']['product_id']; ?>" method="post">
 
         <label class="hidden" for="infoproduct_id">Id infoProduct </label>
         <input class="hidden" type="hidden" id="infoproduct_id" name="infoproduct_id" autocomplete="off" value="<?= $data['inprod']['infoproduct_id']; ?>">

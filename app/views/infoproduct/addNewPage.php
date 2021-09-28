@@ -2,8 +2,8 @@
     <h1>Tambah info Supplier <?= $data['prod']['product_name']; ?></h1>
     <a class="editButton" href="<?= BASEURL; ?>/Product/index">Kembali</a>
 
-
-    <form action="<?= BASEURL; ?>/InfoProduct/tambah" method="post">
+    <!-- <?php echo '<pre>', var_dump($data), '</pre>'; ?> -->
+    <form action="<?= BASEURL; ?>/InfoProduct/tambah/<?= $data['prod']['product_id']; ?>" method="post">
 
         <label class="hidden" for="product_id">Id Product</label>
         <input class="hidden" type="hidden" id="product_id" name="product_id" autocomplete="off" value="<?= $data['prod']['product_id']; ?>">

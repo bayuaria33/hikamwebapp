@@ -51,12 +51,12 @@
 
                     <td>
 
-                        <label class="editButton">
+                        <!-- <label class="editButton">
                             <input type="file" accept="application/pdf, application/vnd.ms-excel" />
                             Upload File
                         </label>
 
-                        <a href="#" class="detailButton" style="float:right;margin-left: 0px;">Check File</a>
+                        <a href="#" class="detailButton" style="float:right;margin-left: 0px;">Check File</a> -->
                         <a href="<?= BASEURL; ?>/InfoProduct/hapus/<?= $inprod['infoproduct_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
                         <a href="<?= BASEURL; ?>/InfoProduct/editPage/<?= $inprod['infoproduct_id']; ?>" class="editButton" style="float:right">Edit</a>
                     </td>
