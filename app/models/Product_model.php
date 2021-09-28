@@ -38,9 +38,13 @@ class Product_model
     public function tambahDataProduct($data)
     {
         $IdArray = $this->getProductId();
-        $lastId = max($IdArray);
-        $lastIdInt = (int)$lastId['product_id'];
-        $newIdInt = $lastIdInt + 1;
+        if (empty($IdArray)) {
+            $newIdInt = "1001";
+        } else {
+            $lastId = max($IdArray);
+            $lastIdInt = (int)$lastId['customer_id'];
+            $newIdInt = $lastIdInt + 1;
+        }
 
 
         $query = "INSERT INTO " . $this->table . " VALUES(:product_id, :product_name, :product_sell_price, :unit, :product_desc, :product_updated, :product_quantity) ";

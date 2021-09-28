@@ -32,9 +32,13 @@ class Supplier_model
     public function tambahDataSupplier($data)
     {
         $IdArray = $this->getSupplierId();
-        $lastId = max($IdArray);
-        $lastIdInt = (int)$lastId['supplier_id'];
-        $newIdInt = $lastIdInt + 1;
+        if (empty($IdArray)) {
+            $newIdInt = "1001";
+        } else {
+            $lastId = max($IdArray);
+            $lastIdInt = (int)$lastId['supplier_id'];
+            $newIdInt = $lastIdInt + 1;
+        }
 
 
         $query = "INSERT INTO " . $this->table . " VALUES(:supplier_id, :supplier_name, :sales_name, :norek1, :norek2, :alamat1, :alamat2, :no_telp1, :no_telp2, :email) ";

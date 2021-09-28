@@ -4,6 +4,13 @@ class Customer_model
     private $table = "customer"; //nama table di db
     private $db;
 
+    function dd($variable)
+    {
+        echo '<pre>';
+        die(var_dump($variable));
+        echo '</pre>';
+    }
+
     public function __construct()
     {
         $this->db = new Database;
@@ -31,11 +38,15 @@ class Customer_model
 
     public function tambahDataCustomer($data)
     {
-        $IdArray = $this->getCustomerId();          // wkwkwkwkwkkwkw
-        $lastId = max($IdArray);                    // satu block code ini cuman buat ngambil Id terakhir doang, soalnya gak autoincrement
-        $lastIdInt = (int)$lastId['customer_id'];   // wkwkwkwkwkkwkw
-        $newIdInt = $lastIdInt + 1;                 // wkwkwkwkwkkwkw
 
+        $IdArray = $this->getCustomerId();
+        if (empty($IdArray)) {
+            $newIdInt = "1001";
+        } else {
+            $lastId = max($IdArray);
+            $lastIdInt = (int)$lastId['customer_id'];
+            $newIdInt = $lastIdInt + 1;
+        }
 
         $query = "INSERT INTO " . $this->table . " VALUES(:customer_id, :customer_name, :alamat1, :alamat2, :no_telp1, :no_telp2, :email) ";
         $this->db->query($query);
