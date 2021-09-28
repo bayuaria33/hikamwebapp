@@ -34,10 +34,10 @@
 
             <tr>
                 <td>
-                    <b>Alamat Customer</b>
+                    <b>Alamat Penagihan</b>
                 </td>
                 <td>
-                    <?= $data['cust']['alamat1']; ?>
+                    <?= $data['cust']['alamat_penagihan']; ?>
                 </td>
                 <td>
                     <b>Tanggal Jatuh Tempo</b>
@@ -49,10 +49,10 @@
 
             <tr>
                 <td>
-                    <b>Alamat Customer</b>
+                    <b>Alamat Pengiriman</b>
                 </td>
                 <td>
-                    <?= $data['cust']['alamat2']; ?>
+                    <?= $data['cust']['alamat_pengiriman']; ?>
                 </td>
                 <td>
                     <b>Catatan Lain</b>

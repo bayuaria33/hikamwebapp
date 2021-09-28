@@ -7,11 +7,11 @@
         <label for="customer_name">Nama Customer</label>
         <input type="text" id="customer_name" name="customer_name" autocomplete="off">
 
-        <label for="alamat1">Alamat Customer</label>
-        <input type="text" id="alamat1" name="alamat1" autocomplete="off">
+        <label for="alamat_penagihan">Alamat Penagihan</label>
+        <input type="text" id="alamat_penagihan" name="alamat_penagihan" autocomplete="off">
 
-        <label for="alamat2">Alamat Customer</label>
-        <input type="text" id="alamat2" name="alamat2" autocomplete="off">
+        <label for="alamat_pengiriman">Alamat Pengiriman</label>
+        <input type="text" id="alamat_pengiriman" name="alamat_pengiriman" autocomplete="off">
 
         <label for="no_telp1">Nomor Telepon Customer</label>
         <input type="number" id="no_telp1" name="no_telp1" autocomplete="off">

@@ -19,7 +19,7 @@
         <label for="invoice_date">Tanggal Invoice</label>
         <input type="date" id="invoice_date" name="invoice_date" autocomplete="off">
 
-        <label for="other_expenses">Pengeluaran Lain</label>
+        <label for="other_expenses">Catatan Lain</label>
         <input type="text" id="other_expenses" name="other_expenses" autocomplete="off">
 
         <label for="status_pembayaran">Status Pembayaran</label>

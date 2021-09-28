@@ -41,15 +41,15 @@ class Supplier_model
         }
 
 
-        $query = "INSERT INTO " . $this->table . " VALUES(:supplier_id, :supplier_name, :sales_name, :norek1, :norek2, :alamat1, :alamat2, :no_telp1, :no_telp2, :email) ";
+        $query = "INSERT INTO " . $this->table . " VALUES(:supplier_id, :supplier_name, :sales_name, :norek1, :norek2, :alamat_penagihan, :alamat_pengiriman, :no_telp1, :no_telp2, :email) ";
         $this->db->query($query);
         $this->db->bind('supplier_id', $newIdInt);
         $this->db->bind('supplier_name', $data['supplier_name']);
         $this->db->bind('sales_name', $data['sales_name']);
         $this->db->bind('norek1', $data['norek1']);
         $this->db->bind('norek2', $data['norek2']);
-        $this->db->bind('alamat1', $data['alamat1']);
-        $this->db->bind('alamat2', $data['alamat2']);
+        $this->db->bind('alamat_penagihan', $data['alamat_penagihan']);
+        $this->db->bind('alamat_pengiriman', $data['alamat_pengiriman']);
         $this->db->bind('no_telp1', $data['no_telp1']);
         $this->db->bind('no_telp2', $data['no_telp2']);
         $this->db->bind('email', $data['email']);
@@ -77,8 +77,8 @@ class Supplier_model
         sales_name=:sales_name,
         norek1=:norek1,
         norek2=:norek2,
-        alamat1=:alamat1, 
-        alamat2 =:alamat2, 
+        alamat_penagihan=:alamat_penagihan, 
+        alamat_pengiriman =:alamat_pengiriman, 
         no_telp1 =:no_telp1,
         no_telp2 =:no_telp2, 
         email=:email 
@@ -89,8 +89,8 @@ class Supplier_model
         $this->db->bind('sales_name', $data['sales_name']);
         $this->db->bind('norek1', $data['norek1']);
         $this->db->bind('norek2', $data['norek2']);
-        $this->db->bind('alamat1', $data['alamat1']);
-        $this->db->bind('alamat2', $data['alamat2']);
+        $this->db->bind('alamat_penagihan', $data['alamat_penagihan']);
+        $this->db->bind('alamat_pengiriman', $data['alamat_pengiriman']);
         $this->db->bind('no_telp1', $data['no_telp1']);
         $this->db->bind('no_telp2', $data['no_telp2']);
         $this->db->bind('email', $data['email']);

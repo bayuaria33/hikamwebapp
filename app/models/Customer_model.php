@@ -48,12 +48,12 @@ class Customer_model
             $newIdInt = $lastIdInt + 1;
         }
 
-        $query = "INSERT INTO " . $this->table . " VALUES(:customer_id, :customer_name, :alamat1, :alamat2, :no_telp1, :no_telp2, :email) ";
+        $query = "INSERT INTO " . $this->table . " VALUES(:customer_id, :customer_name, :alamat_penagihan, :alamat_pengiriman, :no_telp1, :no_telp2, :email) ";
         $this->db->query($query);
         $this->db->bind('customer_id', $newIdInt);
         $this->db->bind('customer_name', $data['customer_name']);
-        $this->db->bind('alamat1', $data['alamat1']);
-        $this->db->bind('alamat2', $data['alamat2']);
+        $this->db->bind('alamat_penagihan', $data['alamat_penagihan']);
+        $this->db->bind('alamat_pengiriman', $data['alamat_pengiriman']);
         $this->db->bind('no_telp1', $data['no_telp1']);
         $this->db->bind('no_telp2', $data['no_telp2']);
         $this->db->bind('email', $data['email']);
@@ -78,8 +78,8 @@ class Customer_model
     {
         echo '<pre>', var_dump($data), '</pre>';
         $query = "UPDATE " . $this->table . " SET customer_name=:customer_name, 
-        alamat1=:alamat1, 
-        alamat2 =:alamat2, 
+        alamat_penagihan=:alamat_penagihan, 
+        alamat_pengiriman =:alamat_pengiriman, 
         no_telp1 =:no_telp1,
         no_telp2 =:no_telp2, 
         email=:email 
@@ -87,8 +87,8 @@ class Customer_model
         $this->db->query($query);
         $this->db->bind('customer_id', $data['customer_id']);
         $this->db->bind('customer_name', $data['customer_name']);
-        $this->db->bind('alamat1', $data['alamat1']);
-        $this->db->bind('alamat2', $data['alamat2']);
+        $this->db->bind('alamat_penagihan', $data['alamat_penagihan']);
+        $this->db->bind('alamat_pengiriman', $data['alamat_pengiriman']);
         $this->db->bind('no_telp1', $data['no_telp1']);
         $this->db->bind('no_telp2', $data['no_telp2']);
         $this->db->bind('email', $data['email']);

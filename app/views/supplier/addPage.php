@@ -16,11 +16,11 @@
         <label for="norek2">No. Rekening 2</label>
         <input type="text" id="norek2" name="norek2" autocomplete="off">
 
-        <label for="alamat1">Alamat Supplier 1 </label>
-        <input type="text" id="alamat1" name="alamat1" autocomplete="off">
+        <label for="alamat_penagihan">Alamat Penagihan </label>
+        <input type="text" id="alamat_penagihan" name="alamat_penagihan" autocomplete="off">
 
-        <label for="alamat2">Alamat Supplier 2 </label>
-        <input type="text" id="alamat2" name="alamat2" autocomplete="off">
+        <label for="alamat_pengiriman">Alamat Pengiriman</label>
+        <input type="text" id="alamat_pengiriman" name="alamat_pengiriman" autocomplete="off">
 
         <label for="no_telp1">Nomor Telepon Supplier 1 </label>
         <input type="number" id="no_telp1" name="no_telp1" autocomplete="off">

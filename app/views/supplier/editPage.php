@@ -20,11 +20,11 @@
         <label for="norek2">Nomor rekening</label>
         <input type="text" id="norek2" name="norek2" autocomplete="off" value="<?= $data['sup']['norek2']; ?>">
 
-        <label for="alamat1">Alamat Supplier</label>
-        <input type="text" id="alamat1" name="alamat1" autocomplete="off" value="<?= $data['sup']['alamat1']; ?>">
+        <label for="alamat_penagihan">Alamat Penagihan</label>
+        <input type="text" id="alamat_penagihan" name="alamat_penagihan" autocomplete="off" value="<?= $data['sup']['alamat_penagihan']; ?>">
 
-        <label for="alamat2">Alamat Supplier</label>
-        <input type="text" id="alamat2" name="alamat2" autocomplete="off" value="<?= $data['sup']['alamat2']; ?>">
+        <label for="alamat_pengiriman">Alamat Pengiriman</label>
+        <input type="text" id="alamat_pengiriman" name="alamat_pengiriman" autocomplete="off" value="<?= $data['sup']['alamat_pengiriman']; ?>">
 
         <label for="no_telp1">Nomor Telepon Supplier</label>
         <input type="number" id="no_telp1" name="no_telp1" autocomplete="off" value="<?= $data['sup']['no_telp1']; ?>">

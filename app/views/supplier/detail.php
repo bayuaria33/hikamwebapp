@@ -9,8 +9,8 @@
         <p><?= $data['sup']['sales_name']; ?></p>
         <p><?= $data['sup']['norek1']; ?></p>
         <p><?= $data['sup']['norek2']; ?></p>
-        <p><?= $data['sup']['alamat1']; ?></p>
-        <p><?= $data['sup']['alamat2']; ?></p>
+        <p><?= $data['sup']['alamat_penagihan']; ?></p>
+        <p><?= $data['sup']['alamat_pengiriman']; ?></p>
         <p><?= $data['sup']['no_telp1']; ?></p>
         <p><?= $data['sup']['no_telp2']; ?></p>
         <p><?= $data['sup']['email']; ?></p>

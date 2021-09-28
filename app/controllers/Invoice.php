@@ -251,12 +251,12 @@ class Invoice extends Controller
         $pdf->Cell(80, 5, $data['invc']['DO_id'], 0, 0);
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Alamat Customer', 0, 0);
-        $pdf->Cell(50, 5, ': ' . $data['cust']['alamat1'], 0, 0);
+        $pdf->Cell(50, 5, 'Alamat Penagihan', 0, 0);
+        $pdf->Cell(50, 5, ': ' . $data['cust']['alamat_penagihan'], 0, 0);
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, '', 0, 0);
-        $pdf->Cell(50, 5, ': ' . $data['cust']['alamat2'], 0, 0);
+        $pdf->Cell(50, 5, 'Alamat Pengiriman', 0, 0);
+        $pdf->Cell(50, 5, ': ' . $data['cust']['alamat_pengiriman'], 0, 0);
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         $pdf->Cell(50, 5, 'Nomor Telepon', 0, 0);
