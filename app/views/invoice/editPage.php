@@ -1,10 +1,10 @@
 <div class="container">
     <h1>Edit data Invoice <?= $data['invc']['invoice_id']; ?></h1>
-    <a class="editButton" href="<?= BASEURL; ?>/Invoice">Kembali</a>
+    <a class="editButton" href="<?= BASEURL; ?>/Invoice/Item/<?= $data['invc']['invoice_id']; ?>">Kembali</a>
 
     <!-- <?= '<pre>', var_dump($data), '</pre>' ?> -->
 
-    <form action="<?= BASEURL; ?>/Invoice/edit" method="post">
+    <form action="<?= BASEURL; ?>/Invoice/edit/<?= $data['invc']['invoice_id']; ?>" method="post">
         <label class="hidden" for="invoice_id">Id Invoice</label>
         <input class="hidden" type="hidden" id="invoice_id" name="invoice_id" autocomplete="off" value="<?= $data['invc']['invoice_id']; ?>">
 

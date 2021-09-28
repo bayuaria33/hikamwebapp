@@ -55,7 +55,7 @@
                     <?= $data['cust']['alamat2']; ?>
                 </td>
                 <td>
-                    <b>Pengeluaran Lain</b>
+                    <b>Catatan Lain</b>
                 </td>
                 <td>
                     <?= $data['invc']['other_expenses']; ?>

@@ -97,15 +97,16 @@ class Invoice extends Controller
         $this->view('templates/footer');
     }
 
-    public function edit()
+    public function edit($invoice_id)
     {
+        $url = BASEURL . '/Invoice' . '/Item' . '/' . $invoice_id;
         if ($this->model('Invoice_model')->editDataInvoice($_POST) > 0) {
             Flasher::setFlash('Berhasil', 'diubah');
-            header('Location: ' . BASEURL . '/Invoice');
+            header("Location: $url");
             exit;
         } else {
             Flasher::setFlash('Gagal', 'diubah');
-            header('Location: ' . BASEURL . '/Invoice');
+            header("Location:$url");
 
             exit;
         }
@@ -307,23 +308,29 @@ class Invoice extends Controller
         }
 
         //summary
-        $pdf->Cell(130, 5, '', 0, 0);
+        $pdf->Cell(126, 5, '', 0, 0);
         $pdf->Cell(22, 5, 'Subtotal', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $pdf->Cell(30, 5, $sum, 1, 1, 'R'); //end of line
+        $pdf->Cell(34, 5, $sum, 1, 1, 'R'); //end of line
 
-        $pdf->Cell(130, 5, '', 0, 0);
+        $pdf->Cell(126, 5, '', 0, 0);
         $pdf->Cell(22, 5, 'PPN 10%', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
         $taxed = $sum * 0.01;
-        $pdf->Cell(30, 5, $taxed, 1, 1, 'R'); //end of line
+        $pdf->Cell(34, 5, $taxed, 1, 1, 'R'); //end of line
 
-        $pdf->Cell(130, 5, '', 0, 0);
+        $pdf->Cell(126, 5, '', 0, 0);
         $pdf->Cell(22, 5, 'Total Due', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $pdf->Cell(30, 5, $sum - $taxed, 1, 1, 'R'); //end of line
+        $pdf->Cell(34, 5, $sum - $taxed, 1, 1, 'R'); //end of line
+
+        //make a dummy empty cell as a vertical spacer
+        $pdf->Cell(189, 10, '', 0, 1); //end of line
+
+        $pdf->Cell(20, 5, 'Catatan', 0, 0);
+        $pdf->MultiCell(120, 5, ': ' . $data['invc']['other_expenses'], 0, 1);
 
 
-        $pdf->Output('I', $filename);
+        $pdf->Output('I', $filename . '.pdf');
     }
 }
