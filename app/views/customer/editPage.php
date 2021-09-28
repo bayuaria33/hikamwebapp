@@ -2,7 +2,7 @@
     <h1>Edit data Customer</h1>
     <a class="editButton" href="<?= BASEURL; ?>/Customer">Kembali</a>
 
-    <form action="<?= BASEURL; ?>/Customer/edit" method="post">
+    <form action="<?= BASEURL; ?>/Customer/edit/<?= $data['cust']['customer_id']; ?>" method="post">
 
 
         <label class="hidden" for="customer_id">Id Customer</label>

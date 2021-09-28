@@ -24,7 +24,6 @@
                         <?= $sup['supplier_name']; ?>
                     <td>
                         <a href="<?= BASEURL; ?>/Supplier/hapus/<?= $sup['supplier_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
-                        <a href="<?= BASEURL; ?>/Supplier/editPage/<?= $sup['supplier_id']; ?>" class="editButton" style="float:right">Edit</a>
                         <a href="<?= BASEURL; ?>/Supplier/detail/<?= $sup['supplier_id']; ?>" class="detailButton" style="float:right">Detail</a>
                     </td>
 

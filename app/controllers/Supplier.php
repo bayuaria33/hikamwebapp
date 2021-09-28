@@ -35,15 +35,16 @@ class Supplier extends Controller
         $this->view('templates/footer');
     }
 
-    public function edit()
+    public function edit($supplier_id)
     {
+        $url = BASEURL . '/Supplier' . '/detail' . '/' . $supplier_id;
         if ($this->model('Supplier_model')->editDataSupplier($_POST) > 0) {
             Flasher::setFlash('Berhasil', 'diubah');
-            header('Location: ' . BASEURL . '/Supplier');
+            header("Location: $url");
             exit;
         } else {
             Flasher::setFlash('Gagal', 'diubah');
-            header('Location: ' . BASEURL . '/Supplier');
+            header("Location: $url");
             exit;
         }
     }
@@ -84,4 +85,3 @@ class Supplier extends Controller
         $this->view('templates/footer');
     }
 }
-

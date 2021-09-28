@@ -2,7 +2,7 @@
     <h1>Edit data Supplier</h1>
     <a class="editButton" href="<?= BASEURL; ?>/Supplier">Kembali</a>
 
-    <form action="<?= BASEURL; ?>/Supplier/edit" method="post">
+    <form action="<?= BASEURL; ?>/Supplier/edit/<?= $data['sup']['supplier_id']; ?>" method="post">
 
 
         <label class="hidden" for="supplier_id">Id Supplier</label>

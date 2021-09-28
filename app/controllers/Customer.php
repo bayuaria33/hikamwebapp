@@ -35,15 +35,16 @@ class Customer extends Controller
         $this->view('templates/footer');
     }
 
-    public function edit()
+    public function edit($customer_id)
     {
+        $url = BASEURL . '/Customer' . '/detail' . '/' . $customer_id;
         if ($this->model('Customer_model')->editDataCustomer($_POST) > 0) {
             Flasher::setFlash('Berhasil', 'diubah');
-            header('Location: ' . BASEURL . '/Customer');
+            header("Location: $url");
             exit;
         } else {
             Flasher::setFlash('Gagal', 'diubah');
-            header('Location: ' . BASEURL . '/Customer');
+            header("Location: $url");
             exit;
         }
     }
