@@ -7,7 +7,7 @@ class InfoProduct extends Controller
     {
         $data['inprod'] = $this->model('InfoProduct_model')->getAllProductSupp($product_id); //BARU
         $data['judul'] = "Detail Info Product";
-        //echo '<pre>', var_dump($data, $newIdInt), '</pre>';
+
         if (!empty($data['inprod'])) {
             $this->view('templates/header', $data);
             $this->view('infoproduct/index', $data);
@@ -23,8 +23,7 @@ class InfoProduct extends Controller
         $data['suppliers'] = $this->model('Supplier_model')->getAllSupplier();
         $data['judul'] = "Tambah data InfoProduct";
         $data['inprod'] = $this->model('InfoProduct_model')->getAllProductSupp($infoproduct_id); //BARU //GANTI INI
-        //echo '<pre>', var_dump($data), '</pre>';
-        //echo "masuk add page";
+
         $this->view('templates/header', $data);
         $this->view('infoproduct/addPage', $data);
         $this->view('templates/footer');
@@ -47,7 +46,7 @@ class InfoProduct extends Controller
     {
         $data['judul'] = "Edit data Supplier Product ";
         $data['inprod'] = $this->model('InfoProduct_model')->getInfoProductById($infoproduct_id);
-        //echo '<pre>', var_dump($data), '</pre>';
+
         $this->view('templates/header', $data);
         $this->view('infoproduct/editPage', $data);
         $this->view('templates/footer');

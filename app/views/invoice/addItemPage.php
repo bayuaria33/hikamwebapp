@@ -4,7 +4,7 @@
 
 
     <form action="<?= BASEURL; ?>/Invoice/tambahItem/<?= $data['invc']['invoice_id']; ?>" method="post">
-        <!-- <?php echo '<pre>', var_dump($data), '</pre>'; ?> -->
+
         <label class="hidden" for="invoice_id">Id Invoice</label>
         <input class="hidden" type="hidden" id="invoice_id" name="invoice_id" autocomplete="off" value="<?= $data['invc']['invoice_id']; ?>">
 

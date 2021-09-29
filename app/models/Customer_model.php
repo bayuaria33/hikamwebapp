@@ -76,7 +76,7 @@ class Customer_model
 
     public function editDataCustomer($data)
     {
-        echo '<pre>', var_dump($data), '</pre>';
+
         $query = "UPDATE " . $this->table . " SET customer_name=:customer_name, 
         alamat_penagihan=:alamat_penagihan, 
         alamat_pengiriman =:alamat_pengiriman, 

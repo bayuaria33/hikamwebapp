@@ -23,7 +23,7 @@
                 <th>Action</th>
 
             </tr>
-            <!-- <?php echo '<pre>', var_dump($data), '</pre>'; ?> -->
+
             <?php foreach ($data['prod'] as $prod) : ?>
                 <tr>
                     <td>

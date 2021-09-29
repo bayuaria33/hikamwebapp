@@ -16,7 +16,7 @@
 
         <table id="tabledetail">
             <tr>
-                <!-- <th>Product Name</th> -->
+
                 <th>Supplier</th>
                 <th>Ketersediaan</th>
                 <th>Deskripsi</th>
@@ -27,7 +27,7 @@
 
 
             </tr>
-            <!-- <?= '<pre>', var_dump($data), '</pre>' ?> -->
+
             <?php foreach ($data['inprod'] as $inprod) : ?>
                 <tr>
                     <td>

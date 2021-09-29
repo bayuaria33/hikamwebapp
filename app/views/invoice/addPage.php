@@ -2,7 +2,6 @@
     <h1>Tambah data Invoice</h1>
     <a class="editButton" href="<?= BASEURL; ?>/Invoice">Kembali</a>
 
-    <!-- <?= '<pre>', var_dump($data), '</pre>' ?> -->
 
     <form action="<?= BASEURL; ?>/Invoice/tambah" method="post">
 

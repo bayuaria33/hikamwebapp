@@ -17,7 +17,7 @@
                 <th>Nama</th>
                 <th>Action</th>
             </tr>
-            <!-- <?= '<pre>', var_dump($data), '</pre>' ?> -->
+
             <?php foreach ($data['cust'] as $cust) : ?>
                 <tr>
                     <td>

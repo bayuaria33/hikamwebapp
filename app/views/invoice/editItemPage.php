@@ -2,7 +2,6 @@
     <h1>Edit data Item Invoice <?= $data['invc_item']['invc_item_id']; ?></h1>
     <a class="editButton" href="<?= BASEURL; ?>/Invoice/Item/ <?= $data['invc_item']['invoice_id']; ?>">Kembali</a>
 
-    <!-- <?= '<pre>', var_dump($data), '</pre>' ?> -->
 
     <form action="<?= BASEURL; ?>/Invoice/editItem/<?= $data['invc_item']['invoice_id']; ?>" method="post">
         <label class="hidden" for="invoice_id">Id Invoice</label>

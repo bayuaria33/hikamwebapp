@@ -91,7 +91,7 @@ class Invoice extends Controller
         $data['judul'] = "Edit data Invoice ";
         $data['cust'] = $this->model('Customer_model')->getAllCustomer();
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
-        //echo '<pre>', var_dump($data), '</pre>';
+
         $this->view('templates/header', $data);
         $this->view('Invoice/editPage', $data);
         $this->view('templates/footer');
@@ -185,7 +185,7 @@ class Invoice extends Controller
         $data['product'] = $this->model('Product_model')->getAllProduct();
         $data['invc_item'] = $this->model('Invoice_model')->getInvoiceItembyId($invc_item_id);
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($data['invc_item']['invoice_id']);
-        //echo '<pre>', var_dump($data), '</pre>';
+
         $this->view('templates/header', $data);
         $this->view('Invoice/editItemPage', $data);
         $this->view('templates/footer');

@@ -3,7 +3,7 @@
     <h1>Detail Invoice</h1>
     <a href="<?= BASEURL; ?>/Invoice" class="editButton">Kembali</a>
     <br>
-    <!-- <?= '<pre>', var_dump($data), '</pre>' ?> -->
+
     <div class="card">
 
         <h2><?= $data['invoice_number']; ?></h2>

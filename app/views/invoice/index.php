@@ -19,7 +19,6 @@
                 <th>Customer Name</th>
                 <th>Action</th>
             </tr>
-            <!-- <?= '<pre>', var_dump($data), '</pre>' ?> -->
             <?php foreach ($data['invc'] as $invc) : ?>
                 <tr>
                     <td>

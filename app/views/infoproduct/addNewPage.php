@@ -2,7 +2,7 @@
     <h1>Tambah info Supplier <?= $data['prod']['product_name']; ?></h1>
     <a class="editButton" href="<?= BASEURL; ?>/Product/index">Kembali</a>
 
-    <!-- <?php echo '<pre>', var_dump($data), '</pre>'; ?> -->
+
     <form action="<?= BASEURL; ?>/InfoProduct/tambah/<?= $data['prod']['product_id']; ?>" method="post">
 
         <label class="hidden" for="product_id">Id Product</label>
