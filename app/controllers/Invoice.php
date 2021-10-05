@@ -24,6 +24,15 @@ class Invoice extends Controller
         return $date;
     }
 
+    function getInvoiceMonth($invoice_id)
+    {
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
+        $invoice_date_month = date("m", strtotime($data['invc']['invoice_date']));
+        $dateObj   = DateTime::createFromFormat('!m', $invoice_date_month);
+        $invoice_date_month_format = $dateObj->format('F');
+        return $invoice_date_month_format;
+    }
+
     function DueDateFormat($invoice_id)
     {
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
@@ -41,12 +50,13 @@ class Invoice extends Controller
     function invoiceString($invoice_id)
     {
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
-
-        $h = "HAI";
+        $m = date("m", strtotime($data['invc']['invoice_date']));
+        $index = $this->findInvoiceIndexInMonth($invoice_id);
+        $index_format = sprintf("%02d", $index);
         $s = "/";
         $i = "INV";
         $invoice_date_year = date("Y", strtotime($data['invc']['invoice_date']));
-        $invoice_number = $h . $invoice_id . $s . $i . $s . $invoice_date_year;
+        $invoice_number = $m . $index_format . $s . $i . $s . $invoice_date_year;
         return $invoice_number;
     }
 
@@ -134,6 +144,21 @@ class Invoice extends Controller
         $this->view('templates/footer');
     }
 
+    function findInvoiceIndexInMonth($invoice_id)
+    {
+        //cari urutan ke brp di bulan $InvoiceMonth
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
+        $data['InvoiceMonth'] = $this->getInvoiceMonth($data['invc']['invoice_id']);
+        $data['AllInvoiceInMonth'] = $this->model('Invoice_model')->getInvoiceInMonth($data['InvoiceMonth']);
+        $array = $data['AllInvoiceInMonth'];
+
+        foreach ($array as $key => $value) {
+            if ($value['invoice_id'] == $data['invc']['invoice_id']) {
+                return $key + 1;
+            }
+        }
+        return false;
+    }
     public function getItemDetails($invoice_id)
     {
         $data['judul'] = "Detail Item Invoice";
@@ -143,12 +168,14 @@ class Invoice extends Controller
         $data['invoice_number'] = $this->invoiceString($data['invc']['invoice_id']);
         $data['invoice_date_format'] = $this->InvoiceDateFormat($data['invc']['invoice_id']);
         $data['due_date_format'] = $this->DueDateFormat($data['invc']['invoice_id']);
+        // $data['InvoiceMonth'] = $this->getInvoiceMonth($data['invc']['invoice_id']);
+        // $data['AllInvoiceInMonth'] = $this->model('Invoice_model')->getInvoiceInMonth($data['InvoiceMonth']);
+        // $data['key'] = $this->findInvoiceIndexInMonth($data['invc']['invoice_id']);
         return $data;
     }
     public function item($invoice_id)
     {
         $data = $this->getItemDetails($invoice_id);
-
         $this->view('templates/header', $data);
         $this->view('Invoice/Item', $data);
         $this->view('templates/footer');

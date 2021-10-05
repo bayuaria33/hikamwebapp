@@ -19,22 +19,22 @@
                 <th>Customer Name</th>
                 <th>Action</th>
             </tr>
-            <?php foreach ($data['invc'] as $invc) : ?>
+            <?php foreach ($data['invc'] as $invc => $value) : ?>
                 <tr>
                     <td>
-                        <?= $invc['invoice_id'] ?>
+                        <?= $invc + 1 ?>
                     </td>
                     <td>
-                        <?= $invc['invoice_date']; ?>
+                        <?= $value['invoice_date']; ?>
                     </td>
                     <td>
-                        <?= $invc['customer_name']; ?>
+                        <?= $value['customer_name']; ?>
                     </td>
 
 
                     <td>
-                        <a href="<?= BASEURL; ?>/Invoice/hapus/<?= $invc['invoice_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
-                        <a href="<?= BASEURL; ?>/Invoice/item/<?= $invc["invoice_id"]; ?>" class="editButton" style="float:right">Detail</a>
+                        <a href="<?= BASEURL; ?>/Invoice/hapus/<?= $value['invoice_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
+                        <a href="<?= BASEURL; ?>/Invoice/item/<?= $value["invoice_id"]; ?>" class="editButton" style="float:right">Detail</a>
                     </td>
 
                 </tr>

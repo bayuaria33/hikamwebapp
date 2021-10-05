@@ -52,7 +52,7 @@ class Invoice_model
             $newIdInt = "1001";
         } else {
             $lastId = max($IdArray);
-            $lastIdInt = (int)$lastId['customer_id'];
+            $lastIdInt = (int)$lastId['invoice_id'];
             $newIdInt = $lastIdInt + 1;
         }             // wkwkwkwkwkkwkwi
 
@@ -70,7 +70,6 @@ class Invoice_model
         $this->db->bind('DO_id', $data['DO_id']);
 
         $this->db->execute();
-        $this->dd($query);
         return $this->db->rowCount();
     }
 
@@ -193,5 +192,13 @@ class Invoice_model
         $this->db->execute();
 
         return $this->db->rowCount();
+    }
+
+    public function getInvoiceInMonth($month)
+    {
+
+        $this->db->query("select invoice_id from " . $this->table . " where monthname(invoice_date)='" . $month
+            . "' order by invoice_date");
+        return $this->db->resultSet();
     }
 }
