@@ -91,6 +91,14 @@
                 </td>
             </tr>
             <tr>
+                <td>
+                    <b>PPN</b>
+                </td>
+                <td>
+                    <?= $data['invc']['ppn']; ?> %
+                </td>
+            </tr>
+            <tr>
 
             </tr>
         </table>

@@ -340,10 +340,11 @@ class Invoice extends Controller
         $pdf->Cell(7, 5, 'Rp', 1, 0);
         $pdf->Cell(34, 5, $sum, 1, 1, 'R'); //end of line
 
+        $ppn = $data['invc']['ppn'];
         $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'PPN 10%', 0, 0);
+        $pdf->Cell(22, 5, 'PPN ' . $ppn . ' %', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $taxed = $sum * 0.01;
+        $taxed = $sum * $ppn / 100;
         $pdf->Cell(34, 5, $taxed, 1, 1, 'R'); //end of line
 
         $pdf->Cell(126, 5, '', 0, 0);
@@ -356,7 +357,6 @@ class Invoice extends Controller
 
         $pdf->Cell(20, 5, 'Catatan', 0, 0);
         $pdf->MultiCell(120, 5, ': ' . $data['invc']['other_expenses'], 0, 1);
-
 
         $pdf->Output('I', $filename . '.pdf');
     }

@@ -31,6 +31,12 @@
         <label for="due_date">Tanggal Jatuh Tempo</label>
         <br><input type="date" id="due_date" name="due_date" autocomplete="off" value="<?= $data['invc']['due_date']; ?>">
 
+        <label for="ppn">PPN</label>
+        <br><select name="ppn" id="ppn">
+            <option value="10">10%</option>
+            <option value="0">0%</option>
+        </select>
+
         <br><label for="PO_id">PO_id</label>
         <input type="text" id="PO_id" name="PO_id" autocomplete="off" value="<?= $data['invc']['PO_id']; ?>">
 

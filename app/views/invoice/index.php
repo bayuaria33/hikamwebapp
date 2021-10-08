@@ -14,7 +14,7 @@
 
         <table id="tabledetail">
             <tr>
-                <th>Invoice Number</th>
+                <th>No. </th>
                 <th>Invoice Date</th>
                 <th>Customer Name</th>
                 <th>Action</th>

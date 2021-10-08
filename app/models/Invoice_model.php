@@ -57,7 +57,7 @@ class Invoice_model
         }             // wkwkwkwkwkkwkwi
 
         $query = "INSERT INTO " . $this->table .
-            " VALUES(:invoice_id, :customer_name, :invoice_date, :other_expenses, :status_pembayaran, :due_date, :PO_id, :DO_id) ";
+            " VALUES(:invoice_id, :customer_name, :invoice_date, :other_expenses, :status_pembayaran, :due_date, :ppn, :PO_id, :DO_id) ";
         $this->db->query($query);
 
         $this->db->bind('invoice_id', $newIdInt);
@@ -65,6 +65,7 @@ class Invoice_model
         $this->db->bind('invoice_date', $data['invoice_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
         $this->db->bind('status_pembayaran', $data['status_pembayaran']);
+        $this->db->bind('ppn', $data['ppn']);
         $this->db->bind('due_date', $data['due_date']);
         $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('DO_id', $data['DO_id']);
@@ -103,6 +104,7 @@ class Invoice_model
         invoice_date =:invoice_date, 
         other_expenses =:other_expenses,
         status_pembayaran =:status_pembayaran, 
+        ppn =:ppn,
         due_date =:due_date,
         PO_id =:PO_id,
         DO_id =:DO_id
@@ -113,6 +115,7 @@ class Invoice_model
         $this->db->bind('invoice_date', $data['invoice_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
         $this->db->bind('status_pembayaran', $data['status_pembayaran']);
+        $this->db->bind('ppn', $data['ppn']);
         $this->db->bind('due_date', $data['due_date']);
         $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('DO_id', $data['DO_id']);
