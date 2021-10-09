@@ -60,24 +60,11 @@ class Invoice extends Controller
         return $invoice_number;
     }
 
-    public function detail($invoice_id)
-    {
-        $data['judul'] = "Detail Invoice";
-        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
-
-        $data['invoice_number'] = $this->invoiceString($data['invc']['invoice_id']);
-        $data['invoice_date_format'] = $this->InvoiceDateFormat($data['invc']['invoice_id']);
-        $data['due_date_format'] = $this->DueDateFormat($data['invc']['invoice_id']);
-
-        $this->view('templates/header', $data);
-        $this->view('Invoice/detail', $data);
-        $this->view('templates/footer');
-    }
-
     public function addPage()
     {
         $data['cust'] = $this->model('Customer_model')->getAllCustomer();
         $data['judul'] = "Tambah data Invoice";
+        $data['PO'] = $this->model('Purchase_model')->getAllPurchase();
         $this->view('templates/header', $data);
         $this->view('invoice/addPage', $data);
         $this->view('templates/footer');
@@ -99,6 +86,7 @@ class Invoice extends Controller
     public function editPage($invoice_id)
     {
         $data['judul'] = "Edit data Invoice ";
+        $data['PO'] = $this->model('Purchase_model')->getAllPurchase();
         $data['cust'] = $this->model('Customer_model')->getAllCustomer();
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
 
@@ -175,7 +163,9 @@ class Invoice extends Controller
     }
     public function item($invoice_id)
     {
+
         $data = $this->getItemDetails($invoice_id);
+        $this->model('Invoice_model')->insertNumber($data);
         $this->view('templates/header', $data);
         $this->view('Invoice/Item', $data);
         $this->view('templates/footer');
@@ -282,9 +272,9 @@ class Invoice extends Controller
         $pdf->Cell(50, 5, ': ' . $data['cust']['alamat_penagihan'], 0, 0);
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Alamat Pengiriman', 0, 0);
-        $pdf->Cell(50, 5, ': ' . $data['cust']['alamat_pengiriman'], 0, 0);
-        $pdf->Cell(59, 5, '', 0, 1); //end of line
+        // $pdf->Cell(50, 5, 'Alamat Pengiriman', 0, 0);
+        // $pdf->Cell(50, 5, ': ' . $data['cust']['alamat_pengiriman'], 0, 0);
+        // $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         $pdf->Cell(50, 5, 'Nomor Telepon', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 0);

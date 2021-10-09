@@ -14,18 +14,19 @@
 
         <table id="tabledetail">
             <tr>
-                <th>No. </th>
+                <!-- <th>No. </th> -->
                 <th>Invoice Date</th>
                 <th>Customer Name</th>
                 <th>Action</th>
             </tr>
             <?php foreach ($data['invc'] as $invc => $value) : ?>
                 <tr>
-                    <td>
+                    <!-- <td>
                         <?= $invc + 1 ?>
-                    </td>
+                    </td> -->
                     <td>
-                        <?= $value['invoice_date']; ?>
+                        <?=
+                        $output = date('d-m-Y', strtotime($value['invoice_date'])); ?>
                     </td>
                     <td>
                         <?= $value['customer_name']; ?>

@@ -1,8 +1,9 @@
 <div class="container">
-    <h1>Tambah data Invoice</h1>
-    <a class="editButton" href="<?= BASEURL; ?>/Invoice">Kembali</a>
+    <h1>Tambah data Purchase</h1>
+    <a class="editButton" href="<?= BASEURL; ?>/Purchase">Kembali</a>
 
-    <form action="<?= BASEURL; ?>/Invoice/tambah" method="post">
+
+    <form action="<?= BASEURL; ?>/Purchase/tambah" method="post">
 
         <label for="product_avb">pilih Customer</label>
         <select name="customer_name" id="customer_name">
@@ -14,8 +15,8 @@
             <?php endforeach; ?>
         </select>
 
-        <label for="invoice_date">Tanggal Invoice</label>
-        <input type="date" id="invoice_date" name="invoice_date" autocomplete="off">
+        <label for="PO_date">Tanggal Purchase</label>
+        <input type="date" id="PO_date" name="PO_date" autocomplete="off">
 
         <label for="other_expenses">Catatan Lain</label>
         <input type="text" id="other_expenses" name="other_expenses" autocomplete="off">
@@ -35,12 +36,12 @@
             <option value="0">0%</option>
         </select>
 
-        <label for="PO_id">Purchase Order Number</label>
-        <select name="PO_id" id="PO_id">
+        <label for="invoice_id">Invoice Number</label>
+        <select name="invoice_id" id="invoice_id">
 
-            <?php foreach ($data['PO'] as $PO) : ?>
+            <?php foreach ($data['invc'] as $invc) : ?>
 
-                <option value="<?= $PO['PO_id']; ?>"><?= $PO['purchase_number']; ?></option>
+                <option value="<?= $invc['invoice_id']; ?>"><?= $invc['invoice_number']; ?></option>
 
             <?php endforeach; ?>
         </select>
