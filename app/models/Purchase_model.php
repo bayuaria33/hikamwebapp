@@ -63,8 +63,8 @@ class Purchase_model
             :PO_date, 
             :other_expenses, 
             :status_pembayaran, 
+            :ppn,
             :due_date, 
-            :ppn, 
             :invoice_id, 
             :DO_id) ";
         $this->db->query($query);

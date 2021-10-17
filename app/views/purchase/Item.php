@@ -6,6 +6,23 @@
         <a href="<?= BASEURL; ?>/Purchase" class="editButton">Kembali</a>
         <a href="<?= BASEURL; ?>/Purchase/editPage/<?= $data['PO']['PO_id']; ?>" class="editButton">Edit</a>
         <a href="<?= BASEURL; ?>/Purchase/generatePDF/<?= $data['PO']['PO_id']; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Generate PDF</a>
+
+        <!-- button cek invoice -->
+        <?php
+        if (!empty($data['PO']['invoice_id'])) { ?>
+            <a href="<?= BASEURL; ?>/Invoice/item/<?= $data['PO']["invoice_id"]; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Cek Invoice</a>
+        <?php  } else { ?>
+            <div class="alert"> Invoice Belum di isi</div>
+        <?php } ?>
+
+        <!-- button cek DO -->
+        <?php
+        if (!empty($data['PO']['DO_id'])) { ?>
+            <a href="" class="detailButton" style="margin-left: 0;" target="_blank">Cek Delivery Order</a>
+        <?php  } else { ?>
+            <div class="alert"> Delivery Order Belum di isi</div>
+        <?php } ?>
+
         <br>
         <table id="tabledetail">
             <tr>

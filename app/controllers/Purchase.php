@@ -92,7 +92,7 @@ class Purchase extends Controller
         $data['PO'] = $this->model('Purchase_model')->getPurchaseById($PO_id);
 
         $this->view('templates/header', $data);
-        $this->view('Purchase/editPage', $data);
+        $this->view('purchase/editPage', $data);
         $this->view('templates/footer');
     }
 
@@ -129,7 +129,7 @@ class Purchase extends Controller
         $data['judul'] = "Daftar Purchase";
         $data['PO'] = $this->model('Purchase_model')->cariDataPurchase();
         $this->view('templates/header', $data);
-        $this->view('Purchase/index', $data);
+        $this->view('purchase/index', $data);
         $this->view('templates/footer');
     }
 
@@ -167,7 +167,7 @@ class Purchase extends Controller
         $data = $this->getItemDetails($PO_id);
         $this->model('Purchase_model')->insertNumber($data);
         $this->view('templates/header', $data);
-        $this->view('Purchase/Item', $data);
+        $this->view('purchase/Item', $data);
         $this->view('templates/footer');
     }
 
@@ -204,7 +204,7 @@ class Purchase extends Controller
         $data['PO'] = $this->model('Purchase_model')->getPurchaseById($data['pc_item']['PO_id']);
 
         $this->view('templates/header', $data);
-        $this->view('Purchase/editItemPage', $data);
+        $this->view('purchase/editItemPage', $data);
         $this->view('templates/footer');
     }
 
@@ -268,8 +268,8 @@ class Purchase extends Controller
         $pdf->Cell(80, 5, $data['PO']['DO_id'], 0, 0);
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Alamat Penagihan', 0, 0);
-        $pdf->Cell(50, 5, ': ' . $data['cust']['alamat_penagihan'], 0, 0);
+        $pdf->Cell(50, 5, 'Alamat Penagihan             :', 0, 1);
+        $pdf->MultiCell(112, 5, $data['cust']['alamat_penagihan'], 0, 1);
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         // $pdf->Cell(50, 5, 'Alamat Pengiriman', 0, 0);
@@ -340,7 +340,7 @@ class Purchase extends Controller
         $pdf->Cell(126, 5, '', 0, 0);
         $pdf->Cell(22, 5, 'Total Due', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $pdf->Cell(34, 5, $sum - $taxed, 1, 1, 'R'); //end of line
+        $pdf->Cell(34, 5, $sum + $taxed, 1, 1, 'R'); //end of line
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line

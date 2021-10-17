@@ -91,7 +91,7 @@ class Invoice extends Controller
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
 
         $this->view('templates/header', $data);
-        $this->view('Invoice/editPage', $data);
+        $this->view('invoice/editPage', $data);
         $this->view('templates/footer');
     }
 
@@ -128,7 +128,7 @@ class Invoice extends Controller
         $data['judul'] = "Daftar Invoice";
         $data['invc'] = $this->model('Invoice_model')->cariDataInvoice();
         $this->view('templates/header', $data);
-        $this->view('Invoice/index', $data);
+        $this->view('invoice/index', $data);
         $this->view('templates/footer');
     }
 
@@ -167,7 +167,7 @@ class Invoice extends Controller
         $data = $this->getItemDetails($invoice_id);
         $this->model('Invoice_model')->insertNumber($data);
         $this->view('templates/header', $data);
-        $this->view('Invoice/Item', $data);
+        $this->view('invoice/item', $data);
         $this->view('templates/footer');
     }
 
@@ -204,7 +204,7 @@ class Invoice extends Controller
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($data['invc_item']['invoice_id']);
 
         $this->view('templates/header', $data);
-        $this->view('Invoice/editItemPage', $data);
+        $this->view('invoice/editItemPage', $data);
         $this->view('templates/footer');
     }
 
@@ -268,8 +268,8 @@ class Invoice extends Controller
         $pdf->Cell(80, 5, $data['invc']['DO_id'], 0, 0);
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Alamat Penagihan', 0, 0);
-        $pdf->Cell(50, 5, ': ' . $data['cust']['alamat_penagihan'], 0, 0);
+        $pdf->Cell(50, 5, 'Alamat Penagihan             :', 0, 1);
+        $pdf->MultiCell(112, 5, $data['cust']['alamat_penagihan'], 0, 1);
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         // $pdf->Cell(50, 5, 'Alamat Pengiriman', 0, 0);
@@ -340,7 +340,7 @@ class Invoice extends Controller
         $pdf->Cell(126, 5, '', 0, 0);
         $pdf->Cell(22, 5, 'Total Due', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $pdf->Cell(34, 5, $sum - $taxed, 1, 1, 'R'); //end of line
+        $pdf->Cell(34, 5, $sum + $taxed, 1, 1, 'R'); //end of line
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line

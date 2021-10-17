@@ -39,7 +39,7 @@
 
         <label for="PO_id">Purchase Order Number</label>
         <select name="PO_id" id="PO_id">
-
+            <option value="0" selected></option>
             <?php foreach ($data['PO'] as $PO) : ?>
 
                 <option value="<?= $PO['PO_id']; ?>"><?= $PO['purchase_number']; ?></option>
@@ -48,7 +48,9 @@
         </select>
 
         <label for="DO_id">DO_id</label>
-        <input type="text" id="DO_id" name="DO_id" autocomplete="off" value="<?= $data['invc']['DO_id']; ?>">
+        <select name="DO_id" id="DO_id">
+            <option value="0" selected></option>
+        </select>
 
         <input type="submit" value="Submit">
     </form>

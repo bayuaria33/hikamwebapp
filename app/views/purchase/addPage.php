@@ -38,7 +38,7 @@
 
         <label for="invoice_id">Invoice Number</label>
         <select name="invoice_id" id="invoice_id">
-
+            <option value="0" selected></option>
             <?php foreach ($data['invc'] as $invc) : ?>
 
                 <option value="<?= $invc['invoice_id']; ?>"><?= $invc['invoice_number']; ?></option>
@@ -47,7 +47,9 @@
         </select>
 
         <label for="DO_id">DO_id</label>
-        <input type="text" id="DO_id" name="DO_id" autocomplete="off">
+        <select name="DO_id" id="DO_id">
+            <option value="0" selected></option>
+        </select>
 
         <input type="submit" value="Submit">
     </form>

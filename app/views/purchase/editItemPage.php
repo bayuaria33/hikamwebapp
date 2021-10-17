@@ -1,13 +1,14 @@
 <div class="container">
-    <h1>Edit data Item Invoice <?= $data['invc_item']['invc_item_id']; ?></h1>
-    <a class="editButton" href="<?= BASEURL; ?>/Invoice/Item/ <?= $data['invc_item']['invoice_id']; ?>">Kembali</a>
+    <h1>Edit data Item Purchase <?= $data['pc_item']['pc_item_id']; ?></h1>
+    <a class="editButton" href="<?= BASEURL; ?>/Purchase/Item/ <?= $data['PO']['PO_id']; ?>">Kembali</a>
 
 
-    <form action="<?= BASEURL; ?>/Invoice/editItem/<?= $data['invc_item']['invoice_id']; ?>" method="post">
-        <label class="hidden" for="invoice_id">Id Invoice</label>
-        <input class="hidden" type="hidden" id="invoice_id" name="invoice_id" autocomplete="off" value="<?= $data['invc_item']['invoice_id']; ?>">
-        <label class="hidden" for="invc_item_id">Id invc Item</label>
-        <input class="hidden" type="hidden" id="invc_item_id" name="invc_item_id" autocomplete="off" value="<?= $data['invc_item']['invc_item_id']; ?>">
+    <form action="<?= BASEURL; ?>/Purchase/editItem/<?= $data['PO']['PO_id']; ?>" method="post">
+        <label class="hidden" for="PO_id">Id Purchase</label>
+        <input class="hidden" type="hidden" id="PO_id" name="PO_id" autocomplete="off" value="<?= $data['PO']['invoice_id']; ?>">
+
+        <label class="hidden" for="pc_item_id">Id PO Item</label>
+        <input class="hidden" type="hidden" id="pc_item_id" name="pc_item_id" autocomplete="off" value="<?= $data['PO']['pc_item_id']; ?>">
 
         <label for="product_id">Product</label>
         <select name="product_id" id="product_id">
@@ -20,10 +21,10 @@
         </select>
 
         <label for="quantity">Quantity</label>
-        <input type="number" id="quantity" name="quantity" autocomplete="off" value="<?= $data['invc_item']['quantity']; ?>">
+        <input type="number" id="quantity" name="quantity" autocomplete="off" value="<?= $data['PO']['quantity']; ?>">
 
         <label for="price">Price</label>
-        <input type="text" id="price" name="price" autocomplete="off" value="<?= $data['invc_item']['price']; ?>">
+        <input type="text" id="price" name="price" autocomplete="off" value="<?= $data['pc_item']['price']; ?>">
 
         <input type="submit" value="Submit">
     </form>
