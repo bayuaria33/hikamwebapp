@@ -2,31 +2,31 @@
     <div>
         <br>
         <?php Flasher::flash() ?>
-        <h1>Invoice <?= $data['invoice_number']; ?></h1>
-        <a href="<?= BASEURL; ?>/Invoice" class="editButton">Kembali</a>
-        <a href="<?= BASEURL; ?>/Invoice/editPage/<?= $data['invc']['invoice_id']; ?>" class="editButton">Edit</a>
-        <a href="<?= BASEURL; ?>/Invoice/generatePDF/<?= $data['invc']['invoice_id']; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Generate PDF</a>
+        <h1>Delivey Order <?= $data['delivery_number']; ?></h1>
+        <a href="<?= BASEURL; ?>/Delivery" class="editButton">Kembali</a>
+        <a href="<?= BASEURL; ?>/Delivery/editPage/<?= $data['DO']['DO_id']; ?>" class="editButton">Edit</a>
+        <a href="<?= BASEURL; ?>/Delivery/generatePDF/<?= $data['DO']['DO_id']; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Generate PDF</a>
 
         <!-- button cek PO -->
         <?php
-        if (!empty($data['invc']['PO_id'])) { ?>
-            <a href="<?= BASEURL; ?>/Purchase/item/<?= $data['invc']["PO_id"]; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Cek Purchase Order</a>
+        if (!empty($data['DO']['PO_id'])) { ?>
+            <a href="<?= BASEURL; ?>/Purchase/item/<?= $data['DO']["PO_id"]; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Cek Purchase Order</a>
         <?php  } else { ?>
             <div class="alert"> Purchase Order Belum di isi</div>
         <?php } ?>
 
-        <!-- button cek DO -->
+        <!-- button cek Invoice -->
         <?php
-        if (!empty($data['invc']['DO_id'])) { ?>
-            <a href="<?= BASEURL; ?>/Delivery/item/<?= $data['invc']["DO_id"]; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Cek Delivery Order</a>
+        if (!empty($data['DO']['invoice_id'])) { ?>
+            <a href="<?= BASEURL; ?>/Invoice/item/<?= $data['DO']["invoice_id"]; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Cek Invoice</a>
         <?php  } else { ?>
-            <div class="alert"> Delivery Order Belum di isi</div>
+            <div class="alert"> Invoice Belum di isi</div>
         <?php } ?>
 
         <br>
         <table id="tabledetail">
             <tr>
-                <th>Detail Invoice</th>
+                <th>Detail Delivery</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -36,13 +36,13 @@
                     <b>Nama Customer</b>
                 </td>
                 <td>
-                    <?= $data['invc']['customer_name']; ?>
+                    <?= $data['DO']['customer_name']; ?>
                 </td>
                 <td>
-                    <b>Tanggal Invoice</b>
+                    <b>Tanggal Delivery</b>
                 </td>
                 <td>
-                    <?= $data['invoice_date_format']; ?>
+                    <?= $data['delivery_date_format']; ?>
                 </td>
 
             </tr>
@@ -73,7 +73,7 @@
                     <b>Catatan Lain</b>
                 </td>
                 <td>
-                    <?= $data['invc']['other_expenses']; ?>
+                    <?= $data['DO']['other_expenses']; ?>
                 </td>
             </tr>
             <tr>
@@ -87,7 +87,7 @@
                     <b>Status Pembayaran</b>
                 </td>
                 <td>
-                    <?= $data['invc']['status_pembayaran']; ?>
+                    <?= $data['DO']['status_pembayaran']; ?>
                 </td>
 
 
@@ -97,13 +97,13 @@
                     <b>PO ID</b>
                 </td>
                 <td>
-                    <?= $data['invc']['PO_id']; ?>
+                    <?= $data['DO']['PO_id']; ?>
                 </td>
                 <td>
-                    <b>DO ID</b>
+                    <b>Invoice ID</b>
                 </td>
                 <td>
-                    <?= $data['invc']['DO_id']; ?>
+                    <?= $data['DO']['invoice_id']; ?>
                 </td>
             </tr>
             <tr>
@@ -111,7 +111,7 @@
                     <b>PPN</b>
                 </td>
                 <td>
-                    <?= $data['invc']['ppn']; ?> %
+                    <?= $data['DO']['ppn']; ?> %
                 </td>
             </tr>
             <tr>
@@ -120,7 +120,7 @@
         </table>
 
         <br>
-        <a class="editButton" href="<?= BASEURL; ?>/Invoice/addItemPage/<?= $data['invc']['invoice_id']; ?>">Tambah Item </a>
+        <a class="editButton" href="<?= BASEURL; ?>/Delivery/addItemPage/<?= $data['DO']['DO_id']; ?>">Tambah Item </a>
         <br>
         <!-- table item invoice -->
         <table id="tabledetail">
@@ -131,22 +131,22 @@
                 <th>Action</th>
             </tr>
 
-            <?php foreach ($data['invc_item'] as $invc) : ?>
+            <?php foreach ($data['do_item'] as $DO) : ?>
                 <tr>
                     <td>
-                        <?= $invc['product_name'] ?>
+                        <?= $DO['product_name'] ?>
                     </td>
                     <td>
-                        <?= $invc['quantity']; ?>
+                        <?= $DO['quantity']; ?>
                     </td>
                     <td>
-                        <?= $invc['price']; ?>
+                        <?= $DO['price']; ?>
                     </td>
 
 
                     <td>
-                        <a href="<?= BASEURL; ?>/Invoice/hapusItem/<?= $invc['invc_item_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
-                        <a href="<?= BASEURL; ?>/Invoice/editItemPage/<?= $invc['invc_item_id']; ?>" class="editButton" style="float:right">Edit</a>
+                        <a href="<?= BASEURL; ?>/Delivery/hapusItem/<?= $DO['do_item_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
+                        <a href="<?= BASEURL; ?>/Delivery/editItemPage/<?= $DO['do_item_id']; ?>" class="editButton" style="float:right">Edit</a>
                     </td>
 
                 </tr>

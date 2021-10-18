@@ -65,6 +65,7 @@ class Invoice extends Controller
         $data['cust'] = $this->model('Customer_model')->getAllCustomer();
         $data['judul'] = "Tambah data Invoice";
         $data['PO'] = $this->model('Purchase_model')->getAllPurchase();
+        $data['DO'] = $this->model('Delivery_model')->getAllDelivery();
         $this->view('templates/header', $data);
         $this->view('invoice/addPage', $data);
         $this->view('templates/footer');
@@ -87,6 +88,7 @@ class Invoice extends Controller
     {
         $data['judul'] = "Edit data Invoice ";
         $data['PO'] = $this->model('Purchase_model')->getAllPurchase();
+        $data['DO'] = $this->model('Delivery_model')->getAllDelivery();
         $data['cust'] = $this->model('Customer_model')->getAllCustomer();
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
 

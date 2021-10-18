@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman <?= $data['judul']; ?></title>
+    <link rel="hikamlogo" href="<?= BASEURL; ?>/img/hikamlogo.ico">
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/style.css">
 </head>
 
@@ -18,6 +19,7 @@
         <li><a href="<?= BASEURL; ?>/Product"> Product </a></li>
         <li><a href="<?= BASEURL; ?>/Invoice"> Invoice </a></li>
         <li><a href="<?= BASEURL; ?>/Purchase"> Purchase Order </a></li>
+        <li><a href="<?= BASEURL; ?>/Delivery"> Delivery Order </a></li>
         <!-- <li><a href="<?= BASEURL; ?>/InfoProduct"> InfoProduct </a></li> -->
         <!-- <li><a href="<?= BASEURL; ?>/About"> About </a></li> -->
 

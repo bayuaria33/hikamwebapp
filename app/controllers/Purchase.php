@@ -66,6 +66,7 @@ class Purchase extends Controller
         $data['cust'] = $this->model('Customer_model')->getAllCustomer();
         $data['judul'] = "Tambah data Purchase";
         $data['invc'] = $this->model('Invoice_model')->getAllInvoice();
+        $data['DO'] = $this->model('Delivery_model')->getAllDelivery();
         $this->view('templates/header', $data);
         $this->view('purchase/addPage', $data);
         $this->view('templates/footer');
@@ -90,7 +91,7 @@ class Purchase extends Controller
         $data['cust'] = $this->model('Customer_model')->getAllCustomer();
         $data['invc'] = $this->model('Invoice_model')->getAllInvoice();
         $data['PO'] = $this->model('Purchase_model')->getPurchaseById($PO_id);
-
+        $data['DO'] = $this->model('Delivery_model')->getAllDelivery();
         $this->view('templates/header', $data);
         $this->view('purchase/editPage', $data);
         $this->view('templates/footer');

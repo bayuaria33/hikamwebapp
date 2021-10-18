@@ -18,7 +18,7 @@
         <!-- button cek DO -->
         <?php
         if (!empty($data['PO']['DO_id'])) { ?>
-            <a href="" class="detailButton" style="margin-left: 0;" target="_blank">Cek Delivery Order</a>
+            <a href="<?= BASEURL; ?>/Delivery/item/<?= $data['PO']["DO_id"]; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Cek Delivery Order</a>
         <?php  } else { ?>
             <div class="alert"> Delivery Order Belum di isi</div>
         <?php } ?>

@@ -1,14 +1,12 @@
 <div class="container">
-    <h1>Edit data Invoice <?= $data['invc']['invoice_id']; ?></h1>
-    <a class="editButton" href="<?= BASEURL; ?>/Invoice/Item/<?= $data['invc']['invoice_id']; ?>">Kembali</a>
+    <h1>Tambah data Delivery</h1>
+    <a class="editButton" href="<?= BASEURL; ?>/Delivery">Kembali</a>
 
+    <form action="<?= BASEURL; ?>/Delivery/tambah" method="post">
 
-    <form action="<?= BASEURL; ?>/Invoice/edit/<?= $data['invc']['invoice_id']; ?>" method="post">
-        <label class="hidden" for="invoice_id">Id Invoice</label>
-        <input class="hidden" type="hidden" id="invoice_id" name="invoice_id" autocomplete="off" value="<?= $data['invc']['invoice_id']; ?>">
-
-        <label for="customer_name">pilih Customer</label>
+        <label for="product_avb">pilih Customer</label>
         <select name="customer_name" id="customer_name">
+
             <?php foreach ($data['cust'] as $cust) : ?>
 
                 <option value="<?= $cust['customer_name']; ?>"> <?= $cust['customer_name']; ?></option>
@@ -16,11 +14,11 @@
             <?php endforeach; ?>
         </select>
 
-        <label for="invoice_date">Tanggal Invoice</label>
-        <input type="date" id="invoice_date" name="invoice_date" autocomplete="off" value="<?= $data['invc']['invoice_date']; ?>">
+        <label for="DO_date">Tanggal Delivery Order</label>
+        <input type="date" id="DO_date" name="DO_date" autocomplete="off">
 
-        <label for="other_expenses">Pengeluaran Lain</label>
-        <input type="text" id="other_expenses" name="other_expenses" autocomplete="off" value="<?= $data['invc']['other_expenses']; ?>">
+        <label for="other_expenses">Catatan Lain</label>
+        <input type="text" id="other_expenses" name="other_expenses" autocomplete="off">
 
         <label for="status_pembayaran">Status Pembayaran</label>
         <select name="status_pembayaran" id="status_pembayaran" autocomplete="off">
@@ -29,7 +27,7 @@
         </select>
 
         <label for="due_date">Tanggal Jatuh Tempo</label>
-        <br><input type="date" id="due_date" name="due_date" autocomplete="off" value="<?= $data['invc']['due_date']; ?>">
+        <br><input type="date" id="due_date" name="due_date" autocomplete="off">
 
         <label for="ppn">PPN</label>
         <br><select name="ppn" id="ppn">
@@ -47,11 +45,12 @@
             <?php endforeach; ?>
         </select>
 
-        <select name="DO_id" id="DO_id">
+        <label for="invoice_id">Invoice Number</label>
+        <select name="invoice_id" id="invoice_id">
             <option value="0" selected></option>
-            <?php foreach ($data['DO'] as $DO) : ?>
+            <?php foreach ($data['invc'] as $invc) : ?>
 
-                <option value="<?= $DO['DO_id']; ?>"><?= $DO['delivery_number']; ?></option>
+                <option value="<?= $invc['invoice_id']; ?>"><?= $invc['invoice_number']; ?></option>
 
             <?php endforeach; ?>
         </select>

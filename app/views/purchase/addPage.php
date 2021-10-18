@@ -49,6 +49,11 @@
         <label for="DO_id">DO_id</label>
         <select name="DO_id" id="DO_id">
             <option value="0" selected></option>
+            <?php foreach ($data['DO'] as $DO) : ?>
+
+                <option value="<?= $DO['DO_id']; ?>"><?= $DO['delivery_number']; ?></option>
+
+            <?php endforeach; ?>
         </select>
 
         <input type="submit" value="Submit">
