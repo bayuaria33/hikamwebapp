@@ -2,7 +2,7 @@
     <div>
         <br>
         <?php Flasher::flash() ?>
-        <h1>Daftar Delivery Order</h1>
+        <h1><?= $data['judul']; ?></h1>
         <br>
 
         <a class="editButton" href="<?= BASEURL; ?>/Delivery/addPage">Tambah data </a>

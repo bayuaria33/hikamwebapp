@@ -31,6 +31,12 @@ class Delivery_model
         return $this->db->single();
     }
 
+    public function getDeliveryByCustomer($customer_name)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table .
+            ' WHERE customer_name LIKE "%' . $customer_name . '%"');
+        return $this->db->resultSet();
+    }
 
     public function getDeliveryId()
     {

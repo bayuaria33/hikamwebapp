@@ -31,6 +31,12 @@ class Invoice_model
         return $this->db->single();
     }
 
+    public function getInvoiceByCustomer($customer_name)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table .
+            ' WHERE customer_name LIKE "%' . $customer_name . '%"');
+        return $this->db->resultSet();
+    }
 
     public function getinvoiceId()
     {

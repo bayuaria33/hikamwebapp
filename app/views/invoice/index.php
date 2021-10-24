@@ -2,7 +2,7 @@
     <div>
         <br>
         <?php Flasher::flash() ?>
-        <h1>Daftar Invoice</h1>
+        <h1><?= $data['judul']; ?></h1>
         <br>
 
         <a class="editButton" href="<?= BASEURL; ?>/Invoice/addPage">Tambah data </a>
