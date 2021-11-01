@@ -62,9 +62,10 @@ body {
 
 #tabledetail th {
   padding-top: 12px;
+  padding-right: 18px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: rgb(64, 145, 185);
+  background-color: rgb(90, 155, 187);
   color: white;
 }
 
