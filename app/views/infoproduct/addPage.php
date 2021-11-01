@@ -15,7 +15,7 @@
         </select>
 
         <label for="supplier_name">pilih Supplier</label>
-        <select name="supplier_name" id="supplier_name">
+        <select name="supplier_name" id="supplier_name" class="selectpicker form-control" data-live-search="true">
 
             <?php foreach ($data['suppliers'] as $sup) : ?>
 
@@ -33,6 +33,10 @@
             <option value="Kg">Kg</option>
             <option value="Ton">Ton</option>
             <option value="Kubik">Kubik</option>
+            <option value="Pouch">Pouch</option>
+            <option value="CS">CS</option>
+            <option value="Case">Case</option>
+            <option value="Botol">Botol</option>
         </select>
 
         <label for="product_price">Harga Product</label>

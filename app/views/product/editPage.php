@@ -19,6 +19,10 @@
             <option value="Kg">Kg</option>
             <option value="Ton">Ton</option>
             <option value="Kubik">Kubik</option>
+            <option value="Pouch">Pouch</option>
+            <option value="CS">CS</option>
+            <option value="Case">Case</option>
+            <option value="Botol">Botol</option>
         </select>
 
         <label for="product_desc">Deskripsi Produk</label>

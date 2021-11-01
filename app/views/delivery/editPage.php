@@ -8,7 +8,7 @@
         <input class="hidden" type="hidden" id="DO_id" name="DO_id" autocomplete="off" value="<?= $data['DO']['DO_id']; ?>">
 
         <label for="customer_name">pilih Customer</label>
-        <select name="customer_name" id="customer_name">
+        <select name="customer_name" id="customer_name" class="selectpicker form-control" data-live-search="true">
             <?php foreach ($data['cust'] as $cust) : ?>
 
                 <option value="<?= $cust['customer_name']; ?>"> <?= $cust['customer_name']; ?></option>
@@ -38,7 +38,7 @@
         </select>
 
         <label for="PO_id">Purchase Order Number</label>
-        <select name="PO_id" id="PO_id">
+        <select name="PO_id" id="PO_id" class="selectpicker form-control" data-live-search="true">
             <option value="0" selected></option>
             <?php foreach ($data['PO'] as $PO) : ?>
 
@@ -48,7 +48,7 @@
         </select>
 
         <label for="invoice_id">Invoice Number</label>
-        <select name="invoice_id" id="invoice_id">
+        <select name="invoice_id" id="invoice_id" class="selectpicker form-control" data-live-search="true">
             <option value="0" selected></option>
             <?php foreach ($data['invc'] as $invc) : ?>
 

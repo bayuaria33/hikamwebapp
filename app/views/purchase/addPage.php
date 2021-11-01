@@ -6,7 +6,7 @@
     <form action="<?= BASEURL; ?>/Purchase/tambah" method="post">
 
         <label for="product_avb">pilih Customer</label>
-        <select name="customer_name" id="customer_name">
+        <select name="customer_name" id="customer_name" class="selectpicker form-control" data-live-search="true">
 
             <?php foreach ($data['cust'] as $cust) : ?>
 
@@ -37,7 +37,7 @@
         </select>
 
         <label for="invoice_id">Invoice Number</label>
-        <select name="invoice_id" id="invoice_id">
+        <select name="invoice_id" id="invoice_id" class="selectpicker form-control" data-live-search="true">
             <option value="0" selected></option>
             <?php foreach ($data['invc'] as $invc) : ?>
 
@@ -47,7 +47,7 @@
         </select>
 
         <label for="DO_id">DO_id</label>
-        <select name="DO_id" id="DO_id">
+        <select name="DO_id" id="DO_id" class="selectpicker form-control" data-live-search="true">
             <option value="0" selected></option>
             <?php foreach ($data['DO'] as $DO) : ?>
 

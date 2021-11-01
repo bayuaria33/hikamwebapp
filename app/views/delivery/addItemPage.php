@@ -9,7 +9,7 @@
         <input class="hidden" type="hidden" id="DO_id" name="DO_id" autocomplete="off" value="<?= $data['DO']['DO_id']; ?>">
 
         <label for="product_id">Product</label>
-        <select name="product_id" id="product_id">
+        <select name="product_id" id="product_id" class="selectpicker form-control" data-live-search="true">
 
             <?php foreach ($data['product'] as $prod) : ?>
 

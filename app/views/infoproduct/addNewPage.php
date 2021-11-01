@@ -17,7 +17,7 @@
         </select>
 
         <label for="product_avb">pilih Supplier</label>
-        <select name="supplier_name" id="supplier_name">
+        <select name="supplier_name" id="supplier_name" class="selectpicker form-control" data-live-search="true">
 
             <?php foreach ($data['suppliers'] as $sup) : ?>
 
@@ -30,11 +30,15 @@
         <input type="text" id="product_desc" name="product_desc" autocomplete="off">
 
         <label for="unit">Unit</label>
-        <select name="unit" id="unit" autocomplete="off" value="<?= $data['inprod']['unit']; ?>">
+        <select name="unit" id="unit" autocomplete="off" value="<?= $data['inprod']['unit']; ?>" class="selectpicker form-control" data-live-search="true">
             <option value="liter">Liter</option>
             <option value="Kg">Kg</option>
             <option value="Ton">Ton</option>
             <option value="Kubik">Kubik</option>
+            <option value="Pouch">Pouch</option>
+            <option value="CS">CS</option>
+            <option value="Case">Case</option>
+            <option value="Botol">Botol</option>
         </select>
 
         <label for="product_price">Harga Product</label>
