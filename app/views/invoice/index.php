@@ -16,7 +16,7 @@
             <thead>
                 <tr>
                     <!-- <th>No. </th> -->
-                    <th>Invoice Date</th>
+                    <th class="datetime">Invoice Date</th>
                     <th>Customer Name</th>
                     <th class="actionbuttons">Action</th>
                 </tr>

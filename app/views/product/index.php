@@ -19,7 +19,7 @@
                     <th>Harga Jual</th>
                     <th>Unit</th>
                     <th>Deskripsi</th>
-                    <th>Updated</th>
+                    <th class="datetime">Updated</th>
                     <th>Quantity</th>
                     <th class="actionbuttons">Action</th>
 
