@@ -29,6 +29,7 @@
         <li><a href="<?= BASEURL; ?>/Invoice"> Invoice </a></li>
         <li><a href="<?= BASEURL; ?>/Purchase"> Purchase Order </a></li>
         <li><a href="<?= BASEURL; ?>/Delivery"> Delivery Order </a></li>
+        <!-- <li><a href="<?= BASEURL; ?>/Sales"> Sales </a></li> -->
         <!-- <li><a href="<?= BASEURL; ?>/InfoProduct"> InfoProduct </a></li> -->
         <!-- <li><a href="<?= BASEURL; ?>/About"> About </a></li> -->
 
