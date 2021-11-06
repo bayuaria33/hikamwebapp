@@ -1,12 +1,12 @@
 <div class="container">
-    <h1>Tambah Invoice Item </h1>
-    <a class="editButton" href="<?= BASEURL; ?>/Invoice/item/<?= $data['invc']['invoice_id']; ?>">Kembali</a>
+    <h1>Tambah Delivery Item </h1>
+    <a class="editButton" href="<?= BASEURL; ?>/Delivery/item/<?= $data['DO']['DO_id']; ?>">Kembali</a>
 
 
-    <form action="<?= BASEURL; ?>/Invoice/tambahItem/<?= $data['invc']['invoice_id']; ?>" method="post">
+    <form action="<?= BASEURL; ?>/Delivery/tambahItem/<?= $data['DO']['DO_id']; ?>" method="post">
 
-        <label class="hidden" for="invoice_id">Id Invoice</label>
-        <input class="hidden" type="hidden" id="invoice_id" name="invoice_id" autocomplete="off" value="<?= $data['invc']['invoice_id']; ?>">
+        <label class="hidden" for="DO_id">Id DO</label>
+        <input class="hidden" type="hidden" id="DO_id" name="DO_id" autocomplete="off" value="<?= $data['DO']['DO_id']; ?>">
 
         <label for="product_id">Product</label>
         <select name="product_id" id="product_id" class="selectpicker form-control" data-live-search="true">

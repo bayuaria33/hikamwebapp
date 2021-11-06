@@ -64,7 +64,7 @@ class InfoProduct_model
         $t = time();
         $time = date("Y-m-d", $t);
 
-        var_dump($data);
+
         $query = "INSERT INTO " . $this->table . " VALUES(:infoproduct_id, :product_id, :product_avb, :product_desc, :unit, :supplier_name, :product_price, :product_updated)";
         $this->db->query($query);
         $this->db->bind('infoproduct_id', $newIdInt);
@@ -93,7 +93,7 @@ class InfoProduct_model
 
     public function editDataInfoProduct($data)
     {
-        echo '<pre>', var_dump($data), '</pre>';
+
         $query = "UPDATE " . $this->table . " SET 
         product_avb=:product_avb, 
         supplier_name =:supplier_name, 

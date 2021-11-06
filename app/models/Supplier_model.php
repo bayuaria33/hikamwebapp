@@ -72,7 +72,7 @@ class Supplier_model
 
     public function editDataSupplier($data)
     {
-        echo '<pre>', var_dump($data), '</pre>';
+
         $query = "UPDATE " . $this->table . " SET supplier_name=:supplier_name,
         sales_name=:sales_name,
         norek1=:norek1,

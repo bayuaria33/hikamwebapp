@@ -7,7 +7,7 @@ class InfoProduct extends Controller
     {
         $data['inprod'] = $this->model('InfoProduct_model')->getAllProductSupp($product_id); //BARU
         $data['judul'] = "Detail Info Product";
-        //echo '<pre>', var_dump($data, $newIdInt), '</pre>';
+
         if (!empty($data['inprod'])) {
             $this->view('templates/header', $data);
             $this->view('infoproduct/index', $data);
@@ -23,8 +23,7 @@ class InfoProduct extends Controller
         $data['suppliers'] = $this->model('Supplier_model')->getAllSupplier();
         $data['judul'] = "Tambah data InfoProduct";
         $data['inprod'] = $this->model('InfoProduct_model')->getAllProductSupp($infoproduct_id); //BARU //GANTI INI
-        //echo '<pre>', var_dump($data), '</pre>';
-        //echo "masuk add page";
+
         $this->view('templates/header', $data);
         $this->view('infoproduct/addPage', $data);
         $this->view('templates/footer');
@@ -47,48 +46,53 @@ class InfoProduct extends Controller
     {
         $data['judul'] = "Edit data Supplier Product ";
         $data['inprod'] = $this->model('InfoProduct_model')->getInfoProductById($infoproduct_id);
-        //echo '<pre>', var_dump($data), '</pre>';
+
         $this->view('templates/header', $data);
         $this->view('infoproduct/editPage', $data);
         $this->view('templates/footer');
     }
 
-    public function edit()
+    public function edit($product_id)
     {
+        $url = BASEURL . '/InfoProduct' . '/DetailSupp' . '/' . $product_id;
         if ($this->model('InfoProduct_model')->editDataInfoProduct($_POST) > 0) {
             Flasher::setFlash('Berhasil', 'diubah');
-            header('Location: ' . BASEURL . '/Product');
+            header("Location: $url");
             exit;
         } else {
             Flasher::setFlash('Gagal', 'diubah');
-            header('Location: ' . BASEURL . '/Product');
+            header("Location: $url");
             exit;
         }
     }
 
 
-    public function tambah()
+    public function tambah($product_id)
     {
+        $url = BASEURL . '/InfoProduct' . '/DetailSupp' . '/' . $product_id;
         if ($this->model('InfoProduct_model')->tambahDataInfoProduct($_POST) > 0) {
             Flasher::setFlash('Berhasil', 'ditambahkan');
-            header('Location: ' . BASEURL . '/Product');
+            header("Location: $url");
             exit;
         } else {
             Flasher::setFlash('Gagal', 'ditambahkan');
-            header('Location: ' . BASEURL . '/Product');
+            header("Location: $url");
             exit;
         }
     }
 
     public function hapus($infoproduct_id)
     {
+        $data['inprod'] = $this->model('InfoProduct_model')->getInfoProductById($infoproduct_id);
+        $url = BASEURL . '/InfoProduct' . '/DetailSupp' . '/' . $data['inprod']['product_id'];
+
         if ($this->model('InfoProduct_model')->hapusDataInfoProduct($infoproduct_id) > 0) {
             Flasher::setFlash('Berhasil', 'dihapus');
-            header('Location: ' . BASEURL . '/Product');
+            header("Location: $url");
             exit;
         } else {
             Flasher::setFlash('Gagal', 'dihapus');
-            header('Location: ' . BASEURL . '/Product');
+            header("Location: $url");
             exit;
         }
     }

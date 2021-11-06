@@ -1,9 +1,8 @@
 <div class="container">
-    <h1>Tambah info Supplier</h1>
-    <a class="editButton" href="<?= BASEURL; ?>/Product/index">Kembali</a>
+    <h1>Tambah info Supplier <?= $data['inprod'][0]['product_name']; ?></h1>
+    <a href="<?= BASEURL; ?>/InfoProduct/detailSupp/<?= $data['inprod'][0]['product_id']; ?>" class="editButton">Kembali</a> <br>
 
-    <!-- <?php echo '<pre>', var_dump($data), '</pre>'; ?> -->
-    <form action="<?= BASEURL; ?>/InfoProduct/tambah" method="post">
+    <form action="<?= BASEURL; ?>/InfoProduct/tambah/<?= $data['inprod'][0]['product_id']; ?>" method="post">
 
         <label class="hidden" for="product_id">Id Product</label>
         <input class="hidden" type="hidden" id="product_id" name="product_id" autocomplete="off" value="<?= $data['inprod'][0]['product_id']; ?>">
@@ -16,7 +15,7 @@
         </select>
 
         <label for="supplier_name">pilih Supplier</label>
-        <select name="supplier_name" id="supplier_name">
+        <select name="supplier_name" id="supplier_name" class="selectpicker form-control" data-live-search="true">
 
             <?php foreach ($data['suppliers'] as $sup) : ?>
 
@@ -34,6 +33,10 @@
             <option value="Kg">Kg</option>
             <option value="Ton">Ton</option>
             <option value="Kubik">Kubik</option>
+            <option value="Pouch">Pouch</option>
+            <option value="CS">CS</option>
+            <option value="Case">Case</option>
+            <option value="Botol">Botol</option>
         </select>
 
         <label for="product_price">Harga Product</label>

@@ -1,8 +1,8 @@
 <?php
-class Invoice_model
+class Purchase_model
 {
-    private $table = "invoice"; //nama table di db
-    private $table2 = "invc_item";
+    private $table = "pc_order"; //nama table di db
+    private $table2 = "pc_item";
     private $table3 = "customer";
     private $db;
 
@@ -18,104 +18,101 @@ class Invoice_model
         $this->db = new Database;
     }
 
-    public function getAllInvoice()
+    public function getAllPurchase()
     {
-        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY invoice_date ASC');
+        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY PO_date ASC');
         return $this->db->resultSet();
     }
 
-    public function getInvoiceById($invoice_id)
+    public function getPurchaseById($PO_id)
     {
         $this->db->query('SELECT * FROM ' . $this->table .
-            ' WHERE invoice_id LIKE ' . $invoice_id);
+            ' WHERE PO_id LIKE ' . $PO_id);
         return $this->db->single();
     }
 
-    public function getInvoiceByCustomer($customer_name)
+    public function getPurchaseByCustomer($customer_name)
     {
         $this->db->query('SELECT * FROM ' . $this->table .
             ' WHERE customer_name LIKE "%' . $customer_name . '%"');
         return $this->db->resultSet();
     }
 
-    public function getinvoiceId()
+    public function getPurchaseId()
     {
-        $this->db->query("SELECT invoice_id FROM " . $this->table);
+        $this->db->query("SELECT PO_id FROM " . $this->table);
         return $this->db->resultSet();
     }
 
-    public function getInvoiceItemId()
+    public function getPurchaseItemId()
     {
-        $this->db->query("SELECT invc_item_id FROM " . $this->table2);
+        $this->db->query("SELECT pc_item_id FROM " . $this->table2);
         return $this->db->resultSet();
     }
 
 
-    public function tambahDataInvoice($data)
+    public function tambahDataPurchase($data)
     {
-        $IdArray = $this->getInvoiceid();          // wkwkwkwkwkkwkw
+        $IdArray = $this->getPurchaseId();          // wkwkwkwkwkkwkw
         if (empty($IdArray)) {
             $newIdInt = "1001";
         } else {
             $lastId = max($IdArray);
-            $lastIdInt = (int)$lastId['invoice_id'];
+            $lastIdInt = (int)$lastId['PO_id'];
             $newIdInt = $lastIdInt + 1;
         }             // wkwkwkwkwkkwkwi
 
         $query = "INSERT INTO " . $this->table .
-            " VALUES(:invoice_id, 
-            :invoice_number,
+            " VALUES(:PO_id, 
+            :purchase_number,
             :customer_name, 
-            :invoice_date, 
+            :PO_date, 
             :other_expenses, 
             :status_pembayaran, 
-            :due_date,
-            :ppn,  
-            :PO_id, 
-            :DO_id,
-            :biaya_kirim) ";
+            :ppn,
+            :due_date, 
+            :invoice_id, 
+            :DO_id) ";
         $this->db->query($query);
 
-        $this->db->bind('invoice_id', $newIdInt);
-        $this->db->bind('invoice_number', $data['invoice_number']);
+        $this->db->bind('PO_id', $newIdInt);
+        $this->db->bind('purchase_number', $data['purchase_number']);
         $this->db->bind('customer_name', $data['customer_name']);
-        $this->db->bind('invoice_date', $data['invoice_date']);
+        $this->db->bind('PO_date', $data['PO_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
         $this->db->bind('status_pembayaran', $data['status_pembayaran']);
         $this->db->bind('ppn', $data['ppn']);
         $this->db->bind('due_date', $data['due_date']);
-        $this->db->bind('PO_id', $data['PO_id']);
+        $this->db->bind('invoice_id', $data['invoice_id']);
         $this->db->bind('DO_id', $data['DO_id']);
-        $this->db->bind('biaya_kirim', $data['biaya_kirim']);
-        // $this->dd($data);
+
         $this->db->execute();
         return $this->db->rowCount();
     }
 
-    public function tambahDataInvoiceItem($data)
+    public function tambahDataPurchaseItem($data)
     {
 
-        $IdArray = $this->getInvoiceItemId();          // wkwkwkwkwkkwkw
+        $IdArray = $this->getPurchaseItemId();          // wkwkwkwkwkkwkw
         if (empty($IdArray)) {
             $newIdInt = "1001";
         } else {
             $lastId = max($IdArray);
-            $lastIdInt = (int)$lastId['invc_item_id'];
+            $lastIdInt = (int)$lastId['pc_item_id'];
             $newIdInt = $lastIdInt + 1;
         }                 // wkwkwkwkwkkwkwi
 
         $query = "INSERT INTO " . $this->table2 .
-            " VALUES(:invc_item_id, :invoice_id, :product_id, :quantity, :unit_item, :price) ";
+            " VALUES(:pc_item_id, :PO_id, :product_id, :quantity, :unit_item, :price) ";
         $this->db->query($query);
 
-        $this->db->bind('invc_item_id', $newIdInt);
-        $this->db->bind('invoice_id', $data['invoice_id']);
+        $this->db->bind('pc_item_id', $newIdInt);
+        $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('product_id', $data['product_id']);
         $this->db->bind('quantity', $data['quantity']);
         $this->db->bind('unit_item', $data['unit_item']);
         $this->db->bind('price', $data['price']);
         $this->db->execute();
-
 
         return $this->db->rowCount();
     }
@@ -123,56 +120,55 @@ class Invoice_model
     public function insertNumber($data)
     {
         $query = "UPDATE " . $this->table . " SET 
-        invoice_number =:invoice_number
-            WHERE invoice_id=:invoice_id";
+        purchase_number =:purchase_number
+            WHERE PO_id=:PO_id";
         $this->db->query($query);
-        $this->db->bind('invoice_id', $data['invc']['invoice_id']);
-        $this->db->bind('invoice_number', $data['invoice_number']);
+        $this->db->bind('PO_id', $data['PO']['PO_id']);
+        $this->db->bind('purchase_number', $data['purchase_number']);
         $this->db->execute();
     }
 
-    public function editDataInvoice($data)
+    public function editDataPurchase($data)
     {
         $query = "UPDATE " . $this->table . " SET 
         customer_name=:customer_name, 
-        invoice_number=:invoice_number,
-        invoice_date =:invoice_date, 
+        purchase_number=:purchase_number, 
+        PO_date =:PO_date, 
         other_expenses =:other_expenses,
         status_pembayaran =:status_pembayaran, 
         ppn =:ppn,
         due_date =:due_date,
-        PO_id =:PO_id,
-        DO_id =:DO_id,
-        biaya_kirim =:biaya_kirim
-            WHERE invoice_id=:invoice_id";
+        invoice_id =:invoice_id,
+        DO_id =:DO_id
+            WHERE PO_id=:PO_id";
         $this->db->query($query);
-        $this->db->bind('invoice_id', $data['invoice_id']);
-        $this->db->bind('invoice_number', $data['invoice_number']);
+        $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('customer_name', $data['customer_name']);
-        $this->db->bind('invoice_date', $data['invoice_date']);
+        $this->db->bind('purchase_number', $data['purchase_number']);
+        $this->db->bind('PO_date', $data['PO_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
         $this->db->bind('status_pembayaran', $data['status_pembayaran']);
         $this->db->bind('ppn', $data['ppn']);
         $this->db->bind('due_date', $data['due_date']);
-        $this->db->bind('PO_id', $data['PO_id']);
+        $this->db->bind('invoice_id', $data['invoice_id']);
         $this->db->bind('DO_id', $data['DO_id']);
-        $this->db->bind('biaya_kirim', $data['biaya_kirim']);
+
         $this->db->execute();
         return $this->db->rowCount();
     }
 
-    public function hapusDataInvoice($invoice_id)
+    public function hapusDataPurchase($PO_id)
     {
-        $query = "DELETE FROM " . $this->table . " WHERE invoice_id = :invoice_id";
+        $query = "DELETE FROM " . $this->table . " WHERE PO_id = :PO_id";
         $this->db->query($query);
-        $this->db->bind('invoice_id', $invoice_id);
+        $this->db->bind('PO_id', $PO_id);
 
         $this->db->execute();
 
         return $this->db->rowCount();
     }
 
-    public function cariDataInvoice()
+    public function cariDataPurchase()
     {
         $keyword = $_POST['keyword'];
         $query = "SELECT * FROM " . $this->table . " WHERE customer_name LIKE :keyword";
@@ -182,42 +178,42 @@ class Invoice_model
         return $this->db->resultSet();
     }
 
-    public function getInvoiceItem($invoice_id)
+    public function getPurchaseItem($PO_id)
     {
         $this->db->query(
             'SELECT *, product_name FROM '
                 . $this->table2 .
-                ' INNER JOIN product on ' . $this->table2 . '.product_id = product.product_id WHERE invoice_id LIKE ' . $invoice_id
+                ' INNER JOIN product on ' . $this->table2 . '.product_id = product.product_id WHERE PO_id LIKE ' . $PO_id
         );
         return $this->db->resultSet();
     }
 
-    public function getInvoiceCust($customer_name)
+    public function getPurchaseCust($customer_name)
     {
         $this->db->query('SELECT * FROM ' . $this->table3 . ' WHERE customer_name=:customer_name');
         $this->db->bind('customer_name', $customer_name);
         return $this->db->single();
     }
 
-    public function getInvoiceItembyId($invc_item_id)
+    public function getPurchaseItembyId($pc_item_id)
     {
         $this->db->query('SELECT * FROM ' . $this->table2 .
-            ' WHERE invc_item_id LIKE ' . $invc_item_id);
+            ' WHERE pc_item_id LIKE ' . $pc_item_id);
         return $this->db->single();
     }
 
-    public function editDataItemInvoice($data)
+    public function editDataItemPurchase($data)
     {
         $query = "UPDATE " . $this->table2 . " SET  
-        invoice_id =:invoice_id,
+        PO_id =:PO_id,
         product_id =:product_id,
         quantity =:quantity, 
-        unit_item =:unit_item, 
+        unit_item =:unit_item,
         price =:price
-            WHERE invc_item_id=:invc_item_id";
+            WHERE pc_item_id=:pc_item_id";
         $this->db->query($query);
-        $this->db->bind('invc_item_id', $data['invc_item_id']);
-        $this->db->bind('invoice_id', $data['invoice_id']);
+        $this->db->bind('pc_item_id', $data['pc_item_id']);
+        $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('product_id', $data['product_id']);
         $this->db->bind('quantity', $data['quantity']);
         $this->db->bind('unit_item', $data['unit_item']);
@@ -225,22 +221,22 @@ class Invoice_model
         $this->db->execute();
         return $this->db->rowCount();
     }
-    public function hapusDataInvoiceItem($invc_item_id)
+    public function hapusDataPurchaseItem($pc_item_id)
     {
-        $query = "DELETE FROM " . $this->table2 . " WHERE invc_item_id = :invc_item_id";
+        $query = "DELETE FROM " . $this->table2 . " WHERE pc_item_id = :pc_item_id";
         $this->db->query($query);
-        $this->db->bind('invc_item_id', $invc_item_id);
+        $this->db->bind('pc_item_id', $pc_item_id);
 
         $this->db->execute();
 
         return $this->db->rowCount();
     }
 
-    public function getInvoiceInMonth($month)
+    public function getPurchaseInMonth($month)
     {
 
-        $this->db->query("select invoice_id from " . $this->table . " where monthname(invoice_date)='" . $month
-            . "' order by invoice_date");
+        $this->db->query("select PO_id from " . $this->table . " where monthname(PO_date)='" . $month
+            . "' order by PO_date");
         return $this->db->resultSet();
     }
 }

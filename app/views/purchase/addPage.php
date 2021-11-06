@@ -1,23 +1,25 @@
 <div class="container">
-    <h1>Tambah data Invoice</h1>
-    <a class="editButton" href="<?= BASEURL; ?>/Invoice">Kembali</a>
+    <h1>Tambah data Purchase</h1>
+    <a class="editButton" href="<?= BASEURL; ?>/Purchase">Kembali</a>
 
-    <form action="<?= BASEURL; ?>/Invoice/tambah" method="post">
 
-        <label for="invoice_number">Nomor Invoice</label>
-        <input type="text" id="invoice_number" name="invoice_number" autocomplete="off" placeholder="Jika kosong akan terisi otomatis di halaman detail">
+    <form action="<?= BASEURL; ?>/Purchase/tambah" method="post">
+
+        <label for="purchase_number">Nomor Purchase</label>
+        <input type="text" id="purchase_number" name="purchase_number" autocomplete="off" placeholder="Jika kosong akan terisi otomatis di halaman detail">
 
         <label for="product_avb">pilih Customer</label>
         <select name="customer_name" id="customer_name" class="selectpicker form-control" data-live-search="true">
 
             <?php foreach ($data['cust'] as $cust) : ?>
+
                 <option value="<?= $cust['customer_name']; ?>"> <?= $cust['customer_name']; ?></option>
+
             <?php endforeach; ?>
         </select>
 
-        <label for="invoice_date">Tanggal Invoice</label>
-        <input type="date" id="invoice_date" name="invoice_date" autocomplete="off">
-
+        <label for="PO_date">Tanggal Purchase</label>
+        <input type="date" id="PO_date" name="PO_date" autocomplete="off">
 
         <label for="other_expenses">Catatan Lain</label>
         <input type="text" id="other_expenses" name="other_expenses" autocomplete="off">
@@ -37,20 +39,17 @@
             <option value="0">0%</option>
         </select>
 
-        <label for="biaya_kirim">Biaya Kirim</label>
-        <input type="text" id="biaya_kirim" name="biaya_kirim" autocomplete="off">
-
-        <label for="PO_id">Purchase Order Number</label>
-        <select name="PO_id" id="PO_id" class="selectpicker form-control" data-live-search="true">
+        <label for="invoice_id">Invoice Number</label>
+        <select name="invoice_id" id="invoice_id" class="selectpicker form-control" data-live-search="true">
             <option value="0" selected></option>
-            <?php foreach ($data['PO'] as $PO) : ?>
+            <?php foreach ($data['invc'] as $invc) : ?>
 
-                <option value="<?= $PO['PO_id']; ?>"><?= $PO['purchase_number']; ?></option>
+                <option value="<?= $invc['invoice_id']; ?>"><?= $invc['invoice_number']; ?></option>
 
             <?php endforeach; ?>
         </select>
 
-        <label for="DO_id">Delivery Order Number</label>
+        <label for="DO_id">DO_id</label>
         <select name="DO_id" id="DO_id" class="selectpicker form-control" data-live-search="true">
             <option value="0" selected></option>
             <?php foreach ($data['DO'] as $DO) : ?>

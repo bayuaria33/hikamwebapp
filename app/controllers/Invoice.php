@@ -24,6 +24,15 @@ class Invoice extends Controller
         return $date;
     }
 
+    function getInvoiceMonth($invoice_id)
+    {
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
+        $invoice_date_month = date("m", strtotime($data['invc']['invoice_date']));
+        $dateObj   = DateTime::createFromFormat('!m', $invoice_date_month);
+        $invoice_date_month_format = $dateObj->format('F');
+        return $invoice_date_month_format;
+    }
+
     function DueDateFormat($invoice_id)
     {
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
@@ -41,33 +50,22 @@ class Invoice extends Controller
     function invoiceString($invoice_id)
     {
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
-
-        $h = "HAI";
+        $m = date("m", strtotime($data['invc']['invoice_date']));
+        $index = $this->findInvoiceIndexInMonth($invoice_id);
+        $index_format = sprintf("%02d", $index);
         $s = "/";
         $i = "INV";
         $invoice_date_year = date("Y", strtotime($data['invc']['invoice_date']));
-        $invoice_number = $h . $invoice_id . $s . $i . $s . $invoice_date_year;
+        $invoice_number = $m . $index_format . $s . $i . $s . $invoice_date_year;
         return $invoice_number;
-    }
-
-    public function detail($invoice_id)
-    {
-        $data['judul'] = "Detail Invoice";
-        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
-
-        $data['invoice_number'] = $this->invoiceString($data['invc']['invoice_id']);
-        $data['invoice_date_format'] = $this->InvoiceDateFormat($data['invc']['invoice_id']);
-        $data['due_date_format'] = $this->DueDateFormat($data['invc']['invoice_id']);
-
-        $this->view('templates/header', $data);
-        $this->view('Invoice/detail', $data);
-        $this->view('templates/footer');
     }
 
     public function addPage()
     {
         $data['cust'] = $this->model('Customer_model')->getAllCustomer();
         $data['judul'] = "Tambah data Invoice";
+        $data['PO'] = $this->model('Purchase_model')->getAllPurchase();
+        $data['DO'] = $this->model('Delivery_model')->getAllDelivery();
         $this->view('templates/header', $data);
         $this->view('invoice/addPage', $data);
         $this->view('templates/footer');
@@ -89,11 +87,13 @@ class Invoice extends Controller
     public function editPage($invoice_id)
     {
         $data['judul'] = "Edit data Invoice ";
+        $data['PO'] = $this->model('Purchase_model')->getAllPurchase();
+        $data['DO'] = $this->model('Delivery_model')->getAllDelivery();
         $data['cust'] = $this->model('Customer_model')->getAllCustomer();
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
-        //echo '<pre>', var_dump($data), '</pre>';
+
         $this->view('templates/header', $data);
-        $this->view('Invoice/editPage', $data);
+        $this->view('invoice/editPage', $data);
         $this->view('templates/footer');
     }
 
@@ -130,10 +130,25 @@ class Invoice extends Controller
         $data['judul'] = "Daftar Invoice";
         $data['invc'] = $this->model('Invoice_model')->cariDataInvoice();
         $this->view('templates/header', $data);
-        $this->view('Invoice/index', $data);
+        $this->view('invoice/index', $data);
         $this->view('templates/footer');
     }
 
+    function findInvoiceIndexInMonth($invoice_id)
+    {
+        //cari urutan ke brp di bulan $InvoiceMonth
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
+        $data['InvoiceMonth'] = $this->getInvoiceMonth($data['invc']['invoice_id']);
+        $data['AllInvoiceInMonth'] = $this->model('Invoice_model')->getInvoiceInMonth($data['InvoiceMonth']);
+        $array = $data['AllInvoiceInMonth'];
+
+        foreach ($array as $key => $value) {
+            if ($value['invoice_id'] == $data['invc']['invoice_id']) {
+                return $key + 1;
+            }
+        }
+        return false;
+    }
     public function getItemDetails($invoice_id)
     {
         $data['judul'] = "Detail Item Invoice";
@@ -143,14 +158,22 @@ class Invoice extends Controller
         $data['invoice_number'] = $this->invoiceString($data['invc']['invoice_id']);
         $data['invoice_date_format'] = $this->InvoiceDateFormat($data['invc']['invoice_id']);
         $data['due_date_format'] = $this->DueDateFormat($data['invc']['invoice_id']);
+        // $data['InvoiceMonth'] = $this->getInvoiceMonth($data['invc']['invoice_id']);
+        // $data['AllInvoiceInMonth'] = $this->model('Invoice_model')->getInvoiceInMonth($data['InvoiceMonth']);
+        // $data['key'] = $this->findInvoiceIndexInMonth($data['invc']['invoice_id']);
         return $data;
     }
     public function item($invoice_id)
     {
+
         $data = $this->getItemDetails($invoice_id);
+        if (!empty($data['invc']['invoice_number'])) {
+        } else {
+            $this->model('Invoice_model')->insertNumber($data);
+        }
 
         $this->view('templates/header', $data);
-        $this->view('Invoice/Item', $data);
+        $this->view('invoice/item', $data);
         $this->view('templates/footer');
     }
 
@@ -185,9 +208,9 @@ class Invoice extends Controller
         $data['product'] = $this->model('Product_model')->getAllProduct();
         $data['invc_item'] = $this->model('Invoice_model')->getInvoiceItembyId($invc_item_id);
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($data['invc_item']['invoice_id']);
-        //echo '<pre>', var_dump($data), '</pre>';
+
         $this->view('templates/header', $data);
-        $this->view('Invoice/editItemPage', $data);
+        $this->view('invoice/editItemPage', $data);
         $this->view('templates/footer');
     }
 
@@ -251,13 +274,13 @@ class Invoice extends Controller
         $pdf->Cell(80, 5, $data['invc']['DO_id'], 0, 0);
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Alamat Penagihan', 0, 0);
-        $pdf->Cell(50, 5, ': ' . $data['cust']['alamat_penagihan'], 0, 0);
+        $pdf->Cell(50, 5, 'Alamat Penagihan             :', 0, 1);
+        $pdf->MultiCell(112, 5, $data['cust']['alamat_penagihan'], 0, 1);
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Alamat Pengiriman', 0, 0);
-        $pdf->Cell(50, 5, ': ' . $data['cust']['alamat_pengiriman'], 0, 0);
-        $pdf->Cell(59, 5, '', 0, 1); //end of line
+        // $pdf->Cell(50, 5, 'Alamat Pengiriman', 0, 0);
+        // $pdf->Cell(50, 5, ': ' . $data['cust']['alamat_pengiriman'], 0, 0);
+        // $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         $pdf->Cell(50, 5, 'Nomor Telepon', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 0);
@@ -302,34 +325,41 @@ class Invoice extends Controller
         foreach ($data['invc_item'] as $invc_item) {
             $pdf->Cell(105, 5, $invc_item['product_name'], 1, 0);
             $pdf->Cell(25, 5, $invc_item['quantity'], 1, 0);
-            $pdf->Cell(25, 5, $invc_item['unit'], 1, 0);
+            $pdf->Cell(25, 5, $invc_item['unit_item'], 1, 0);
             $pdf->Cell(34, 5, $invc_item['price'], 1, 1, 'R'); //end of line
             $sum += $invc_item['price'] * $invc_item['quantity'];
         }
 
         //summary
-        $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'Subtotal', 0, 0);
+        $pdf->Cell(120, 5, '', 0, 0);
+        $pdf->Cell(28, 5, 'Subtotal', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
         $pdf->Cell(34, 5, $sum, 1, 1, 'R'); //end of line
 
-        $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'PPN 10%', 0, 0);
+
+        $ongkir = $data['invc']['biaya_kirim'];
+        $pdf->Cell(120, 5, '', 0, 0);
+        $pdf->Cell(28, 5, 'Biaya Kirim', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $taxed = $sum * 0.01;
+        $pdf->Cell(34, 5, $ongkir, 1, 1, 'R'); //end of line
+
+        $ppn = $data['invc']['ppn'];
+        $pdf->Cell(120, 5, '', 0, 0);
+        $pdf->Cell(28, 5, 'PPN ' . $ppn . ' %', 0, 0);
+        $pdf->Cell(7, 5, 'Rp', 1, 0);
+        $taxed = $sum * $ppn / 100;
         $pdf->Cell(34, 5, $taxed, 1, 1, 'R'); //end of line
 
-        $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'Total Due', 0, 0);
+        $pdf->Cell(120, 5, '', 0, 0);
+        $pdf->Cell(28, 5, 'Grand Total', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $pdf->Cell(34, 5, $sum - $taxed, 1, 1, 'R'); //end of line
+        $pdf->Cell(34, 5, $sum + $taxed + $ongkir, 1, 1, 'R'); //end of line
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line
 
         $pdf->Cell(20, 5, 'Catatan', 0, 0);
         $pdf->MultiCell(120, 5, ': ' . $data['invc']['other_expenses'], 0, 1);
-
 
         $pdf->Output('I', $filename . '.pdf');
     }

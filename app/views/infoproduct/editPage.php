@@ -2,7 +2,7 @@
     <h1>Update info Supplier</h1>
     <a href="<?= BASEURL; ?>/InfoProduct/detailSupp/<?= $data['inprod']['product_id']; ?>" class="editButton">Kembali</a> <br>
 
-    <form action="<?= BASEURL; ?>/InfoProduct/edit" method="post">
+    <form action="<?= BASEURL; ?>/InfoProduct/edit/<?= $data['inprod']['product_id']; ?>" method="post">
 
         <label class="hidden" for="infoproduct_id">Id infoProduct </label>
         <input class="hidden" type="hidden" id="infoproduct_id" name="infoproduct_id" autocomplete="off" value="<?= $data['inprod']['infoproduct_id']; ?>">
@@ -25,6 +25,10 @@
             <option value="Kg">Kg</option>
             <option value="Ton">Ton</option>
             <option value="Kubik">Kubik</option>
+            <option value="Pouch">Pouch</option>
+            <option value="CS">CS</option>
+            <option value="Case">Case</option>
+            <option value="Botol">Botol</option>
         </select>
         <label for="product_price">Harga </label>
         <input type="number" id="product_price" name="product_price" autocomplete="off" value="<?= $data['inprod']['product_price']; ?>">

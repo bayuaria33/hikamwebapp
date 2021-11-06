@@ -1,12 +1,13 @@
 <div class="container">
-    <h1>Tambah Invoice Item </h1>
-    <a class="editButton" href="<?= BASEURL; ?>/Invoice/item/<?= $data['invc']['invoice_id']; ?>">Kembali</a>
+    <h1>Edit data Item Delivery <?= $data['do_item']['do_item_id']; ?></h1>
+    <a class="editButton" href="<?= BASEURL; ?>/Delivery/Item/ <?= $data['do_item']['do_id']; ?>">Kembali</a>
 
 
-    <form action="<?= BASEURL; ?>/Invoice/tambahItem/<?= $data['invc']['invoice_id']; ?>" method="post">
-
-        <label class="hidden" for="invoice_id">Id Invoice</label>
-        <input class="hidden" type="hidden" id="invoice_id" name="invoice_id" autocomplete="off" value="<?= $data['invc']['invoice_id']; ?>">
+    <form action="<?= BASEURL; ?>/Delivery/editItem/<?= $data['do_item']['do_id']; ?>" method="post">
+        <label class="hidden" for="do_id">Id Invoice</label>
+        <input class="hidden" type="hidden" id="do_id" name="do_id" autocomplete="off" value="<?= $data['do_item']['do_id']; ?>">
+        <label class="hidden" for="do_item_id">Id do Item</label>
+        <input class="hidden" type="hidden" id="do_item_id" name="do_item_id" autocomplete="off" value="<?= $data['do_item']['do_item_id']; ?>">
 
         <label for="product_id">Product</label>
         <select name="product_id" id="product_id" class="selectpicker form-control" data-live-search="true">
@@ -19,7 +20,7 @@
         </select>
 
         <label for="quantity">Quantity</label>
-        <input type="number" id="quantity" name="quantity" autocomplete="off">
+        <input type="number" id="quantity" name="quantity" autocomplete="off" value="<?= $data['do_item']['quantity']; ?>">
 
         <label for="unit_item">jenis Unit Product</label>
         <select name="unit_item" id="unit_item" autocomplete="off" class="selectpicker form-control" data-live-search="true">
@@ -34,8 +35,7 @@
         </select>
 
         <label for="price">Price</label>
-        <input type="text" id="price" name="price" autocomplete="off">
-
+        <input type="text" id="price" name="price" autocomplete="off" value="<?= $data['do_item']['price']; ?>">
 
         <input type="submit" value="Submit">
     </form>

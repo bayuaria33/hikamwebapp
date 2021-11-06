@@ -35,6 +35,34 @@ class Customer extends Controller
         $this->view('templates/footer');
     }
 
+    public function custInvoice($customer_id)
+    {
+        $data['cust'] = $this->model('Customer_model')->getCustomerById($customer_id);
+        $data['judul'] = "Daftar Invoice " . $data['cust']['customer_name'];
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceByCustomer($data['cust']['customer_name']);
+        $this->view('templates/header', $data);
+        $this->view('invoice/index', $data);
+        $this->view('templates/footer');
+    }
+    public function custPurchase($customer_id)
+    {
+        $data['cust'] = $this->model('Customer_model')->getCustomerById($customer_id);
+        $data['judul'] = "Daftar Purchase Order " . $data['cust']['customer_name'];
+        $data['PO'] = $this->model('Purchase_model')->getPurchaseByCustomer($data['cust']['customer_name']);
+        $this->view('templates/header', $data);
+        $this->view('purchase/index', $data);
+        $this->view('templates/footer');
+    }
+    public function custDelivery($customer_id)
+    {
+        $data['cust'] = $this->model('Customer_model')->getCustomerById($customer_id);
+        $data['judul'] = "Daftar Delivery Order " . $data['cust']['customer_name'];
+        $data['DO'] = $this->model('Delivery_model')->getDeliveryByCustomer($data['cust']['customer_name']);
+        $this->view('templates/header', $data);
+        $this->view('delivery/index', $data);
+        $this->view('templates/footer');
+    }
+
     public function edit($customer_id)
     {
         $url = BASEURL . '/Customer' . '/detail' . '/' . $customer_id;

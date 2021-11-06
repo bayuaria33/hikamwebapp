@@ -42,7 +42,7 @@ class Product_model
             $newIdInt = "1001";
         } else {
             $lastId = max($IdArray);
-            $lastIdInt = (int)$lastId['customer_id'];
+            $lastIdInt = (int)$lastId['product_id'];
             $newIdInt = $lastIdInt + 1;
         }
 
@@ -75,7 +75,7 @@ class Product_model
 
     public function editDataProduct($data)
     {
-        echo '<pre>', var_dump($data), '</pre>';
+
         $query = "UPDATE " . $this->table . " SET product_name=:product_name, 
         product_sell_price=:product_sell_price, 
         unit =:unit, 
