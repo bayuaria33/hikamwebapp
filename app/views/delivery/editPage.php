@@ -7,6 +7,9 @@
         <label class="hidden" for="DO_id">Id Delivery</label>
         <input class="hidden" type="hidden" id="DO_id" name="DO_id" autocomplete="off" value="<?= $data['DO']['DO_id']; ?>">
 
+        <label for="delivery_number">Nomor Delivery</label>
+        <input type="text" id="delivery_number" name="delivery_number" autocomplete="off" placeholder="Jika kosong akan terisi otomatis di halaman detail">
+
         <label for="customer_name">pilih Customer</label>
         <select name="customer_name" id="customer_name" class="selectpicker form-control" data-live-search="true">
             <?php foreach ($data['cust'] as $cust) : ?>

@@ -5,6 +5,9 @@
 
     <form action="<?= BASEURL; ?>/Purchase/tambah" method="post">
 
+        <label for="purchase_number">Nomor Purchase</label>
+        <input type="text" id="purchase_number" name="purchase_number" autocomplete="off" placeholder="Jika kosong akan terisi otomatis di halaman detail">
+
         <label for="product_avb">pilih Customer</label>
         <select name="customer_name" id="customer_name" class="selectpicker form-control" data-live-search="true">
 

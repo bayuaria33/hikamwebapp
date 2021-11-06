@@ -167,7 +167,11 @@ class Invoice extends Controller
     {
 
         $data = $this->getItemDetails($invoice_id);
-        $this->model('Invoice_model')->insertNumber($data);
+        if (!empty($data['invc']['invoice_number'])) {
+        } else {
+            $this->model('Invoice_model')->insertNumber($data);
+        }
+
         $this->view('templates/header', $data);
         $this->view('invoice/item', $data);
         $this->view('templates/footer');
@@ -321,28 +325,35 @@ class Invoice extends Controller
         foreach ($data['invc_item'] as $invc_item) {
             $pdf->Cell(105, 5, $invc_item['product_name'], 1, 0);
             $pdf->Cell(25, 5, $invc_item['quantity'], 1, 0);
-            $pdf->Cell(25, 5, $invc_item['unit'], 1, 0);
+            $pdf->Cell(25, 5, $invc_item['unit_item'], 1, 0);
             $pdf->Cell(34, 5, $invc_item['price'], 1, 1, 'R'); //end of line
             $sum += $invc_item['price'] * $invc_item['quantity'];
         }
 
         //summary
-        $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'Subtotal', 0, 0);
+        $pdf->Cell(120, 5, '', 0, 0);
+        $pdf->Cell(28, 5, 'Subtotal', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
         $pdf->Cell(34, 5, $sum, 1, 1, 'R'); //end of line
 
+
+        $ongkir = $data['invc']['biaya_kirim'];
+        $pdf->Cell(120, 5, '', 0, 0);
+        $pdf->Cell(28, 5, 'Biaya Kirim', 0, 0);
+        $pdf->Cell(7, 5, 'Rp', 1, 0);
+        $pdf->Cell(34, 5, $ongkir, 1, 1, 'R'); //end of line
+
         $ppn = $data['invc']['ppn'];
-        $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'PPN ' . $ppn . ' %', 0, 0);
+        $pdf->Cell(120, 5, '', 0, 0);
+        $pdf->Cell(28, 5, 'PPN ' . $ppn . ' %', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
         $taxed = $sum * $ppn / 100;
         $pdf->Cell(34, 5, $taxed, 1, 1, 'R'); //end of line
 
-        $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'Total Due', 0, 0);
+        $pdf->Cell(120, 5, '', 0, 0);
+        $pdf->Cell(28, 5, 'Grand Total', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $pdf->Cell(34, 5, $sum + $taxed, 1, 1, 'R'); //end of line
+        $pdf->Cell(34, 5, $sum + $taxed + $ongkir, 1, 1, 'R'); //end of line
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line

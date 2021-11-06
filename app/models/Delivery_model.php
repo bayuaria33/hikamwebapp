@@ -76,7 +76,7 @@ class Delivery_model
         $this->db->query($query);
 
         $this->db->bind('DO_id', $newIdInt);
-        $this->db->bind('delivery_number', '');
+        $this->db->bind('delivery_number', $data['delivery_number']);
         $this->db->bind('customer_name', $data['customer_name']);
         $this->db->bind('DO_date', $data['DO_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
@@ -103,13 +103,14 @@ class Delivery_model
         }                 // wkwkwkwkwkkwkwi
 
         $query = "INSERT INTO " . $this->table2 .
-            " VALUES(:do_item_id, :DO_id, :product_id, :quantity, :price) ";
+            " VALUES(:do_item_id, :DO_id, :product_id, :quantity, :unit_item, :price) ";
         $this->db->query($query);
 
         $this->db->bind('do_item_id', $newIdInt);
         $this->db->bind('DO_id', $data['DO_id']);
         $this->db->bind('product_id', $data['product_id']);
         $this->db->bind('quantity', $data['quantity']);
+        $this->db->bind('unit_item', $data['unit_item']);
         $this->db->bind('price', $data['price']);
         $this->db->execute();
 
@@ -132,6 +133,7 @@ class Delivery_model
     {
         $query = "UPDATE " . $this->table . " SET 
         customer_name=:customer_name, 
+        delivery_number=:delivery_number, 
         DO_date =:DO_date, 
         other_expenses =:other_expenses,
         status_pembayaran =:status_pembayaran, 
@@ -143,6 +145,7 @@ class Delivery_model
         $this->db->query($query);
         $this->db->bind('DO_id', $data['DO_id']);
         $this->db->bind('customer_name', $data['customer_name']);
+        $this->db->bind('delivery_number', $data['delivery_number']);
         $this->db->bind('DO_date', $data['DO_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
         $this->db->bind('status_pembayaran', $data['status_pembayaran']);
@@ -206,6 +209,7 @@ class Delivery_model
         do_id =:do_id,
         product_id =:product_id,
         quantity =:quantity, 
+        unit_item =:unit_item, 
         price =:price
             WHERE do_item_id=:do_item_id";
         $this->db->query($query);
@@ -213,6 +217,7 @@ class Delivery_model
         $this->db->bind('do_id', $data['do_id']);
         $this->db->bind('product_id', $data['product_id']);
         $this->db->bind('quantity', $data['quantity']);
+        $this->db->bind('unit_item', $data['unit_item']);
         $this->db->bind('price', $data['price']);
         $this->db->execute();
         return $this->db->rowCount();

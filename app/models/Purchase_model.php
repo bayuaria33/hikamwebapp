@@ -76,7 +76,7 @@ class Purchase_model
         $this->db->query($query);
 
         $this->db->bind('PO_id', $newIdInt);
-        $this->db->bind('purchase_number', '');
+        $this->db->bind('purchase_number', $data['purchase_number']);
         $this->db->bind('customer_name', $data['customer_name']);
         $this->db->bind('PO_date', $data['PO_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
@@ -103,13 +103,14 @@ class Purchase_model
         }                 // wkwkwkwkwkkwkwi
 
         $query = "INSERT INTO " . $this->table2 .
-            " VALUES(:pc_item_id, :PO_id, :product_id, :quantity, :price) ";
+            " VALUES(:pc_item_id, :PO_id, :product_id, :quantity, :unit_item, :price) ";
         $this->db->query($query);
 
         $this->db->bind('pc_item_id', $newIdInt);
         $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('product_id', $data['product_id']);
         $this->db->bind('quantity', $data['quantity']);
+        $this->db->bind('unit_item', $data['unit_item']);
         $this->db->bind('price', $data['price']);
         $this->db->execute();
 
@@ -131,6 +132,7 @@ class Purchase_model
     {
         $query = "UPDATE " . $this->table . " SET 
         customer_name=:customer_name, 
+        purchase_number=:purchase_number, 
         PO_date =:PO_date, 
         other_expenses =:other_expenses,
         status_pembayaran =:status_pembayaran, 
@@ -142,6 +144,7 @@ class Purchase_model
         $this->db->query($query);
         $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('customer_name', $data['customer_name']);
+        $this->db->bind('purchase_number', $data['purchase_number']);
         $this->db->bind('PO_date', $data['PO_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
         $this->db->bind('status_pembayaran', $data['status_pembayaran']);
@@ -205,6 +208,7 @@ class Purchase_model
         PO_id =:PO_id,
         product_id =:product_id,
         quantity =:quantity, 
+        unit_item =:unit_item,
         price =:price
             WHERE pc_item_id=:pc_item_id";
         $this->db->query($query);
@@ -212,6 +216,7 @@ class Purchase_model
         $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('product_id', $data['product_id']);
         $this->db->bind('quantity', $data['quantity']);
+        $this->db->bind('unit_item', $data['unit_item']);
         $this->db->bind('price', $data['price']);
         $this->db->execute();
         return $this->db->rowCount();

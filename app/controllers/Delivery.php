@@ -167,7 +167,12 @@ class Delivery extends Controller
     {
 
         $data = $this->getItemDetails($DO_id);
-        $this->model('Delivery_model')->insertNumber($data);
+
+        if (!empty($data['DO']['delivery_number'])) {
+        } else {
+            $this->model('Delivery_model')->insertNumber($data);
+        }
+
         $this->view('templates/header', $data);
         $this->view('delivery/Item', $data);
         $this->view('templates/footer');

@@ -72,11 +72,12 @@ class Invoice_model
             :due_date,
             :ppn,  
             :PO_id, 
-            :DO_id) ";
+            :DO_id,
+            :biaya_kirim) ";
         $this->db->query($query);
 
         $this->db->bind('invoice_id', $newIdInt);
-        $this->db->bind('invoice_number', '');
+        $this->db->bind('invoice_number', $data['invoice_number']);
         $this->db->bind('customer_name', $data['customer_name']);
         $this->db->bind('invoice_date', $data['invoice_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
@@ -85,6 +86,7 @@ class Invoice_model
         $this->db->bind('due_date', $data['due_date']);
         $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('DO_id', $data['DO_id']);
+        $this->db->bind('biaya_kirim', $data['biaya_kirim']);
         // $this->dd($data);
         $this->db->execute();
         return $this->db->rowCount();
@@ -103,13 +105,14 @@ class Invoice_model
         }                 // wkwkwkwkwkkwkwi
 
         $query = "INSERT INTO " . $this->table2 .
-            " VALUES(:invc_item_id, :invoice_id, :product_id, :quantity, :price) ";
+            " VALUES(:invc_item_id, :invoice_id, :product_id, :quantity, :unit_item, :price) ";
         $this->db->query($query);
 
         $this->db->bind('invc_item_id', $newIdInt);
         $this->db->bind('invoice_id', $data['invoice_id']);
         $this->db->bind('product_id', $data['product_id']);
         $this->db->bind('quantity', $data['quantity']);
+        $this->db->bind('unit_item', $data['unit_item']);
         $this->db->bind('price', $data['price']);
         $this->db->execute();
 
@@ -132,16 +135,19 @@ class Invoice_model
     {
         $query = "UPDATE " . $this->table . " SET 
         customer_name=:customer_name, 
+        invoice_number=:invoice_number,
         invoice_date =:invoice_date, 
         other_expenses =:other_expenses,
         status_pembayaran =:status_pembayaran, 
         ppn =:ppn,
         due_date =:due_date,
         PO_id =:PO_id,
-        DO_id =:DO_id
+        DO_id =:DO_id,
+        biaya_kirim =:biaya_kirim
             WHERE invoice_id=:invoice_id";
         $this->db->query($query);
         $this->db->bind('invoice_id', $data['invoice_id']);
+        $this->db->bind('invoice_number', $data['invoice_number']);
         $this->db->bind('customer_name', $data['customer_name']);
         $this->db->bind('invoice_date', $data['invoice_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
@@ -150,7 +156,7 @@ class Invoice_model
         $this->db->bind('due_date', $data['due_date']);
         $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('DO_id', $data['DO_id']);
-
+        $this->db->bind('biaya_kirim', $data['biaya_kirim']);
         $this->db->execute();
         return $this->db->rowCount();
     }
@@ -206,6 +212,7 @@ class Invoice_model
         invoice_id =:invoice_id,
         product_id =:product_id,
         quantity =:quantity, 
+        unit_item =:unit_item, 
         price =:price
             WHERE invc_item_id=:invc_item_id";
         $this->db->query($query);
@@ -213,6 +220,7 @@ class Invoice_model
         $this->db->bind('invoice_id', $data['invoice_id']);
         $this->db->bind('product_id', $data['product_id']);
         $this->db->bind('quantity', $data['quantity']);
+        $this->db->bind('unit_item', $data['unit_item']);
         $this->db->bind('price', $data['price']);
         $this->db->execute();
         return $this->db->rowCount();

@@ -7,6 +7,9 @@
         <label class="hidden" for="PO_id">Id Purchase</label>
         <input class="hidden" type="hidden" id="PO_id" name="PO_id" autocomplete="off" value="<?= $data['PO']['PO_id']; ?>">
 
+        <label for="purchase_number">Nomor Purchase</label>
+        <input type="text" id="purchase_number" name="purchase_number" autocomplete="off" placeholder="Jika kosong akan terisi otomatis di halaman detail">
+
         <label for="customer_name">pilih Customer</label>
         <select name="customer_name" id="customer_name" class="selectpicker form-control" data-live-search="true">
             <?php foreach ($data['cust'] as $cust) : ?>

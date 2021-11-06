@@ -2,7 +2,13 @@
     <div>
         <br>
         <?php Flasher::flash() ?>
-        <h1>Delivey Order <?= $data['delivery_number']; ?></h1>
+
+        <?php
+        if (!empty($data['DO']['delivery_number'])) { ?>
+            <h1>Delivery Order <?= $data['DO']['delivery_number']; ?></h1>
+        <?php  } else { ?>
+            <h1>Delivery Order <?= $data['delivery_number']; ?></h1>
+        <?php } ?>
         <a href="<?= BASEURL; ?>/Delivery" class="editButton">Kembali</a>
         <a href="<?= BASEURL; ?>/Delivery/editPage/<?= $data['DO']['DO_id']; ?>" class="editButton">Edit</a>
         <a href="<?= BASEURL; ?>/Delivery/generatePDF/<?= $data['DO']['DO_id']; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Generate PDF</a>

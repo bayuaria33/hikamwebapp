@@ -4,7 +4,6 @@
         <?php Flasher::flash() ?>
         <h1><?= $data['judul']; ?></h1>
         <br>
-
         <a class="editButton" href="<?= BASEURL; ?>/Invoice/addPage">Tambah data </a>
 
         <!-- <form action="<?= BASEURL; ?>/Invoice/cari" style="max-width:350px;display:flex;justify-content:center;align-items:center;" method="post">
@@ -15,8 +14,8 @@
         <table id="tabledetail">
             <thead>
                 <tr>
-                    <!-- <th>No. </th> -->
                     <th class="datetime">Invoice Date</th>
+                    <th>Invoice Number</th>
                     <th>Customer Name</th>
                     <th class="actionbuttons">Action</th>
                 </tr>
@@ -24,12 +23,17 @@
             <tbody>
                 <?php foreach ($data['invc'] as $invc => $value) : ?>
                     <tr>
-                        <!-- <td>
-                        <?= $invc + 1 ?>
-                    </td> -->
                         <td>
                             <?=
                             $output = date('d-m-Y', strtotime($value['invoice_date'])); ?>
+                        </td>
+                        <td>
+                            <?php
+                            if (!empty($value['invoice_number'])) { ?>
+                                <?= $value['invoice_number']; ?>
+                            <?php  } else { ?>
+                                Buka Detail untuk generate No. Invoice
+                            <?php } ?>
                         </td>
                         <td>
                             <?= $value['customer_name']; ?>

@@ -2,7 +2,12 @@
     <div>
         <br>
         <?php Flasher::flash() ?>
-        <h1>Purchase Order <?= $data['purchase_number']; ?></h1>
+        <?php
+        if (!empty($data['PO']['purchase_number'])) { ?>
+            <h1>Purchase <?= $data['PO']['purchase_number']; ?></h1>
+        <?php  } else { ?>
+            <h1>Purchase <?= $data['purchase_number']; ?></h1>
+        <?php } ?>
         <a href="<?= BASEURL; ?>/Purchase" class="editButton">Kembali</a>
         <a href="<?= BASEURL; ?>/Purchase/editPage/<?= $data['PO']['PO_id']; ?>" class="editButton">Edit</a>
         <a href="<?= BASEURL; ?>/Purchase/generatePDF/<?= $data['PO']['PO_id']; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Generate PDF</a>
@@ -127,6 +132,7 @@
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
+                <th>Unit</th>
                 <th>Price</th>
                 <th>Action</th>
             </tr>
@@ -138,6 +144,9 @@
                     </td>
                     <td>
                         <?= $PO['quantity']; ?>
+                    </td>
+                    <td>
+                        <?= $PO['unit_item']; ?>
                     </td>
                     <td>
                         <?= $PO['price']; ?>

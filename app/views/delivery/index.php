@@ -15,8 +15,8 @@
         <table id="tabledetail">
             <thead>
                 <tr>
-                    <!-- <th>No. </th> -->
                     <th class="datetime">Delivery Date</th>
+                    <th>Delivery Number</th>
                     <th>Customer Name</th>
                     <th class="actionbuttons">Action</th>
                 </tr>
@@ -24,12 +24,18 @@
             <tbody>
                 <?php foreach ($data['DO'] as $DO => $value) : ?>
                     <tr>
-                        <!-- <td>
-                        <?= $DO + 1 ?>
-                    </td> -->
                         <td>
                             <?=
-                            $output = date('d-m-Y', strtotime($value['DO_date'])); ?>
+                            $output = date('d-m-Y', strtotime($value['DO_date']));
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            if (!empty($value['delivery_number'])) { ?>
+                                <?= $value['delivery_number']; ?>
+                            <?php  } else { ?>
+                                Buka Detail untuk generate No. Delivery
+                            <?php } ?>
                         </td>
                         <td>
                             <?= $value['customer_name']; ?>

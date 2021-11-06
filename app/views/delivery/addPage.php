@@ -4,6 +4,10 @@
 
     <form action="<?= BASEURL; ?>/Delivery/tambah" method="post">
 
+        <label for="delivery_number">Nomor Delivery</label>
+        <input type="text" id="delivery_number" name="delivery_number" autocomplete="off" placeholder="Jika kosong akan terisi otomatis di halaman detail">
+
+
         <label for="product_avb">pilih Customer</label>
         <select name="customer_name" id="customer_name" class="selectpicker form-control" data-live-search="true">
 

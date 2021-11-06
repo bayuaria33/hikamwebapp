@@ -2,11 +2,17 @@
     <div>
         <br>
         <?php Flasher::flash() ?>
-        <h1>Invoice <?= $data['invoice_number']; ?></h1>
+
+        <?php
+        if (!empty($data['invc']['invoice_number'])) { ?>
+            <h1>Invoice <?= $data['invc']['invoice_number']; ?></h1>
+        <?php  } else { ?>
+            <h1>Invoice <?= $data['invoice_number']; ?></h1>
+        <?php } ?>
+
         <a href="<?= BASEURL; ?>/Invoice" class="editButton">Kembali</a>
         <a href="<?= BASEURL; ?>/Invoice/editPage/<?= $data['invc']['invoice_id']; ?>" class="editButton">Edit</a>
         <a href="<?= BASEURL; ?>/Invoice/generatePDF/<?= $data['invc']['invoice_id']; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Generate PDF</a>
-
         <!-- button cek PO -->
         <?php
         if (!empty($data['invc']['PO_id'])) { ?>
@@ -113,6 +119,12 @@
                 <td>
                     <?= $data['invc']['ppn']; ?> %
                 </td>
+                <td>
+                    <b>Biaya Kirim</b>
+                </td>
+                <td>
+                    <?= number_format($data['invc']['biaya_kirim'], 2);  ?>
+                </td>
             </tr>
             <tr>
 
@@ -127,10 +139,10 @@
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
+                <th>Unit</th>
                 <th>Price</th>
                 <th>Action</th>
             </tr>
-
             <?php foreach ($data['invc_item'] as $invc) : ?>
                 <tr>
                     <td>
@@ -140,7 +152,10 @@
                         <?= $invc['quantity']; ?>
                     </td>
                     <td>
-                        <?= $invc['price']; ?>
+                        <?= $invc['unit_item']; ?>
+                    </td>
+                    <td>
+                        <?= number_format($invc['price'], 2);  ?>
                     </td>
 
 

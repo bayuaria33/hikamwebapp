@@ -166,7 +166,11 @@ class Purchase extends Controller
     public function item($PO_id)
     {
         $data = $this->getItemDetails($PO_id);
-        $this->model('Purchase_model')->insertNumber($data);
+        if (!empty($data['PO']['purchase_number'])) {
+        } else {
+            $this->model('Purchase_model')->insertNumber($data);
+        }
+
         $this->view('templates/header', $data);
         $this->view('purchase/Item', $data);
         $this->view('templates/footer');
@@ -326,20 +330,20 @@ class Purchase extends Controller
         }
 
         //summary
-        $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'Subtotal', 0, 0);
+        $pdf->Cell(120, 5, '', 0, 0);
+        $pdf->Cell(28, 5, 'Subtotal', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
         $pdf->Cell(34, 5, $sum, 1, 1, 'R'); //end of line
 
         $ppn = $data['PO']['ppn'];
-        $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'PPN ' . $ppn . ' %', 0, 0);
+        $pdf->Cell(120, 5, '', 0, 0);
+        $pdf->Cell(28, 5, 'PPN ' . $ppn . ' %', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
         $taxed = $sum * $ppn / 100;
         $pdf->Cell(34, 5, $taxed, 1, 1, 'R'); //end of line
 
-        $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'Total Due', 0, 0);
+        $pdf->Cell(120, 5, '', 0, 0);
+        $pdf->Cell(28, 5, 'Grand Total', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
         $pdf->Cell(34, 5, $sum + $taxed, 1, 1, 'R'); //end of line
 

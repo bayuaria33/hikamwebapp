@@ -22,6 +22,17 @@
         <label for="quantity">Quantity</label>
         <input type="number" id="quantity" name="quantity" autocomplete="off" value="<?= $data['invc_item']['quantity']; ?>">
 
+        <label for="unit_item">jenis Unit Product</label>
+        <select name="unit_item" id="unit_item" autocomplete="off" class="selectpicker form-control" data-live-search="true" value="<?= $data['invc_item']['unit_item']; ?>">
+            <option value="liter">Liter</option>
+            <option value="Kg">Kg</option>
+            <option value="Ton">Ton</option>
+            <option value="Kubik">Kubik</option>
+            <option value="Pouch">Pouch</option>
+            <option value="CS">CS</option>
+            <option value="Case">Case</option>
+            <option value="Botol">Botol</option>
+        </select>
         <label for="price">Price</label>
         <input type="text" id="price" name="price" autocomplete="off" value="<?= $data['invc_item']['price']; ?>">
 
