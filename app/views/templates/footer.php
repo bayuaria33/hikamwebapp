@@ -24,6 +24,26 @@
     });
 
     $('#tabledetail').DataTable();
+
+    //pay options if  = term of payment
+    function paySelectCheck(paySelect) {
+        console.log(paySelect);
+        if (paySelect) {
+            payOptionValue = document.getElementById("top").value;
+            if (payOptionValue == paySelect.value) {
+                document.getElementById("due_date").style.display = "block";
+                document.getElementById("due_date_label").style.display = "block";
+            } else {
+                document.getElementById("due_date").style.display = "none";
+                document.getElementById("due_date_label").style.display = "none";
+                setValue("due_date", null);
+            }
+        } else {
+            document.getElementById("due_date").style.display = "none";
+            document.getElementById("due_date_label").style.display = "none";
+            setValue("due_date", null);
+        }
+    }
 </script>
 
 </html>

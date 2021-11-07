@@ -31,8 +31,15 @@
             <option value="Belum Lunas">Belum Lunas</option>
         </select>
 
-        <label for="due_date">Tanggal Jatuh Tempo</label>
-        <br><input type="date" id="due_date" name="due_date" autocomplete="off" value="<?= $data['PO']['due_date']; ?>">
+        <label for="payment_option">Payment Option</label>
+        <select name="payment_option" id="payment_option" autocomplete="off" onchange="paySelectCheck(this);">
+            <option value="CBD">CBD</option>
+            <option value="COD">COD</option>
+            <option value="Term of Payment" id="top">Term of Payment</option>
+        </select>
+
+        <label id="due_date_label" for="due_date" style="display: none;">Tanggal Jatuh Tempo</label>
+        <input type="date" id="due_date" name="due_date" autocomplete="off" style="display:none" value="<?= $data['invc']['due_date']; ?>">
 
         <label for="ppn">PPN</label>
         <br><select name="ppn" id="ppn">

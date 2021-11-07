@@ -25,6 +25,12 @@
         <label for="other_expenses">Pengeluaran Lain</label>
         <input type="text" id="other_expenses" name="other_expenses" autocomplete="off" value="<?= $data['DO']['other_expenses']; ?>">
 
+        <label for="tipe">Jenis Delivery</label>
+        <select name="tipe" id="tipe" autocomplete="off">
+            <option value="Ambil">Ambil</option>
+            <option value="Kirim">Kirim</option>
+        </select>
+
         <label for="status_pembayaran">Status Pembayaran</label>
         <select name="status_pembayaran" id="status_pembayaran" autocomplete="off">
             <option value="Lunas">Lunas</option>

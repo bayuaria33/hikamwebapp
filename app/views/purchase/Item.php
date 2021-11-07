@@ -63,7 +63,12 @@
                     <b>Tanggal Jatuh Tempo</b>
                 </td>
                 <td>
-                    <?= $data['due_date_format']; ?>
+                    <?php
+                    if ($data['PO']['due_date'] == "0000-00-00") { ?>
+                        -
+                    <?php  } else { ?>
+                        <?= $data['due_date_format']; ?>
+                    <?php } ?>
                 </td>
             </tr>
 
@@ -120,7 +125,12 @@
                 </td>
             </tr>
             <tr>
-
+                <td>
+                    <b>Payment Option</b>
+                </td>
+                <td>
+                    <?= $data['PO']['payment_option']; ?>
+                </td>
             </tr>
         </table>
 

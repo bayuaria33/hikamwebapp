@@ -69,6 +69,7 @@ class Invoice_model
             :invoice_date, 
             :other_expenses, 
             :status_pembayaran, 
+            :payment_option,
             :due_date,
             :ppn,  
             :PO_id, 
@@ -83,6 +84,7 @@ class Invoice_model
         $this->db->bind('other_expenses', $data['other_expenses']);
         $this->db->bind('status_pembayaran', $data['status_pembayaran']);
         $this->db->bind('ppn', $data['ppn']);
+        $this->db->bind('payment_option', $data['payment_option']);
         $this->db->bind('due_date', $data['due_date']);
         $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('DO_id', $data['DO_id']);
@@ -140,6 +142,7 @@ class Invoice_model
         other_expenses =:other_expenses,
         status_pembayaran =:status_pembayaran, 
         ppn =:ppn,
+        payment_option =:payment_option,
         due_date =:due_date,
         PO_id =:PO_id,
         DO_id =:DO_id,
@@ -153,6 +156,7 @@ class Invoice_model
         $this->db->bind('other_expenses', $data['other_expenses']);
         $this->db->bind('status_pembayaran', $data['status_pembayaran']);
         $this->db->bind('ppn', $data['ppn']);
+        $this->db->bind('payment_option', $data['payment_option']);
         $this->db->bind('due_date', $data['due_date']);
         $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('DO_id', $data['DO_id']);

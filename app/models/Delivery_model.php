@@ -69,6 +69,7 @@ class Delivery_model
             :DO_date, 
             :other_expenses, 
             :status_pembayaran, 
+            :tipe,
             :due_date,
             :ppn,  
             :PO_id, 
@@ -81,6 +82,7 @@ class Delivery_model
         $this->db->bind('DO_date', $data['DO_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
         $this->db->bind('status_pembayaran', $data['status_pembayaran']);
+        $this->db->bind('tipe', $data['tipe']);
         $this->db->bind('ppn', $data['ppn']);
         $this->db->bind('due_date', $data['due_date']);
         $this->db->bind('PO_id', $data['PO_id']);
@@ -137,6 +139,7 @@ class Delivery_model
         DO_date =:DO_date, 
         other_expenses =:other_expenses,
         status_pembayaran =:status_pembayaran, 
+        tipe =:tipe,
         ppn =:ppn,
         due_date =:due_date,
         PO_id =:PO_id,
@@ -149,6 +152,7 @@ class Delivery_model
         $this->db->bind('DO_date', $data['DO_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
         $this->db->bind('status_pembayaran', $data['status_pembayaran']);
+        $this->db->bind('tipe', $data['tipe']);
         $this->db->bind('ppn', $data['ppn']);
         $this->db->bind('due_date', $data['due_date']);
         $this->db->bind('PO_id', $data['PO_id']);

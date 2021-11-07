@@ -9,7 +9,6 @@
         <?php  } else { ?>
             <h1>Invoice <?= $data['invoice_number']; ?></h1>
         <?php } ?>
-
         <a href="<?= BASEURL; ?>/Invoice" class="editButton">Kembali</a>
         <a href="<?= BASEURL; ?>/Invoice/editPage/<?= $data['invc']['invoice_id']; ?>" class="editButton">Edit</a>
         <a href="<?= BASEURL; ?>/Invoice/generatePDF/<?= $data['invc']['invoice_id']; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Generate PDF</a>
@@ -64,7 +63,16 @@
                     <b>Tanggal Jatuh Tempo</b>
                 </td>
                 <td>
-                    <?= $data['due_date_format']; ?>
+
+
+                    <?php
+                    if ($data['invc']['due_date'] == "0000-00-00") { ?>
+                        -
+                    <?php  } else { ?>
+                        <?= $data['due_date_format']; ?>
+                    <?php } ?>
+
+
                 </td>
             </tr>
 
@@ -127,7 +135,13 @@
                 </td>
             </tr>
             <tr>
-
+            <tr>
+                <td>
+                    <b>Payment Option</b>
+                </td>
+                <td>
+                    <?= $data['invc']['payment_option']; ?>
+                </td>
             </tr>
         </table>
 

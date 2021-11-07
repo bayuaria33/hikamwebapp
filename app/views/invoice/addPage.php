@@ -16,7 +16,7 @@
         </select>
 
         <label for="invoice_date">Tanggal Invoice</label>
-        <input type="date" id="invoice_date" name="invoice_date" autocomplete="off">
+        <input type="date" id="invoice_date" name="invoice_date" autocomplete="off" required>
 
 
         <label for="other_expenses">Catatan Lain</label>
@@ -28,8 +28,15 @@
             <option value="Belum Lunas">Belum Lunas</option>
         </select>
 
-        <label for="due_date">Tanggal Jatuh Tempo</label>
-        <br><input type="date" id="due_date" name="due_date" autocomplete="off">
+        <label for="payment_option">Payment Option</label>
+        <select name="payment_option" id="payment_option" autocomplete="off" onchange="paySelectCheck(this);">
+            <option value="CBD">CBD</option>
+            <option value="COD">COD</option>
+            <option value="Term of Payment" id="top">Term of Payment</option>
+        </select>
+
+        <label id="due_date_label" for="due_date" style="display: none;">Tanggal Jatuh Tempo</label>
+        <input type="date" id="due_date" name="due_date" autocomplete="off" style="display:none">
 
         <label for="ppn">PPN</label>
         <br><select name="ppn" id="ppn">

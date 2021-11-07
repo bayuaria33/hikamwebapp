@@ -61,10 +61,10 @@
                     <?= $data['cust']['alamat_penagihan']; ?>
                 </td>
                 <td>
-                    <b>Tanggal Jatuh Tempo</b>
+                    <b>Jenis Delivery</b>
                 </td>
                 <td>
-                    <?= $data['due_date_format']; ?>
+                    <?= $data['DO']['tipe']; ?>
                 </td>
             </tr>
 

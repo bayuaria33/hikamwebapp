@@ -19,10 +19,16 @@
         </select>
 
         <label for="DO_date">Tanggal Delivery Order</label>
-        <input type="date" id="DO_date" name="DO_date" autocomplete="off">
+        <input type="date" id="DO_date" name="DO_date" autocomplete="off" required>
 
         <label for="other_expenses">Catatan Lain</label>
         <input type="text" id="other_expenses" name="other_expenses" autocomplete="off">
+
+        <label for="tipe">Jenis Delivery</label>
+        <select name="tipe" id="tipe" autocomplete="off">
+            <option value="Ambil">Ambil</option>
+            <option value="Kirim">Kirim</option>
+        </select>
 
         <label for="status_pembayaran">Status Pembayaran</label>
         <select name="status_pembayaran" id="status_pembayaran" autocomplete="off">

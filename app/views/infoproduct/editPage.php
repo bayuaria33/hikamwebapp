@@ -26,9 +26,10 @@
             <option value="Ton">Ton</option>
             <option value="Kubik">Kubik</option>
             <option value="Pouch">Pouch</option>
-            <option value="CS">CS</option>
+            <option value="Pail">Pail</option>
             <option value="Case">Case</option>
             <option value="Botol">Botol</option>
+            <option value="Drum">Drum</option>
         </select>
         <label for="product_price">Harga </label>
         <input type="number" id="product_price" name="product_price" autocomplete="off" value="<?= $data['inprod']['product_price']; ?>">
