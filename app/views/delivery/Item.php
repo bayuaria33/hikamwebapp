@@ -133,6 +133,7 @@
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
+                <th>Unit</th>
                 <th>Price</th>
                 <th>Action</th>
             </tr>
@@ -144,6 +145,9 @@
                     </td>
                     <td>
                         <?= $DO['quantity']; ?>
+                    </td>
+                    <td>
+                        <?= $DO['unit_item']; ?>
                     </td>
                     <td>
                         <?= $DO['price']; ?>
