@@ -31,6 +31,7 @@
             <option value="Case">Case</option>
             <option value="Botol">Botol</option>
             <option value="Drum">Drum</option>
+            <option value="Bag">Bag / Sak</option>
         </select>
 
         <label for="price">Price</label>
