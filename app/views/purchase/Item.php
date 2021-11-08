@@ -38,10 +38,10 @@
             </tr>
             <tr>
                 <td>
-                    <b>Nama Customer</b>
+                    <b>Nama Supplier</b>
                 </td>
                 <td>
-                    <?= $data['PO']['customer_name']; ?>
+                    <?= $data['PO']['supplier_name']; ?>
                 </td>
                 <td>
                     <b>Tanggal Purchase</b>

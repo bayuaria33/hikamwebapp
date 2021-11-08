@@ -18,7 +18,7 @@
 
                     <th class="datetime">Purchase Order Date</th>
                     <th>Purchase Number</th>
-                    <th>Customer Name</th>
+                    <th>Supplier Name</th>
                     <th class="actionbuttons">Action</th>
                 </tr>
             </thead>
@@ -38,7 +38,7 @@
                             <?php } ?>
                         </td>
                         <td>
-                            <?= $value['customer_name']; ?>
+                            <?= $value['supplier_name']; ?>
                         </td>
 
 

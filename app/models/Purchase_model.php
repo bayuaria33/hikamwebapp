@@ -3,7 +3,7 @@ class Purchase_model
 {
     private $table = "pc_order"; //nama table di db
     private $table2 = "pc_item";
-    private $table3 = "customer";
+    private $table3 = "supplier";
     private $db;
 
     function dd($variable)
@@ -31,10 +31,10 @@ class Purchase_model
         return $this->db->single();
     }
 
-    public function getPurchaseByCustomer($customer_name)
+    public function getPurchaseBySupplier($supplier_name)
     {
         $this->db->query('SELECT * FROM ' . $this->table .
-            ' WHERE customer_name LIKE "%' . $customer_name . '%"');
+            ' WHERE supplier_name LIKE "%' . $supplier_name . '%"');
         return $this->db->resultSet();
     }
 
@@ -65,7 +65,7 @@ class Purchase_model
         $query = "INSERT INTO " . $this->table .
             " VALUES(:PO_id, 
             :purchase_number,
-            :customer_name, 
+            :supplier_name, 
             :PO_date, 
             :other_expenses, 
             :status_pembayaran, 
@@ -78,7 +78,7 @@ class Purchase_model
 
         $this->db->bind('PO_id', $newIdInt);
         $this->db->bind('purchase_number', $data['purchase_number']);
-        $this->db->bind('customer_name', $data['customer_name']);
+        $this->db->bind('supplier_name', $data['supplier_name']);
         $this->db->bind('PO_date', $data['PO_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
         $this->db->bind('status_pembayaran', $data['status_pembayaran']);
@@ -133,7 +133,7 @@ class Purchase_model
     public function editDataPurchase($data)
     {
         $query = "UPDATE " . $this->table . " SET 
-        customer_name=:customer_name, 
+        supplier_name=:supplier_name, 
         purchase_number=:purchase_number, 
         PO_date =:PO_date, 
         other_expenses =:other_expenses,
@@ -146,7 +146,7 @@ class Purchase_model
             WHERE PO_id=:PO_id";
         $this->db->query($query);
         $this->db->bind('PO_id', $data['PO_id']);
-        $this->db->bind('customer_name', $data['customer_name']);
+        $this->db->bind('supplier_name', $data['supplier_name']);
         $this->db->bind('purchase_number', $data['purchase_number']);
         $this->db->bind('PO_date', $data['PO_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
@@ -175,7 +175,7 @@ class Purchase_model
     public function cariDataPurchase()
     {
         $keyword = $_POST['keyword'];
-        $query = "SELECT * FROM " . $this->table . " WHERE customer_name LIKE :keyword";
+        $query = "SELECT * FROM " . $this->table . " WHERE supplier_name LIKE :keyword";
         $this->db->query($query);
         $this->db->bind('keyword', "%$keyword%");
 
@@ -192,10 +192,10 @@ class Purchase_model
         return $this->db->resultSet();
     }
 
-    public function getPurchaseCust($customer_name)
+    public function getPurchaseSupp($supplier_name)
     {
-        $this->db->query('SELECT * FROM ' . $this->table3 . ' WHERE customer_name=:customer_name');
-        $this->db->bind('customer_name', $customer_name);
+        $this->db->query('SELECT * FROM ' . $this->table3 . ' WHERE supplier_name=:supplier_name');
+        $this->db->bind('supplier_name', $supplier_name);
         return $this->db->single();
     }
 

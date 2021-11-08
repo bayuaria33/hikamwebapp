@@ -264,7 +264,7 @@ class Delivery extends Controller
         $pdf->SetFont('Arial', '', 12);
 
         $pdf->Cell(50, 5, 'Nomor Delivery', 0, 0);
-        $pdf->Cell(80, 5, ': ' . $data['delivery_number'], 0, 0);
+        $pdf->Cell(80, 5, ': ' . $data['DO']['delivery_number'], 0, 0);
         $pdf->Cell(30, 5, 'Nomor PO: ', 0, 0);
         $pdf->Cell(80, 5, $data['DO']['PO_id'], 0, 0);
         $pdf->Cell(59, 5, '', 0, 1); //end of line

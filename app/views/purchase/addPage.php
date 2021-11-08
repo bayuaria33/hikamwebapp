@@ -8,12 +8,12 @@
         <label for="purchase_number">Nomor Purchase</label>
         <input type="text" id="purchase_number" name="purchase_number" autocomplete="off" placeholder="Jika kosong akan terisi otomatis di halaman detail">
 
-        <label for="product_avb">pilih Customer</label>
-        <select name="customer_name" id="customer_name" class="selectpicker form-control" data-live-search="true">
+        <label for="product_avb">pilih Supplier</label>
+        <select name="supplier_name" id="supplier_name" class="selectpicker form-control" data-live-search="true">
 
-            <?php foreach ($data['cust'] as $cust) : ?>
+            <?php foreach ($data['supp'] as $supp) : ?>
 
-                <option value="<?= $cust['customer_name']; ?>"> <?= $cust['customer_name']; ?></option>
+                <option value="<?= $supp['supplier_name']; ?>"> <?= $supp['supplier_name']; ?></option>
 
             <?php endforeach; ?>
         </select>
