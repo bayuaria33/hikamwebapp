@@ -335,7 +335,7 @@ class Delivery extends Controller
         foreach ($data['do_item'] as $do_item) {
             $pdf->Cell(105, 5, $do_item['product_name'], 1, 0);
             $pdf->Cell(25, 5, $do_item['quantity'], 1, 0);
-            $pdf->Cell(25, 5, $do_item['unit'], 1, 0);
+            $pdf->Cell(25, 5, $do_item['unit_item'], 1, 0);
             $pdf->Cell(34, 5, $do_item['price'], 1, 1, 'R'); //end of line
             $sum += $do_item['price'] * $do_item['quantity'];
         }

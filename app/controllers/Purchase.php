@@ -371,7 +371,7 @@ class Purchase extends Controller
         foreach ($data['pc_item'] as $pc_item) {
             $pdf->Cell(105, 5, $pc_item['product_name'], 1, 0);
             $pdf->Cell(25, 5, $pc_item['quantity'], 1, 0);
-            $pdf->Cell(25, 5, $pc_item['unit'], 1, 0);
+            $pdf->Cell(25, 5, $pc_item['unit_item'], 1, 0);
             $pdf->Cell(34, 5, $pc_item['price'], 1, 1, 'R'); //end of line
             $sum += $pc_item['price'] * $pc_item['quantity'];
         }
