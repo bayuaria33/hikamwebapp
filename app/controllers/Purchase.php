@@ -3,8 +3,19 @@ class Purchase extends Controller
 {
     public function index()
     {
-        $data['judul'] = "Daftar Purchase";
-        $data['PO'] = $this->model('Purchase_model')->getAllPurchase();
+        $data['judul'] = "Daftar Purchase Supplier";
+        $data['jenis'] = "Supplier";
+        $data['PO'] = $this->model('Purchase_model')->getAllPurchaseSupplier();
+        $this->view('templates/header', $data);
+        $this->view('purchase/index', $data);
+        $this->view('templates/footer');
+    }
+
+    public function index2()
+    {
+        $data['judul'] = "Daftar Purchase Customer";
+        $data['jenis'] = "Customer";
+        $data['PO'] = $this->model('Purchase_model')->getAllPurchaseCustomer();
         $this->view('templates/header', $data);
         $this->view('purchase/index', $data);
         $this->view('templates/footer');
@@ -61,8 +72,10 @@ class Purchase extends Controller
     }
 
 
-    public function addPage()
+    public function addPage($jenis)
     {
+        $data['jenis'] = $jenis;
+        $data['cust'] = $this->model('Customer_model')->getAllCustomer();
         $data['supp'] = $this->model('Supplier_model')->getAllSupplier();
         $data['judul'] = "Tambah data Purchase";
         $data['invc'] = $this->model('Invoice_model')->getAllInvoice();
@@ -85,9 +98,11 @@ class Purchase extends Controller
         }
     }
 
-    public function editPage($PO_id)
+    public function editPage($PO_id, $jenis)
     {
         $data['judul'] = "Edit data Purchase ";
+        $data['jenis'] = $jenis;
+        $data['cust'] = $this->model('Customer_model')->getAllCustomer();
         $data['supp'] = $this->model('Supplier_model')->getAllSupplier();
         $data['invc'] = $this->model('Invoice_model')->getAllInvoice();
         $data['PO'] = $this->model('Purchase_model')->getPurchaseById($PO_id);
@@ -154,6 +169,9 @@ class Purchase extends Controller
         $data['judul'] = "Detail Item Purchase";
         $data['PO'] = $this->model('Purchase_model')->getPurchaseById($PO_id);
         $data['pc_item'] = $this->model('Purchase_model')->getPurchaseItem($PO_id);
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($data['PO']['invoice_id']);
+        $data['DO'] = $this->model('Delivery_model')->getDeliveryById($data['PO']['DO_id']);
+        $data['cust'] = $this->model('Purchase_model')->getPurchaseCust($data['PO']['customer_name']);
         $data['supp'] = $this->model('Purchase_model')->getPurchaseSupp($data['PO']['supplier_name']);
         $data['purchase_number'] = $this->purchaseString($data['PO']['PO_id']);
         $data['purchase_date_format'] = $this->PurchaseDateFormat($data['PO']['PO_id']);
@@ -261,35 +279,64 @@ class Purchase extends Controller
         //set font to arial, regular, 12pt
         $pdf->SetFont('Arial', '', 12);
 
-        $pdf->Cell(50, 5, 'Nomor Purchase Order', 0, 0);
-        $pdf->Cell(80, 5, ': ' . $data['PO']['purchase_number'], 0, 0);
-        $pdf->Cell(30, 5, 'Nomor Invoice: ', 0, 0);
-        $pdf->Cell(80, 5, $data['PO']['invoice_id'], 0, 0);
-        $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Nama Supplier', 0, 0);
-        $pdf->Cell(80, 5, ': ' . $data['supp']['supplier_name'], 0, 0);
-        $pdf->Cell(30, 5, 'Nomor DO: ', 0, 0);
-        $pdf->Cell(80, 5, $data['PO']['DO_id'], 0, 0);
-        $pdf->Cell(59, 5, '', 0, 1); //end of line
+
+
+
+        if (!empty($data['supp'])) {
+            $pdf->Cell(50, 5, 'Nomor Purchase Order', 0, 0);
+            $pdf->Cell(80, 5, ': ' . $data['PO']['purchase_number'], 0, 0);
+            $pdf->Cell(59, 5, '', 0, 1); //end of line
+            $pdf->Cell(50, 5, 'Nama Supplier', 0, 0);
+            $pdf->Cell(80, 5, ': ' . $data['supp']['supplier_name'], 0, 0);
+            $pdf->Cell(59, 5, '', 0, 1); //end of line
+        } else {
+            $pdf->Cell(50, 5, 'Nomor Purchase Order', 0, 0);
+            $pdf->Cell(80, 5, ': ' . $data['PO']['purchase_number'], 0, 0);
+
+            $pdf->Cell(30, 5, 'Nomor Invoice: ', 0, 0);
+            if (!empty($data['invc'])) {
+                $pdf->Cell(80, 5, $data['invc']['invoice_number'], 0, 0);
+            } else {
+                $pdf->Cell(80, 5, '-', 0, 0);
+            }
+            $pdf->Cell(59, 5, '', 0, 1); //end of line
+            $pdf->Cell(50, 5, 'Nama Customer', 0, 0);
+            $pdf->Cell(80, 5, ': ' . $data['cust']['customer_name'], 0, 0);
+
+            $pdf->Cell(30, 5, 'Nomor DO: ', 0, 0);
+            if (!empty($data['DO'])) {
+                $pdf->Cell(80, 5, $data['DO']['delivery_number'], 0, 0);
+            } else {
+                $pdf->Cell(80, 5, '-', 0, 0);
+            }
+            $pdf->Cell(59, 5, '', 0, 1); //end of line
+        }
 
         $pdf->Cell(50, 5, 'Alamat Penagihan             :', 0, 1);
-        $pdf->MultiCell(112, 5, $data['supp']['alamat_penagihan'], 0, 1);
+        if (!empty($data['supp'])) {
+            $pdf->MultiCell(112, 5, $data['supp']['alamat_penagihan'], 0, 1);
+        } else {
+            $pdf->MultiCell(112, 5, $data['cust']['alamat_penagihan'], 0, 1);
+        }
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        // $pdf->Cell(50, 5, 'Alamat Pengiriman', 0, 0);
-        // $pdf->Cell(50, 5, ': ' . $data['supp']['alamat_pengiriman'], 0, 0);
-        // $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         $pdf->Cell(50, 5, 'Nomor Telepon', 0, 0);
-        $pdf->Cell(80, 5, ': ' . $data['supp']['no_telp1'], 0, 0);
-        $pdf->Cell(25, 5, 'Purchase #', 0, 0);
-        $pdf->Cell(34, 5, ': ' . $data['PO']['PO_id'], 0, 1); //end of line
+        if (!empty($data['supp'])) {
+            $pdf->Cell(80, 5, ': ' . $data['supp']['no_telp1'], 0, 1);
+            $pdf->Cell(50, 5, '', 0, 0);
+            $pdf->Cell(80, 5, ': ' . $data['supp']['no_telp2'], 0, 1);
+        } else {
+            $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 1);
+            $pdf->Cell(50, 5, '', 0, 0);
+            $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp2'], 0, 1);
+        }
 
-        $pdf->Cell(50, 5, '', 0, 0);
-        $pdf->Cell(80, 5, ': ' . $data['supp']['no_telp2'], 0, 0);
-        $pdf->Cell(25, 5, 'Supplier ID', 0, 0);
-        $pdf->Cell(34, 5, ': ' . $data['supp']['supplier_id'], 0, 1); //end of line
+
+
+
+
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line

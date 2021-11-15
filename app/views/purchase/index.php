@@ -5,12 +5,7 @@
         <h1><?= $data['judul']; ?></h1>
         <br>
 
-        <a class="editButton" href="<?= BASEURL; ?>/Purchase/addPage">Tambah data </a>
-
-        <!-- <form action="<?= BASEURL; ?>/Purchase/cari" style="max-width:350px;display:flex;justify-content:center;align-items:center;" method="post">
-            <input type="text" placeholder="Cari Purchase.." name="keyword" id="keyword" autocomplete="off">
-            <button type="submit" style="max-width:100px;height:40px;margin-left:5px" id="tombolCari">Search</button>
-        </form> -->
+        <a class="editButton" href="<?= BASEURL; ?>/Purchase/addPage/<?= $data['jenis']; ?>">Tambah data </a>
 
         <table id="tabledetail">
             <thead>
@@ -18,7 +13,7 @@
 
                     <th class="datetime">Purchase Order Date</th>
                     <th>Purchase Number</th>
-                    <th>Supplier Name</th>
+                    <th><?= $data['jenis']; ?> Name</th>
                     <th class="actionbuttons">Action</th>
                 </tr>
             </thead>
@@ -38,7 +33,12 @@
                             <?php } ?>
                         </td>
                         <td>
-                            <?= $value['supplier_name']; ?>
+                            <?php
+                            if (!empty($value['supplier_name'])) { ?>
+                                <?= $value['supplier_name']; ?>
+                            <?php  } else { ?>
+                                <?= $value['customer_name']; ?>
+                            <?php } ?>
                         </td>
 
 

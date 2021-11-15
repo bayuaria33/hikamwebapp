@@ -13,14 +13,12 @@
         <select name="product_id" id="product_id" class="selectpicker form-control" data-live-search="true">
 
             <?php foreach ($data['product'] as $prod) : ?>
-
-                <option value="<?= $prod['product_id']; ?>"><?= $prod['product_name']; ?></option>
-
+                <option value="<?= $prod['product_id']; ?>" <?php if ($prod['product_id'] == $data['invc_item']['product_id']) echo " selected" ?>><?= $prod['product_name']; ?></option>
             <?php endforeach; ?>
         </select>
 
         <label for="quantity">Quantity</label>
-        <input type="number" id="quantity" name="quantity" autocomplete="off" value="<?= $data['invc_item']['quantity']; ?>">
+        <input type="number" step="any" id="quantity" name="quantity" autocomplete="off" value="<?= $data['invc_item']['quantity']; ?>">
 
         <label for="unit_item">jenis Unit Product</label>
         <select name="unit_item" id="unit_item" autocomplete="off" class="selectpicker form-control" data-live-search="true" value="<?= $data['invc_item']['unit_item']; ?>">
@@ -36,7 +34,7 @@
             <option value="Bag">Bag / Sak</option>
         </select>
         <label for="price">Price</label>
-        <input type="text" id="price" name="price" autocomplete="off" value="<?= $data['invc_item']['price']; ?>">
+        <input type="number" step="any" id="price" name="price" autocomplete="off" value="<?= $data['invc_item']['price']; ?>">
 
         <input type="submit" value="Submit">
     </form>

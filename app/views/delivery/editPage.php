@@ -14,7 +14,7 @@
         <select name="customer_name" id="customer_name" class="selectpicker form-control" data-live-search="true">
             <?php foreach ($data['cust'] as $cust) : ?>
 
-                <option value="<?= $cust['customer_name']; ?>"> <?= $cust['customer_name']; ?></option>
+                <option value="<?= $cust['customer_name']; ?>" <?php if ($cust['customer_name'] == $data['DO']['customer_name']) echo " selected" ?>> <?= $cust['customer_name']; ?></option>
 
             <?php endforeach; ?>
         </select>
@@ -50,9 +50,7 @@
         <select name="PO_id" id="PO_id" class="selectpicker form-control" data-live-search="true">
             <option value="0" selected></option>
             <?php foreach ($data['PO'] as $PO) : ?>
-
-                <option value="<?= $PO['PO_id']; ?>"><?= $PO['purchase_number']; ?></option>
-
+                <option value="<?= $PO['PO_id']; ?>" <?php if ($PO['PO_id'] == $data['DO']['PO_id']) echo " selected" ?>><?= $PO['purchase_number']; ?></option>
             <?php endforeach; ?>
         </select>
 
@@ -60,9 +58,7 @@
         <select name="invoice_id" id="invoice_id" class="selectpicker form-control" data-live-search="true">
             <option value="0" selected></option>
             <?php foreach ($data['invc'] as $invc) : ?>
-
-                <option value="<?= $invc['invoice_id']; ?>"><?= $invc['invoice_number']; ?></option>
-
+                <option value="<?= $invc['invoice_id']; ?>" <?php if ($invc['invoice_id'] == $data['DO']['invoice_id']) echo " selected" ?>><?= $invc['invoice_number']; ?></option>
             <?php endforeach; ?>
         </select>
 

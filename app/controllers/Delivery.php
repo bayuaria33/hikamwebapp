@@ -154,6 +154,8 @@ class Delivery extends Controller
         $data['judul'] = "Detail Item Delivery";
         $data['DO'] = $this->model('Delivery_model')->getDeliveryById($DO_id);
         $data['do_item'] = $this->model('Delivery_model')->getDeliveryItem($DO_id);
+        $data['invc'] = $this->model('Invoice_model')->getInvoiceById($data['DO']['invoice_id']);
+        $data['PO'] = $this->model('Purchase_model')->getPurchaseById($data['DO']['PO_id']);
         $data['cust'] = $this->model('Delivery_model')->getDeliveryCust($data['DO']['customer_name']);
         $data['delivery_number'] = $this->deliveryString($data['DO']['DO_id']);
         $data['delivery_date_format'] = $this->DeliveryDateFormat($data['DO']['DO_id']);
@@ -266,13 +268,22 @@ class Delivery extends Controller
         $pdf->Cell(50, 5, 'Nomor Delivery', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['DO']['delivery_number'], 0, 0);
         $pdf->Cell(30, 5, 'Nomor PO: ', 0, 0);
-        $pdf->Cell(80, 5, $data['DO']['PO_id'], 0, 0);
+        if (!empty($data['PO'])) {
+            $pdf->Cell(80, 5, $data['PO']['purchase_number'], 0, 0);
+        } else {
+            $pdf->Cell(80, 5, '-', 0, 0);
+        }
+
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         $pdf->Cell(50, 5, 'Nama Customer', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['cust']['customer_name'], 0, 0);
         $pdf->Cell(30, 5, 'Nomor Invoice: ', 0, 0);
-        $pdf->Cell(80, 5, $data['DO']['invoice_id'], 0, 0);
+        if (!empty($data['invc'])) {
+            $pdf->Cell(80, 5, $data['invc']['invoice_number'], 0, 0);
+        } else {
+            $pdf->Cell(80, 5, '-', 0, 0);
+        }
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         // $pdf->Cell(50, 5, 'Alamat Penagihan             :', 0, 1);
@@ -284,14 +295,12 @@ class Delivery extends Controller
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         $pdf->Cell(50, 5, 'Nomor Telepon', 0, 0);
-        $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 0);
-        $pdf->Cell(25, 5, 'Delivery #', 0, 0);
-        $pdf->Cell(34, 5, ': ' . $data['DO']['DO_id'], 0, 1); //end of line
+        $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 1);
+
 
         $pdf->Cell(50, 5, '', 0, 0);
-        $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp2'], 0, 0);
-        $pdf->Cell(25, 5, 'Customer ID', 0, 0);
-        $pdf->Cell(34, 5, ': ' . $data['cust']['customer_id'], 0, 1); //end of line
+        $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp2'], 0, 1);
+
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line

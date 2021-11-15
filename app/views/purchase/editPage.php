@@ -2,22 +2,33 @@
     <h1>Edit data Purchase <?= $data['PO']['PO_id']; ?></h1>
     <a class="editButton" href="<?= BASEURL; ?>/Purchase/Item/<?= $data['PO']['PO_id']; ?>">Kembali</a>
 
-
     <form action="<?= BASEURL; ?>/Purchase/edit/<?= $data['PO']['PO_id']; ?>" method="post">
         <label class="hidden" for="PO_id">Id Purchase</label>
         <input class="hidden" type="hidden" id="PO_id" name="PO_id" autocomplete="off" value="<?= $data['PO']['PO_id']; ?>">
 
         <label for="purchase_number">Nomor Purchase</label>
-        <input type="text" id="purchase_number" name="purchase_number" autocomplete="off" placeholder="Jika kosong akan terisi otomatis di halaman detail">
+        <input type="text" id="purchase_number" name="purchase_number" autocomplete="off" placeholder="Jika kosong akan terisi otomatis di halaman detail" value="<?= $data['PO']['purchase_number']; ?>">
 
-        <label for="supplier_name">pilih Supplier</label>
-        <select name="supplier_name" id="supplier_name" class="selectpicker form-control" data-live-search="true">
-            <?php foreach ($data['supp'] as $supp) : ?>
+        <?php
+        if ($data['jenis'] == 'Supplier') { ?>
 
-                <option value="<?= $supp['supplier_name']; ?>"> <?= $supp['supplier_name']; ?></option>
+            <label for="supplier_name">pilih Supplier</label>
+            <select name="supplier_name" id="supplier_name" class="selectpicker form-control" data-live-search="true">
+                <?php foreach ($data['supp'] as $supp) : ?>
+                    <option value="<?= $supp['supplier_name']; ?>" <?php if ($supp['supplier_name'] == $data['PO']['supplier_name']) echo " selected" ?>> <?= $supp['supplier_name']; ?></option>
+                <?php endforeach; ?>
+            </select>
 
-            <?php endforeach; ?>
-        </select>
+        <?php  } else { ?>
+
+            <label for="customer_name">pilih Customer</label>
+            <select name="customer_name" id="customer_name" class="selectpicker form-control" data-live-search="true">
+                <?php foreach ($data['cust'] as $cust) : ?>
+                    <option value="<?= $cust['customer_name']; ?>" <?php if ($cust['customer_name'] == $data['PO']['customer_name']) echo " selected" ?>> <?= $cust['customer_name']; ?></option>
+                <?php endforeach; ?>
+            </select>
+
+        <?php } ?>
 
         <label for="PO_date">Tanggal Purchase</label>
         <input type="date" id="PO_date" name="PO_date" autocomplete="off" value="<?= $data['PO']['PO_date']; ?>">
@@ -39,7 +50,7 @@
         </select>
 
         <label id="due_date_label" for="due_date" style="display: none;">Tanggal Jatuh Tempo</label>
-        <input type="date" id="due_date" name="due_date" autocomplete="off" style="display:none" value="<?= $data['invc']['due_date']; ?>">
+        <input type="date" id="due_date" name="due_date" autocomplete="off" style="display:none" value="<?= $data['PO']['due_date']; ?>">
 
         <label for="ppn">PPN</label>
         <br><select name="ppn" id="ppn">
@@ -47,25 +58,29 @@
             <option value="0">0%</option>
         </select>
 
-        <label for="invoice_id">Invoice Number</label>
-        <select name="invoice_id" id="invoice_id" class="selectpicker form-control" data-live-search="true">
-            <option value="0" selected></option>
-            <?php foreach ($data['invc'] as $invc) : ?>
+        <?php
+        if ($data['jenis'] == 'Supplier') { ?>
+            <!-- Kosong if supplier -->
+        <?php  } else { ?>
 
-                <option value="<?= $invc['invoice_id']; ?>"><?= $invc['invoice_number']; ?></option>
+            <label for="invoice_id">Invoice Number</label>
+            <select name="invoice_id" id="invoice_id" class="selectpicker form-control" data-live-search="true">
+                <option value="0" selected></option>
+                <?php foreach ($data['invc'] as $invc) : ?>
+                    <option value="<?= $invc['invoice_id']; ?>" <?php if ($invc['invoice_id'] == $data['PO']['invoice_id']) echo " selected" ?>><?= $invc['invoice_number']; ?></option>
+                <?php endforeach; ?>
+            </select>
 
-            <?php endforeach; ?>
-        </select>
+            <label for="DO_id">DO_id</label>
+            <select name="DO_id" id="DO_id" class="selectpicker form-control" data-live-search="true">
+                <option value="0" selected></option>
+                <?php foreach ($data['DO'] as $DO) : ?>
 
-        <label for="DO_id">DO_id</label>
-        <select name="DO_id" id="DO_id" class="selectpicker form-control" data-live-search="true">
-            <option value="0" selected></option>
-            <?php foreach ($data['DO'] as $DO) : ?>
+                    <option value="<?= $DO['DO_id']; ?>" <?php if ($DO['DO_id'] == $data['PO']['DO_id']) echo " selected" ?>><?= $DO['delivery_number']; ?></option>
 
-                <option value="<?= $DO['DO_id']; ?>"><?= $DO['delivery_number']; ?></option>
-
-            <?php endforeach; ?>
-        </select>
+                <?php endforeach; ?>
+            </select>
+        <?php } ?>
 
         <input type="submit" value="Submit">
     </form>

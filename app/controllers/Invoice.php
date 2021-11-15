@@ -155,6 +155,8 @@ class Invoice extends Controller
         $data['invc'] = $this->model('Invoice_model')->getInvoiceById($invoice_id);
         $data['invc_item'] = $this->model('Invoice_model')->getInvoiceItem($invoice_id);
         $data['cust'] = $this->model('Invoice_model')->getInvoiceCust($data['invc']['customer_name']);
+        $data['PO'] = $this->model('Purchase_model')->getPurchaseById($data['invc']['PO_id']);
+        $data['DO'] = $this->model('Delivery_model')->getDeliveryById($data['invc']['DO_id']);
         $data['invoice_number'] = $this->invoiceString($data['invc']['invoice_id']);
         $data['invoice_date_format'] = $this->InvoiceDateFormat($data['invc']['invoice_id']);
         $data['due_date_format'] = $this->DueDateFormat($data['invc']['invoice_id']);
@@ -265,13 +267,22 @@ class Invoice extends Controller
         $pdf->Cell(50, 5, 'Nomor Invoice', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['invc']['invoice_number'], 0, 0);
         $pdf->Cell(30, 5, 'Nomor PO: ', 0, 0);
-        $pdf->Cell(80, 5, $data['invc']['PO_id'], 0, 0);
+        if (!empty($data['PO'])) {
+            $pdf->Cell(80, 5, $data['PO']['purchase_number'], 0, 0);
+        } else {
+            $pdf->Cell(80, 5, '-', 0, 0);
+        }
+
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         $pdf->Cell(50, 5, 'Nama Customer', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['cust']['customer_name'], 0, 0);
         $pdf->Cell(30, 5, 'Nomor DO: ', 0, 0);
-        $pdf->Cell(80, 5, $data['invc']['DO_id'], 0, 0);
+        if (!empty($data['DO'])) {
+            $pdf->Cell(80, 5, $data['DO']['delivery_number'], 0, 0);
+        } else {
+            $pdf->Cell(80, 5, '-', 0, 0);
+        }
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         $pdf->Cell(50, 5, 'Alamat Penagihan             :', 0, 1);
@@ -283,14 +294,11 @@ class Invoice extends Controller
         // $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         $pdf->Cell(50, 5, 'Nomor Telepon', 0, 0);
-        $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 0);
-        $pdf->Cell(25, 5, 'Invoice #', 0, 0);
-        $pdf->Cell(34, 5, ': ' . $data['invc']['invoice_id'], 0, 1); //end of line
+        $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 1);
+
 
         $pdf->Cell(50, 5, '', 0, 0);
-        $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp2'], 0, 0);
-        $pdf->Cell(25, 5, 'Customer ID', 0, 0);
-        $pdf->Cell(34, 5, ': ' . $data['cust']['customer_id'], 0, 1); //end of line
+        $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp2'], 0, 1);
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line

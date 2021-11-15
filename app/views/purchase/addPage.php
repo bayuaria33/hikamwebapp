@@ -1,22 +1,32 @@
 <div class="container">
-    <h1>Tambah data Purchase</h1>
-    <a class="editButton" href="<?= BASEURL; ?>/Purchase">Kembali</a>
-
+    <h1><?= $data['judul']; ?> <?= $data['jenis']; ?></h1>
+    <a class="editButton" href="javascript:window.history.back();">Kembali</a>
 
     <form action="<?= BASEURL; ?>/Purchase/tambah" method="post">
 
         <label for="purchase_number">Nomor Purchase</label>
         <input type="text" id="purchase_number" name="purchase_number" autocomplete="off" placeholder="Jika kosong akan terisi otomatis di halaman detail">
 
-        <label for="product_avb">pilih Supplier</label>
-        <select name="supplier_name" id="supplier_name" class="selectpicker form-control" data-live-search="true">
+        <?php
+        if ($data['jenis'] == 'Supplier') { ?>
 
-            <?php foreach ($data['supp'] as $supp) : ?>
+            <label for="supplier_name">pilih Supplier</label>
+            <select name="supplier_name" id="supplier_name" class="selectpicker form-control" data-live-search="true">
+                <?php foreach ($data['supp'] as $supp) : ?>
+                    <option value="<?= $supp['supplier_name']; ?>"> <?= $supp['supplier_name']; ?></option>
+                <?php endforeach; ?>
+            </select>
 
-                <option value="<?= $supp['supplier_name']; ?>"> <?= $supp['supplier_name']; ?></option>
+        <?php  } else { ?>
 
-            <?php endforeach; ?>
-        </select>
+            <label for="customer_name">pilih Customer</label>
+            <select name="customer_name" id="customer_name" class="selectpicker form-control" data-live-search="true">
+                <?php foreach ($data['cust'] as $cust) : ?>
+                    <option value="<?= $cust['customer_name']; ?>"> <?= $cust['customer_name']; ?></option>
+                <?php endforeach; ?>
+            </select>
+
+        <?php } ?>
 
         <label for="PO_date">Tanggal Purchase</label>
         <input type="date" id="PO_date" name="PO_date" autocomplete="off" required>
@@ -46,25 +56,41 @@
             <option value="0">0%</option>
         </select>
 
-        <label for="invoice_id">Invoice Number</label>
-        <select name="invoice_id" id="invoice_id" class="selectpicker form-control" data-live-search="true">
-            <option value="0" selected></option>
-            <?php foreach ($data['invc'] as $invc) : ?>
+        <?php
+        if ($data['jenis'] == 'Supplier') { ?>
+            <label style="display:none" for="invoice_id">Invoice Number</label>
+            <select style="display:none" name="invoice_id" id="invoice_id">
+                <option value="0" selected></option>
+                <?php foreach ($data['invc'] as $invc) : ?>
+                    <option value="<?= $invc['invoice_id']; ?>"><?= $invc['invoice_number']; ?></option>
+                <?php endforeach; ?>
+            </select>
 
-                <option value="<?= $invc['invoice_id']; ?>"><?= $invc['invoice_number']; ?></option>
+            <label style="display:none" for="DO_id">DO_id</label>
+            <select style="display:none" name="DO_id" id="DO_id">
+                <option value="0" selected></option>
+                <?php foreach ($data['DO'] as $DO) : ?>
+                    <option value="<?= $DO['DO_id']; ?>"><?= $DO['delivery_number']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        <?php  } else { ?>
 
-            <?php endforeach; ?>
-        </select>
+            <label for="invoice_id">Invoice Number</label>
+            <select name="invoice_id" id="invoice_id" class="selectpicker form-control" data-live-search="true">
+                <option value="0" selected></option>
+                <?php foreach ($data['invc'] as $invc) : ?>
+                    <option value="<?= $invc['invoice_id']; ?>"><?= $invc['invoice_number']; ?></option>
+                <?php endforeach; ?>
+            </select>
 
-        <label for="DO_id">DO_id</label>
-        <select name="DO_id" id="DO_id" class="selectpicker form-control" data-live-search="true">
-            <option value="0" selected></option>
-            <?php foreach ($data['DO'] as $DO) : ?>
-
-                <option value="<?= $DO['DO_id']; ?>"><?= $DO['delivery_number']; ?></option>
-
-            <?php endforeach; ?>
-        </select>
+            <label for="DO_id">DO_id</label>
+            <select name="DO_id" id="DO_id" class="selectpicker form-control" data-live-search="true">
+                <option value="0" selected></option>
+                <?php foreach ($data['DO'] as $DO) : ?>
+                    <option value="<?= $DO['DO_id']; ?>"><?= $DO['delivery_number']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        <?php } ?>
 
         <input type="submit" value="Submit">
     </form>

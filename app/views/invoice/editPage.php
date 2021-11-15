@@ -13,9 +13,7 @@
         <label for="customer_name">pilih Customer</label>
         <select name="customer_name" id="customer_name" class="selectpicker form-control" data-live-search="true">
             <?php foreach ($data['cust'] as $cust) : ?>
-
-                <option value="<?= $cust['customer_name']; ?>"> <?= $cust['customer_name']; ?></option>
-
+                <option value="<?= $cust['customer_name']; ?>" <?php if ($cust['customer_name'] == $data['invc']['customer_name']) echo " selected" ?>> <?= $cust['customer_name']; ?></option>
             <?php endforeach; ?>
         </select>
 
@@ -48,15 +46,13 @@
         </select>
 
         <label for="biaya_kirim">Biaya Kirim</label>
-        <input type="text" id="biaya_kirim" name="biaya_kirim" autocomplete="off">
+        <input type="text" id="biaya_kirim" name="biaya_kirim" autocomplete="off" value="<?= $data['invc']['biaya_kirim']; ?>">
 
         <label for="PO_id">Purchase Order Number</label>
         <select name="PO_id" id="PO_id" class="selectpicker form-control" data-live-search="true">
             <option value="0" selected></option>
             <?php foreach ($data['PO'] as $PO) : ?>
-
-                <option value="<?= $PO['PO_id']; ?>"><?= $PO['purchase_number']; ?></option>
-
+                <option value="<?= $PO['PO_id']; ?>" <?php if ($PO['PO_id'] == $data['invc']['PO_id']) echo " selected" ?>><?= $PO['purchase_number']; ?></option>
             <?php endforeach; ?>
         </select>
 
@@ -65,7 +61,7 @@
             <option value="0" selected></option>
             <?php foreach ($data['DO'] as $DO) : ?>
 
-                <option value="<?= $DO['DO_id']; ?>"><?= $DO['delivery_number']; ?></option>
+                <option value="<?= $DO['DO_id']; ?>" <?php if ($DO['DO_id'] == $data['invc']['DO_id']) echo " selected" ?>><?= $DO['delivery_number']; ?></option>
 
             <?php endforeach; ?>
         </select>

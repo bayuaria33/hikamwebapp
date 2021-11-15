@@ -19,19 +19,27 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 </head>
 
-<body>
-    <ul id="nav">
-        <li><a href="<?= BASEURL; ?>"> HIKAM WEB APP </a></li>
-        <li><a href="<?= BASEURL; ?>"> Home </a></li>
-        <li><a href="<?= BASEURL; ?>/Customer"> Customer </a></li>
-        <li><a href="<?= BASEURL; ?>/Supplier"> Supplier </a></li>
-        <li><a href="<?= BASEURL; ?>/Product"> Product </a></li>
-        <li><a href="<?= BASEURL; ?>/Invoice"> Invoice </a></li>
-        <li><a href="<?= BASEURL; ?>/Purchase"> Purchase Order </a></li>
-        <li><a href="<?= BASEURL; ?>/Delivery"> Delivery Order </a></li>
-        <!-- <li><a href="<?= BASEURL; ?>/Sales"> Sales </a></li> -->
-        <!-- <li><a href="<?= BASEURL; ?>/InfoProduct"> InfoProduct </a></li> -->
-        <!-- <li><a href="<?= BASEURL; ?>/About"> About </a></li> -->
-
-        <li style="float:right"><a href="<?= BASEURL; ?>"> Login </a></li>
-    </ul>
+<body class="container-float">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse">
+            <ul id="nav" class="navbar-nav mr-auto">
+                <li class="nav-item active"><a href="<?= BASEURL; ?>" class="nav-link"> HIKAM WEB APP </a></li>
+                <li class="nav-item active"><a href="<?= BASEURL; ?>" class="nav-link"> Home </a></li>
+                <li class="nav-item active"><a href="<?= BASEURL; ?>/Customer" class="nav-link"> Customer </a></li>
+                <li class="nav-item active"><a href="<?= BASEURL; ?>/Supplier" class="nav-link"> Supplier </a></li>
+                <li class="nav-item active"><a href="<?= BASEURL; ?>/Product" class="nav-link"> Product </a></li>
+                <li class="nav-item active"><a href="<?= BASEURL; ?>/Invoice" class="nav-link"> Invoice </a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Purchase Order
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a href="<?= BASEURL; ?>/Purchase/index" class="nav-link"> Supplier</a>
+                        <a href="<?= BASEURL; ?>/Purchase/index2" class="nav-link"> Customer </a>
+                    </div>
+                </li>
+                <li class="nav-item active"><a href="<?= BASEURL; ?>/Delivery" class="nav-link"> Delivery Order </a></li>
+                <li class="nav-item active ml-auto"><a href="<?= BASEURL; ?>" class="nav-link"> Login </a></li>
+            </ul>
+        </div>
+    </nav>

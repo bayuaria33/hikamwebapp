@@ -19,7 +19,7 @@
         </select>
 
         <label for="quantity">Quantity</label>
-        <input type="number" id="quantity" name="quantity" autocomplete="off">
+        <input type="number" step="any" id="quantity" name="quantity" autocomplete="off">
 
         <label for="unit_item">jenis Unit Product</label>
         <select name="unit_item" id="unit_item" autocomplete="off" class="selectpicker form-control" data-live-search="true">
@@ -36,7 +36,7 @@
         </select>
 
         <label for="price">Price</label>
-        <input type="text" id="price" name="price" autocomplete="off">
+        <input type="number" step="any" id="price" name="price" autocomplete="off">
 
 
         <input type="submit" value="Submit">
