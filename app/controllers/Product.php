@@ -5,9 +5,13 @@ class Product extends Controller
     {
         $data['judul'] = "Daftar Product";
         $data['prod'] = $this->model('Product_model')->getAllProduct();
-        $this->view('templates/header', $data);
-        $this->view('product/index', $data);
-        $this->view('templates/footer');
+        if ($_SESSION['level_user'] == '1' or $_SESSION['level_user'] == '2' or $_SESSION['level_user'] == '4') {
+            $this->view('templates/header', $data);
+            $this->view('product/index', $data);
+            $this->view('templates/footer');
+        } else {
+            header('Location:' . BASEURL);
+        }
     }
 
 

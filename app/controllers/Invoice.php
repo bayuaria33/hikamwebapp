@@ -5,9 +5,13 @@ class Invoice extends Controller
     {
         $data['judul'] = "Daftar Invoice";
         $data['invc'] = $this->model('Invoice_model')->getAllInvoice();
-        $this->view('templates/header', $data);
-        $this->view('invoice/index', $data);
-        $this->view('templates/footer');
+        if ($_SESSION['level_user'] == '1' or $_SESSION['level_user'] == '2' or $_SESSION['level_user'] == '5') {
+            $this->view('templates/header', $data);
+            $this->view('invoice/index', $data);
+            $this->view('templates/footer');
+        } else {
+            header('Location:' . BASEURL);
+        }
     }
 
     function InvoiceDateFormat($invoice_id)

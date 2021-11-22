@@ -69,12 +69,12 @@ class Invoice_model
             :invoice_date, 
             :other_expenses, 
             :status_pembayaran, 
+            :biaya_kirim,
             :payment_option,
             :due_date,
             :ppn,  
             :PO_id, 
-            :DO_id,
-            :biaya_kirim) ";
+            :DO_id) ";
         $this->db->query($query);
 
         $this->db->bind('invoice_id', $newIdInt);

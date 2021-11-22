@@ -46,6 +46,7 @@
         <select name="payment_option" id="payment_option" autocomplete="off" onchange="paySelectCheck(this);">
             <option value="CBD">CBD</option>
             <option value="COD">COD</option>
+            <option value="After Invoice">Setelah Invoice Diterima</option>
             <option value="Term of Payment" id="top">Term of Payment</option>
         </select>
 

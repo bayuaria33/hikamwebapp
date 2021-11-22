@@ -6,9 +6,13 @@ class Purchase extends Controller
         $data['judul'] = "Daftar Purchase Supplier";
         $data['jenis'] = "Supplier";
         $data['PO'] = $this->model('Purchase_model')->getAllPurchaseSupplier();
-        $this->view('templates/header', $data);
-        $this->view('purchase/index', $data);
-        $this->view('templates/footer');
+        if ($_SESSION['level_user'] == '1' or $_SESSION['level_user'] == '3') {
+            $this->view('templates/header', $data);
+            $this->view('purchase/index', $data);
+            $this->view('templates/footer');
+        } else {
+            header('Location:' . BASEURL);
+        }
     }
 
     public function index2()

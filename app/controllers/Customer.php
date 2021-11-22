@@ -5,9 +5,13 @@ class Customer extends Controller
     {
         $data['judul'] = "Daftar Customer";
         $data['cust'] = $this->model('Customer_model')->getAllCustomer();
-        $this->view('templates/header', $data);
-        $this->view('customer/index', $data);
-        $this->view('templates/footer');
+        if ($_SESSION['level_user'] == '1' or $_SESSION['level_user'] == '2' or $_SESSION['level_user'] == '4') {
+            $this->view('templates/header', $data);
+            $this->view('customer/index', $data);
+            $this->view('templates/footer');
+        } else {
+            header('Location:' . BASEURL);
+        }
     }
 
     public function detail($customer_id)
@@ -26,6 +30,7 @@ class Customer extends Controller
         $this->view('customer/addPage');
         $this->view('templates/footer');
     }
+
     public function editPage($customer_id)
     {
         $data['judul'] = "Edit data Customer";

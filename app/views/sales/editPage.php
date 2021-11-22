@@ -1,7 +1,6 @@
 <div class="container">
     <h1>Edit data Sales</h1>
     <a class="editButton" href="<?= BASEURL; ?>/Sales">Kembali</a>
-    <!-- <?php echo '<pre>', var_dump($data), '</pre>'; ?> -->
 
     <form action="<?= BASEURL; ?>/Sales/edit/<?= $data['sales']['sales_id']; ?>" method="post">
         <label class="hidden" for="sales_id">Id Sales</label>

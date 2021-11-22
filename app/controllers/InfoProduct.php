@@ -8,13 +8,17 @@ class InfoProduct extends Controller
         $data['inprod'] = $this->model('InfoProduct_model')->getAllProductSupp($product_id); //BARU
         $data['judul'] = "Detail Info Product";
 
-        if (!empty($data['inprod'])) {
-            $this->view('templates/header', $data);
-            $this->view('infoproduct/index', $data);
-            $this->view('templates/footer');
+        if ($_SESSION['level_user'] == '1' or $_SESSION['level_user'] == '2') {
+            if (!empty($data['inprod'])) {
+                $this->view('templates/header', $data);
+                $this->view('infoproduct/index', $data);
+                $this->view('templates/footer');
+            } else {
+                $data['judul'] = "Tambah New Info Product";
+                $this->addNewPage($product_id);
+            }
         } else {
-            $data['judul'] = "Tambah New Info Product";
-            $this->addNewPage($product_id);
+            header('Location:' . BASEURL);
         }
     }
 

@@ -5,9 +5,13 @@ class Delivery extends Controller
     {
         $data['judul'] = "Daftar Delivery Order";
         $data['DO'] = $this->model('Delivery_model')->getAllDelivery();
-        $this->view('templates/header', $data);
-        $this->view('delivery/index', $data);
-        $this->view('templates/footer');
+        if ($_SESSION['level_user'] == '1' or $_SESSION['level_user'] == '2' or $_SESSION['level_user'] == '5') {
+            $this->view('templates/header', $data);
+            $this->view('delivery/index', $data);
+            $this->view('templates/footer');
+        } else {
+            header('Location:' . BASEURL);
+        }
     }
 
     function DeliveryDateFormat($DO_id)

@@ -5,9 +5,13 @@ class Supplier extends Controller
     {
         $data['judul'] = "Daftar Supplier";
         $data['sup'] = $this->model('Supplier_model')->getAllSupplier();
-        $this->view('templates/header', $data);
-        $this->view('supplier/index', $data);
-        $this->view('templates/footer');
+        if ($_SESSION['level_user'] == '1' or $_SESSION['level_user'] == '3') {
+            $this->view('templates/header', $data);
+            $this->view('supplier/index', $data);
+            $this->view('templates/footer');
+        } else {
+            header('Location:' . BASEURL);
+        }
     }
 
     public function detail($supplier_id)
