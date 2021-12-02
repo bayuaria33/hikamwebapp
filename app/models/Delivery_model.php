@@ -70,10 +70,10 @@ class Delivery_model
             :other_expenses, 
             :status_pembayaran, 
             :tipe,
-            :due_date,
-            :ppn,  
-            :PO_id, 
-            :invoice_id) ";
+            :ppn,
+            :due_date,  
+            :invoice_id, 
+            :PO_id) ";
         $this->db->query($query);
 
         $this->db->bind('DO_id', $newIdInt);
@@ -85,8 +85,8 @@ class Delivery_model
         $this->db->bind('tipe', $data['tipe']);
         $this->db->bind('ppn', $data['ppn']);
         $this->db->bind('due_date', $data['due_date']);
-        $this->db->bind('PO_id', $data['PO_id']);
         $this->db->bind('invoice_id', $data['invoice_id']);
+        $this->db->bind('PO_id', $data['PO_id']);
         // $this->dd($data);
         $this->db->execute();
         return $this->db->rowCount();

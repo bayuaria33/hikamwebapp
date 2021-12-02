@@ -271,32 +271,32 @@ class Delivery extends Controller
 
         $pdf->Cell(50, 5, 'Nomor Delivery', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['DO']['delivery_number'], 0, 0);
-        $pdf->Cell(30, 5, 'Nomor PO: ', 0, 0);
-        if (!empty($data['PO'])) {
-            $pdf->Cell(80, 5, $data['PO']['purchase_number'], 0, 0);
-        } else {
-            $pdf->Cell(80, 5, '-', 0, 0);
-        }
-
+        // $pdf->Cell(30, 5, 'Nomor PO: ', 0, 0);
+        // if (!empty($data['PO'])) {
+        //     $pdf->Cell(80, 5, $data['PO']['purchase_number'], 0, 0);
+        // } else {
+        //     $pdf->Cell(80, 5, '-', 0, 0);
+        // }
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         $pdf->Cell(50, 5, 'Nama Customer', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['cust']['customer_name'], 0, 0);
-        $pdf->Cell(30, 5, 'Nomor Invoice: ', 0, 0);
-        if (!empty($data['invc'])) {
-            $pdf->Cell(80, 5, $data['invc']['invoice_number'], 0, 0);
-        } else {
-            $pdf->Cell(80, 5, '-', 0, 0);
-        }
+
+        // $pdf->Cell(30, 5, 'Nomor Invoice: ', 0, 0);
+        // if (!empty($data['invc'])) {
+        //     $pdf->Cell(80, 5, $data['invc']['invoice_number'], 0, 0);
+        // } else {
+        //     $pdf->Cell(80, 5, '-', 0, 0);
+        // }
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         // $pdf->Cell(50, 5, 'Alamat Penagihan             :', 0, 1);
         // $pdf->MultiCell(112, 5, $data['cust']['alamat_penagihan'], 0, 1);
         // $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Alamat Pengiriman             :', 0, 1);
-        $pdf->MultiCell(112, 5, $data['cust']['alamat_pengiriman'], 0, 1);
-        $pdf->Cell(59, 5, '', 0, 1); //end of line
+        $pdf->Cell(50, 5, 'Alamat Pengiriman', 1, 0);
+        $pdf->MultiCell(80, 5, ': ' . $data['cust']['alamat_pengiriman'], 1, 1);
+        // $pdf->Cell(59, 5, '', 1, 1); //end of line
 
         $pdf->Cell(50, 5, 'Nomor Telepon', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 1);
@@ -305,19 +305,33 @@ class Delivery extends Controller
         $pdf->Cell(50, 5, '', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp2'], 0, 1);
 
+        $pdf->Cell(30, 5, 'Nomor PO: ', 0, 0);
+        if (!empty($data['PO'])) {
+            $pdf->Cell(80, 5, $data['PO']['purchase_number'], 0, 0);
+        } else {
+            $pdf->Cell(80, 5, '-', 0, 0);
+        }
+        $pdf->Cell(59, 5, '', 0, 1); //end of line
+
+        $pdf->Cell(30, 5, 'Nomor Invoice: ', 0, 0);
+        if (!empty($data['invc'])) {
+            $pdf->Cell(80, 5, $data['invc']['invoice_number'], 0, 0);
+        } else {
+            $pdf->Cell(80, 5, '-', 0, 0);
+        }
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Jumlah Uang', 0, 0);
-        $pdf->Cell(80, 5, ':', 0, 1);
+        // $pdf->Cell(50, 5, 'Jumlah Uang', 0, 0);
+        // $pdf->Cell(80, 5, ':', 0, 1);
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 'B', 1); //end of line
 
 
-        $pdf->Cell(50, 5, 'Untuk Pembayaran', 0, 0);
-        $pdf->Cell(50, 5, ': ', 0, 1);
+        // $pdf->Cell(50, 5, 'Untuk Pembayaran', 0, 0);
+        // $pdf->Cell(50, 5, ': ', 0, 1);
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line
@@ -325,10 +339,10 @@ class Delivery extends Controller
         //delivery contents
         $pdf->SetFont('Arial', 'B', 12);
 
-        $pdf->Cell(105, 5, 'Description', 1, 0);
+        $pdf->Cell(105, 5, 'Nama Barang', 1, 0);
         $pdf->Cell(25, 5, 'Quantity', 1, 0);
-        $pdf->Cell(25, 5, 'Unit', 1, 0);
-        $pdf->Cell(34, 5, 'Price per Unit', 1, 1); //end of line
+        $pdf->Cell(25, 5, 'Unit', 1, 1);
+        // $pdf->Cell(34, 5, 'Price per Unit', 1, 1); //end of line
 
         $pdf->SetFont('Arial', '', 12);
 
@@ -339,28 +353,28 @@ class Delivery extends Controller
         foreach ($data['do_item'] as $do_item) {
             $pdf->Cell(105, 5, $do_item['product_name'], 1, 0);
             $pdf->Cell(25, 5, $do_item['quantity'], 1, 0);
-            $pdf->Cell(25, 5, $do_item['unit_item'], 1, 0);
-            $pdf->Cell(34, 5, $do_item['price'], 1, 1, 'R'); //end of line
+            $pdf->Cell(25, 5, $do_item['unit_item'], 1, 1, 'R');
+            // $pdf->Cell(34, 5, $do_item['price'], 1, 1, 'R'); //end of line
             $sum += $do_item['price'] * $do_item['quantity'];
         }
 
         //summary
-        $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'Subtotal', 0, 0);
-        $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $pdf->Cell(34, 5, $sum, 1, 1, 'R'); //end of line
+        // $pdf->Cell(126, 5, '', 0, 0);
+        // $pdf->Cell(22, 5, 'Subtotal', 0, 0);
+        // $pdf->Cell(7, 5, 'Rp', 1, 0);
+        // $pdf->Cell(34, 5, $sum, 1, 1, 'R'); //end of line
 
-        $ppn = $data['DO']['ppn'];
-        $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'PPN ' . $ppn . ' %', 0, 0);
-        $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $taxed = $sum * $ppn / 100;
-        $pdf->Cell(34, 5, $taxed, 1, 1, 'R'); //end of line
+        // $ppn = $data['DO']['ppn'];
+        // $pdf->Cell(126, 5, '', 0, 0);
+        // $pdf->Cell(22, 5, 'PPN ' . $ppn . ' %', 0, 0);
+        // $pdf->Cell(7, 5, 'Rp', 1, 0);
+        // $taxed = $sum * $ppn / 100;
+        // $pdf->Cell(34, 5, $taxed, 1, 1, 'R'); //end of line
 
-        $pdf->Cell(126, 5, '', 0, 0);
-        $pdf->Cell(22, 5, 'Total Due', 0, 0);
-        $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $pdf->Cell(34, 5, $sum + $taxed, 1, 1, 'R'); //end of line
+        // $pdf->Cell(126, 5, '', 0, 0);
+        // $pdf->Cell(22, 5, 'Total Due', 0, 0);
+        // $pdf->Cell(7, 5, 'Rp', 1, 0);
+        // $pdf->Cell(34, 5, $sum + $taxed, 1, 1, 'R'); //end of line
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line

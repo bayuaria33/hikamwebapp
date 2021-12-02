@@ -84,8 +84,8 @@ class Purchase_model
             :other_expenses, 
             :status_pembayaran, 
             :payment_option,
-            :ppn,
             :due_date, 
+            :ppn,
             :invoice_id, 
             :DO_id) ";
         $this->db->query($query);
@@ -97,12 +97,12 @@ class Purchase_model
         $this->db->bind('PO_date', $data['PO_date']);
         $this->db->bind('other_expenses', $data['other_expenses']);
         $this->db->bind('status_pembayaran', $data['status_pembayaran']);
-        $this->db->bind('ppn', $data['ppn']);
         $this->db->bind('payment_option', $data['payment_option']);
         $this->db->bind('due_date', $data['due_date']);
+        $this->db->bind('ppn', $data['ppn']);
         $this->db->bind('invoice_id', $data['invoice_id']);
         $this->db->bind('DO_id', $data['DO_id']);
-
+        //$this->dd($_POST);
         $this->db->execute();
         return $this->db->rowCount();
     }

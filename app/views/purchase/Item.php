@@ -56,6 +56,7 @@
                     </td>
                     <td>
                         <?= $data['PO']['supplier_name']; ?>
+                        <a href="<?= BASEURL; ?>/Supplier/detail/<?= $data['supp']["supplier_id"]; ?>" class="detailButton" style="margin-right: 0;" target="_blank">Cek Supplier</a>
                     </td>
                     <td>
                         <b>Tanggal Purchase</b>
