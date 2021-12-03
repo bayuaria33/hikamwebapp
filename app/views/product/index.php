@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <div>
         <br>
         <?php Flasher::flash() ?>
@@ -47,9 +47,14 @@
                             <?= $prod['product_quantity']; ?>
                         </td>
                         <td>
-                            <a href="<?= BASEURL; ?>/Product/hapus/<?= $prod['product_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
-                            <a href="<?= BASEURL; ?>/Product/editPage/<?= $prod['product_id']; ?>" class="editButton" style="float:right">Edit</a>
-                            <a href="<?= BASEURL; ?>/InfoProduct/detailSupp/<?= $prod['product_id']; ?>" class="detailButton" style="float:right">Info Supplier</a>
+                            <?php
+                            if ($_SESSION['level_user'] == '5') { ?>
+                                <a href="<?= BASEURL; ?>/Product/editPage/<?= $prod['product_id']; ?>" class="editButton" style="float:right">Edit</a>
+                            <?php  } else { ?>
+                                <a href="<?= BASEURL; ?>/Product/hapus/<?= $prod['product_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
+                                <a href="<?= BASEURL; ?>/Product/editPage/<?= $prod['product_id']; ?>" class="editButton" style="float:right">Edit</a>
+                                <a href="<?= BASEURL; ?>/InfoProduct/detailSupp/<?= $prod['product_id']; ?>" class="detailButton" style="float:right">Info Supplier</a>
+                            <?php } ?>
                         </td>
 
                     </tr>

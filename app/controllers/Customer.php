@@ -54,6 +54,7 @@ class Customer extends Controller
         $data['cust'] = $this->model('Customer_model')->getCustomerById($customer_id);
         $data['judul'] = "Daftar Purchase Order " . $data['cust']['customer_name'];
         $data['PO'] = $this->model('Purchase_model')->getPurchaseByCustomer($data['cust']['customer_name']);
+        $data['jenis'] = 'Customer';
         $this->view('templates/header', $data);
         $this->view('purchase/index', $data);
         $this->view('templates/footer');

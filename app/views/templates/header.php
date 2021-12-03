@@ -81,6 +81,7 @@
                             </div>
                         </li>
                         <li class="nav-item active"><a href="<?= BASEURL; ?>/Supplier" class="nav-link"> Supplier </a></li>
+                        <li class="nav-item active"><a href="<?= BASEURL; ?>/Product" class="nav-link"> Product </a></li>
                         <li class="nav-item active ml-auto">
                             <?php if (isset($_SESSION['user_id'])) : ?>
                                 <a href="<?= BASEURL; ?>/users/logout" class="nav-link"> Logout </a>
@@ -109,7 +110,7 @@
                         <li class="nav-item active"><a href="<?= BASEURL; ?>" class="nav-link"> HIKAM WEB APP </a></li>
                         <li class="nav-item active"><a href="<?= BASEURL; ?>" class="nav-link"> Home </a></li>
                         <li class="nav-item active"><a href="<?= BASEURL; ?>/Delivery" class="nav-link"> Delivery Order </a></li>
-                        <li class="nav-item active"><a href="<?= BASEURL; ?>/Invoice" class="nav-link"> Invoice </a></li>
+                        <li class="nav-item active"><a href="<?= BASEURL; ?>/Product" class="nav-link"> Product </a></li>
                         <li class="nav-item active ml-auto">
                             <?php if (isset($_SESSION['user_id'])) : ?>
                                 <a href="<?= BASEURL; ?>/Users/logout" class="nav-link"> Logout </a>

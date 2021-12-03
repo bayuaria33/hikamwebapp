@@ -51,6 +51,13 @@ class Purchase_model
         return $this->db->resultSet();
     }
 
+    public function getPurchaseByCustomer($customer_name)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table .
+            ' WHERE customer_name LIKE "%' . $customer_name . '%"');
+        return $this->db->resultSet();
+    }
+
     public function getPurchaseId()
     {
         $this->db->query("SELECT PO_id FROM " . $this->table);
