@@ -41,10 +41,14 @@
                             <?php } ?>
                         </td>
 
-
                         <td>
-                            <a href="<?= BASEURL; ?>/Purchase/hapus/<?= $value['PO_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
-                            <a href="<?= BASEURL; ?>/Purchase/item/<?= $value["PO_id"]; ?>" class="editButton" style="float:right">Detail</a>
+                            <?php
+                            if ($_SESSION['level_user'] == '4') { ?>
+                                <a href="<?= BASEURL; ?>/Purchase/item/<?= $value["PO_id"]; ?>" class="editButton" style="float:right">Detail</a>
+                            <?php  } else { ?>
+                                <a href="<?= BASEURL; ?>/Purchase/hapus/<?= $value['PO_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
+                                <a href="<?= BASEURL; ?>/Purchase/item/<?= $value["PO_id"]; ?>" class="editButton" style="float:right">Detail</a>
+                            <?php } ?>
                         </td>
 
                     </tr>

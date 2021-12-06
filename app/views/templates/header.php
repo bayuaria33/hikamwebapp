@@ -97,6 +97,14 @@
                         <li class="nav-item active"><a href="<?= BASEURL; ?>/Customer" class="nav-link"> Customer </a></li>
                         <li class="nav-item active"><a href="<?= BASEURL; ?>/Product" class="nav-link"> Product </a></li>
                         <li class="nav-item active"><a href="<?= BASEURL; ?>/Delivery" class="nav-link"> Delivery Order </a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Purchase Order
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a href="<?= BASEURL; ?>/Purchase/index2" class="nav-link"> Customer </a>
+                            </div>
+                        </li>
                         <li class="nav-item active ml-auto">
                             <?php if (isset($_SESSION['user_id'])) : ?>
                                 <a href="<?= BASEURL; ?>/users/logout" class="nav-link"> Logout </a>
@@ -111,6 +119,14 @@
                         <li class="nav-item active"><a href="<?= BASEURL; ?>" class="nav-link"> Home </a></li>
                         <li class="nav-item active"><a href="<?= BASEURL; ?>/Delivery" class="nav-link"> Delivery Order </a></li>
                         <li class="nav-item active"><a href="<?= BASEURL; ?>/Product" class="nav-link"> Product </a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Purchase Order
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a href="<?= BASEURL; ?>/Purchase/index2" class="nav-link"> Customer </a>
+                            </div>
+                        </li>
                         <li class="nav-item active ml-auto">
                             <?php if (isset($_SESSION['user_id'])) : ?>
                                 <a href="<?= BASEURL; ?>/Users/logout" class="nav-link"> Logout </a>
