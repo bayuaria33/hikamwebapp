@@ -283,9 +283,13 @@ class Purchase extends Controller
         //set font to arial, regular, 12pt
         $pdf->SetFont('Arial', '', 12);
 
-
-
-
+        $sum = 0;
+        $ppn = $data['PO']['ppn'];
+        foreach ($data['pc_item'] as $pc_item) {
+            $sum += $pc_item['price'] * $pc_item['quantity'];
+        }
+        $taxed = $sum * $ppn / 100;
+        $grandtotal = $sum + $taxed;
 
         if (!empty($data['supp'])) {
             $pdf->Cell(50, 5, 'Nomor Purchase Order', 0, 0);
@@ -317,11 +321,11 @@ class Purchase extends Controller
             $pdf->Cell(59, 5, '', 0, 1); //end of line
         }
 
-        $pdf->Cell(50, 5, 'Alamat Penagihan             :', 0, 1);
+        $pdf->Cell(50, 5, 'Alamat Penagihan', 0, 0);
         if (!empty($data['supp'])) {
-            $pdf->MultiCell(112, 5, $data['supp']['alamat_penagihan'], 0, 1);
+            $pdf->MultiCell(130, 5, ': ' . $data['supp']['alamat_penagihan'], 0, 1);
         } else {
-            $pdf->MultiCell(112, 5, $data['cust']['alamat_penagihan'], 0, 1);
+            $pdf->MultiCell(130, 5, ': ' . $data['cust']['alamat_penagihan'], 0, 1);
         }
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
@@ -337,16 +341,16 @@ class Purchase extends Controller
             $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp2'], 0, 1);
         }
 
-
-
-
-
-
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Jumlah Uang', 0, 0);
-        $pdf->Cell(80, 5, ':', 0, 1);
+        $terbilang = strtoupper(terbilang($grandtotal));
+
+        $pdf->Cell(30, 5, 'Jumlah Uang', 0, 0);
+        $pdf->Cell(5, 5, ':', 0, 0);
+        $pdf->SetFont('Arial', 'BI');
+        $pdf->MultiCell(150, 5, '# ' .  $terbilang . ' RUPIAH #', 0, 1);
+        $pdf->SetFont('Arial', '', 12);
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 'B', 1); //end of line
@@ -371,13 +375,12 @@ class Purchase extends Controller
         //Numbers are right-aligned so we give 'R' after new line parameter
 
 
-        $sum = 0;
+
         foreach ($data['pc_item'] as $pc_item) {
             $pdf->Cell(105, 5, $pc_item['product_name'], 1, 0);
             $pdf->Cell(25, 5, $pc_item['quantity'], 1, 0);
             $pdf->Cell(25, 5, $pc_item['unit_item'], 1, 0);
             $pdf->Cell(34, 5, $pc_item['price'], 1, 1, 'R'); //end of line
-            $sum += $pc_item['price'] * $pc_item['quantity'];
         }
 
         //summary
@@ -390,13 +393,13 @@ class Purchase extends Controller
         $pdf->Cell(120, 5, '', 0, 0);
         $pdf->Cell(28, 5, 'PPN ' . $ppn . ' %', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $taxed = $sum * $ppn / 100;
+
         $pdf->Cell(34, 5, $taxed, 1, 1, 'R'); //end of line
 
         $pdf->Cell(120, 5, '', 0, 0);
         $pdf->Cell(28, 5, 'Grand Total', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $pdf->Cell(34, 5, $sum + $taxed, 1, 1, 'R'); //end of line
+        $pdf->Cell(34, 5, $grandtotal, 1, 1, 'R'); //end of line
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line

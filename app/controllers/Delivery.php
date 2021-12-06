@@ -294,8 +294,8 @@ class Delivery extends Controller
         // $pdf->MultiCell(112, 5, $data['cust']['alamat_penagihan'], 0, 1);
         // $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Alamat Pengiriman', 1, 0);
-        $pdf->MultiCell(80, 5, ': ' . $data['cust']['alamat_pengiriman'], 1, 1);
+        $pdf->Cell(50, 5, 'Alamat Pengiriman', 0, 0);
+        $pdf->MultiCell(130, 5, ': ' . $data['cust']['alamat_pengiriman'], 0, 1);
         // $pdf->Cell(59, 5, '', 1, 1); //end of line
 
         $pdf->Cell(50, 5, 'Nomor Telepon', 0, 0);

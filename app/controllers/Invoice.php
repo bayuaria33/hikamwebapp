@@ -270,27 +270,17 @@ class Invoice extends Controller
 
         $pdf->Cell(50, 5, 'Nomor Invoice', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['invc']['invoice_number'], 0, 0);
-        $pdf->Cell(30, 5, 'Nomor PO: ', 0, 0);
-        if (!empty($data['PO'])) {
-            $pdf->Cell(80, 5, $data['PO']['purchase_number'], 0, 0);
-        } else {
-            $pdf->Cell(80, 5, '-', 0, 0);
-        }
+
 
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         $pdf->Cell(50, 5, 'Nama Customer', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['cust']['customer_name'], 0, 0);
-        $pdf->Cell(30, 5, 'Nomor DO: ', 0, 0);
-        if (!empty($data['DO'])) {
-            $pdf->Cell(80, 5, $data['DO']['delivery_number'], 0, 0);
-        } else {
-            $pdf->Cell(80, 5, '-', 0, 0);
-        }
+
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Alamat Penagihan             :', 0, 1);
-        $pdf->MultiCell(112, 5, $data['cust']['alamat_penagihan'], 0, 1);
+        $pdf->Cell(50, 5, 'Alamat Penagihan             :', 0, 0);
+        $pdf->MultiCell(112, 5, ': ' . $data['cust']['alamat_penagihan'], 0, 1);
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
         // $pdf->Cell(50, 5, 'Alamat Pengiriman', 0, 0);
@@ -300,15 +290,44 @@ class Invoice extends Controller
         $pdf->Cell(50, 5, 'Nomor Telepon', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 1);
 
-
         $pdf->Cell(50, 5, '', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp2'], 0, 1);
+
+        $pdf->Cell(59, 5, '', 0, 1); //end of line
+
+        $pdf->Cell(50, 5, 'Nomor PO', 0, 0);
+        if (!empty($data['PO'])) {
+            $pdf->Cell(80, 5, ': ' . $data['PO']['purchase_number'], 0, 1);
+        } else {
+            $pdf->Cell(80, 5, ': ' . '-', 0, 1);
+        }
+
+        $pdf->Cell(50, 5, 'Nomor DO', 0, 0);
+        if (!empty($data['DO'])) {
+            $pdf->Cell(80, 5, ': ' . $data['DO']['delivery_number'], 0, 1);
+        } else {
+            $pdf->Cell(81, 5, ': ' . '-', 0, 1);
+        }
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Jumlah Uang', 0, 0);
-        $pdf->Cell(80, 5, ':', 0, 1);
+        $sum = 0;
+        $ongkir = $data['invc']['biaya_kirim'];
+        $ppn = $data['invc']['ppn'];
+        foreach ($data['invc_item'] as $invc_item) {
+            $sum += $invc_item['price'] * $invc_item['quantity'];
+        }
+        $taxed = $sum * $ppn / 100;
+        $grandtotal = $sum + $taxed + $ongkir;
+
+        $terbilang = strtoupper(terbilang($grandtotal));
+
+        $pdf->Cell(30, 5, 'Jumlah Uang', 0, 0);
+        $pdf->Cell(5, 5, ':', 0, 0);
+        $pdf->SetFont('Arial', 'BI');
+        $pdf->MultiCell(150, 5, '# ' .  $terbilang . ' RUPIAH #', 0, 1);
+        $pdf->SetFont('Arial', '', 12);
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 'B', 1); //end of line
@@ -323,7 +342,7 @@ class Invoice extends Controller
         //invoice contents
         $pdf->SetFont('Arial', 'B', 12);
 
-        $pdf->Cell(105, 5, 'Description', 1, 0);
+        $pdf->Cell(105, 5, 'Nama Barang', 1, 0);
         $pdf->Cell(25, 5, 'Quantity', 1, 0);
         $pdf->Cell(25, 5, 'Unit', 1, 0);
         $pdf->Cell(34, 5, 'Price per Unit', 1, 1); //end of line
@@ -332,14 +351,11 @@ class Invoice extends Controller
 
         //Numbers are right-aligned so we give 'R' after new line parameter
 
-
-        $sum = 0;
         foreach ($data['invc_item'] as $invc_item) {
             $pdf->Cell(105, 5, $invc_item['product_name'], 1, 0);
             $pdf->Cell(25, 5, $invc_item['quantity'], 1, 0);
             $pdf->Cell(25, 5, $invc_item['unit_item'], 1, 0);
             $pdf->Cell(34, 5, $invc_item['price'], 1, 1, 'R'); //end of line
-            $sum += $invc_item['price'] * $invc_item['quantity'];
         }
 
         //summary
@@ -348,24 +364,20 @@ class Invoice extends Controller
         $pdf->Cell(7, 5, 'Rp', 1, 0);
         $pdf->Cell(34, 5, $sum, 1, 1, 'R'); //end of line
 
-
-        $ongkir = $data['invc']['biaya_kirim'];
         $pdf->Cell(120, 5, '', 0, 0);
         $pdf->Cell(28, 5, 'Biaya Kirim', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
         $pdf->Cell(34, 5, $ongkir, 1, 1, 'R'); //end of line
 
-        $ppn = $data['invc']['ppn'];
         $pdf->Cell(120, 5, '', 0, 0);
         $pdf->Cell(28, 5, 'PPN ' . $ppn . ' %', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $taxed = $sum * $ppn / 100;
         $pdf->Cell(34, 5, $taxed, 1, 1, 'R'); //end of line
 
         $pdf->Cell(120, 5, '', 0, 0);
         $pdf->Cell(28, 5, 'Grand Total', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $pdf->Cell(34, 5, $sum + $taxed + $ongkir, 1, 1, 'R'); //end of line
+        $pdf->Cell(34, 5, $grandtotal, 1, 1, 'R'); //end of line
 
         //make a dummy empty cell as a vertical spacer
         $pdf->Cell(189, 10, '', 0, 1); //end of line
