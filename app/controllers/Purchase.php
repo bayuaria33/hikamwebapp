@@ -413,4 +413,77 @@ class Purchase extends Controller
 
         $pdf->Output('I', $filename . '.pdf');
     }
+
+    //Uploads
+    public function cek_file($PO_id)
+    {
+        $data['PO'] = $this->model('Purchase_model')->getPurchaseById($PO_id);
+        $data['file_PO'] = $this->model('Purchase_model')->getPurchaseFileById($PO_id);
+        $data['judul'] = "Daftar File " . $data['PO']['purchase_number'];
+        $this->view('templates/header', $data);
+        $this->view('purchase/file_details', $data);
+        $this->view('templates/footer');
+    }
+
+    public function uploadPage($PO_id)
+    {
+        $data['judul'] = "Upload File ";
+        $data['PO'] = $this->model('Purchase_model')->getPurchaseById($PO_id);
+        $this->view('templates/header', $data);
+        $this->view('purchase/upload_form', $data);
+        $this->view('templates/footer');
+    }
+
+    public function hapusFile($pc_file_id)
+    {
+        $data['pc_file'] = $this->model('Purchase_model')->getPurchaseFile($pc_file_id);
+        $fileName = 'terupload' . '/' . $data['pc_file']['file_name'];
+
+        if (file_exists(realpath($fileName))) {
+            echo '<pre>', var_dump($fileName), '</pre>';
+            if ($this->model('Purchase_model')->hapusFilePurchase($pc_file_id) > 0) {
+                Flasher::setFlash('Berhasil', 'dihapus');
+                unlink($fileName);
+                header('Location: ' . BASEURL . '/Purchase' . '/cek_file' . '/' . $data['pc_file']['PO_id']);
+                exit;
+            } else {
+                Flasher::setFlash('Gagal', 'dihapus');
+                header('Location: ' . BASEURL . '/Purchase' . '/cek_file' . '/' . $data['pc_file']['PO_id']);
+                exit;
+            }
+        } else {
+            Flasher::setFlash('Gagal', 'dihapus');
+            header('Location: ' . BASEURL . '/Purchase' . '/cek_file' . '/' . $data['pc_file']['PO_id']);
+            exit;
+        }
+    }
+
+    function upload($PO_id)
+    {
+        // ambil data file
+        $data['PO'] = $this->model('Purchase_model')->getPurchaseById($PO_id);
+
+        $dir = "/hikamwebapp/public/terupload/";
+        $data['file_name'] = $_FILES['file_upload']['name'];
+        $data['file_size'] = $_FILES['file_upload']['size'];
+        $namaSementara = $_FILES['file_upload']['tmp_name'];
+
+        // tentukan lokasi file akan dipindahkan
+        $dirUpload = $_SERVER['DOCUMENT_ROOT'] . $dir;
+
+        // pindahkan file
+        $terupload = move_uploaded_file($namaSementara, $dirUpload . $data['file_name']);
+
+        if ($terupload) {
+
+            if ($this->model('Purchase_model')->tambahFilePurchase($data) > 0) {
+                Flasher::setFlash('Berhasil', 'ditambahkan');
+                header('Location: ' . BASEURL . '/Purchase' . '/cek_file' . '/' . $data['PO']['PO_id']);
+            }
+        } else {
+            Flasher::setFlash('Gagal', 'ditambahkan');
+            header('Location: ' . BASEURL . '/Purchase' . '/cek_file' . '/' . $data['PO']['PO_id']);
+            exit;
+        }
+    }
 }

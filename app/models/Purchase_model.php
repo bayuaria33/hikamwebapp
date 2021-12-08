@@ -5,6 +5,7 @@ class Purchase_model
     private $table2 = "pc_item";
     private $table3 = "supplier";
     private $table4 = "customer";
+    private $table5 = "pc_file";
     private $db;
 
     function dd($variable)
@@ -196,16 +197,6 @@ class Purchase_model
         return $this->db->rowCount();
     }
 
-    public function cariDataPurchase()
-    {
-        $keyword = $_POST['keyword'];
-        $query = "SELECT * FROM " . $this->table . " WHERE supplier_name LIKE :keyword";
-        $this->db->query($query);
-        $this->db->bind('keyword', "%$keyword%");
-
-        return $this->db->resultSet();
-    }
-
     public function getPurchaseItem($PO_id)
     {
         $this->db->query(
@@ -273,5 +264,54 @@ class Purchase_model
         $this->db->query("select PO_id from " . $this->table . " where monthname(PO_date)='" . $month
             . "' order by PO_date");
         return $this->db->resultSet();
+    }
+
+    //Uploads
+
+    public function getPurchaseFileById($PO_id)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table5 . ' WHERE PO_id LIKE ' . $PO_id);
+        return $this->db->resultSet();
+    }
+
+    public function getPurchaseFile($pc_file_id){
+        $this->db->query('SELECT * FROM ' . $this->table5 . ' WHERE pc_file_id LIKE ' . $pc_file_id);
+        return $this->db->single();
+    }
+
+    public function getFileId()
+    {
+        $this->db->query("SELECT pc_file_id FROM " . $this->table5);
+        return $this->db->resultSet();
+    }
+
+    public function tambahFilePurchase($data)
+    {
+        $IdArray = $this->getFileId();
+        if (empty($IdArray)) {
+            $newIdInt = "1001";
+        } else {
+            $lastId = max($IdArray);
+            $lastIdInt = (int)$lastId['pc_file_id'];
+            $newIdInt = $lastIdInt + 1;
+        }
+        $query = "INSERT INTO " . $this->table5 . " VALUES(:pc_file_id, :file_name, :file_size, :PO_id)";
+        $this->db->query($query);
+        $this->db->bind('pc_file_id', $newIdInt);
+        $this->db->bind('file_name', $data['file_name']);
+        $this->db->bind('file_size', $data['file_size']);
+        $this->db->bind('PO_id', $data['PO']['PO_id']);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
+    public function hapusFilePurchase($pc_file_id)
+    {
+        $query = "DELETE FROM " . $this->table5 . " WHERE pc_file_id = :pc_file_id";
+        $this->db->query($query);
+        $this->db->bind('pc_file_id', $pc_file_id);
+        $this->db->execute();
+
+        return $this->db->rowCount();
     }
 }

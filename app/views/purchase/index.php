@@ -43,12 +43,13 @@
 
                         <td>
                             <?php
-                            if ($_SESSION['level_user'] == '4') { ?>
-                                <a href="<?= BASEURL; ?>/Purchase/item/<?= $value["PO_id"]; ?>" class="editButton" style="float:right">Detail</a>
+                            if (!empty($value['supplier_name'])) { ?>
                             <?php  } else { ?>
-                                <a href="<?= BASEURL; ?>/Purchase/hapus/<?= $value['PO_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
-                                <a href="<?= BASEURL; ?>/Purchase/item/<?= $value["PO_id"]; ?>" class="editButton" style="float:right">Detail</a>
+                                <a href="<?= BASEURL; ?>/Purchase/cek_file/<?= $value['PO_id']; ?>" class="detailButton" style="float:right;margin-left: 0px;">Check File</a>
                             <?php } ?>
+
+                            <a href="<?= BASEURL; ?>/Purchase/hapus/<?= $value['PO_id']; ?>" class="redButton" style="float:right" onclick="return confirm('Anda yakin akan hapus data ini?')">Delete</a>
+                            <a href="<?= BASEURL; ?>/Purchase/item/<?= $value["PO_id"]; ?>" class="editButton" style="float:right">Detail</a>
                         </td>
 
                     </tr>
