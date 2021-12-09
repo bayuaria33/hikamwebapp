@@ -50,7 +50,7 @@
 
           <li>
             <a href="<?= BASEURL; ?>/Product">
-              <i class='bx bx-book-alt'></i>
+              <i class='bx bx-package'></i>
               <span class="link_name">Product</span>
             </a>
             <ul class="sub-menu blank">
@@ -60,7 +60,7 @@
 
           <li>
             <a href="<?= BASEURL; ?>/Supplier">
-              <i class='bx bx-package'></i>
+              <i class='bx bx bxs-truck' color="white"></i>
               <span class="link_name">Supplier</span>
             </a>
             <ul class="sub-menu blank">
@@ -111,7 +111,7 @@
               <div class="name-job">
                 <div class="profile_name"><?= $_SESSION['username']; ?></div>
               </div>
-              <a href="<?= BASEURL; ?>/users/logout" class="nav-link"> <i class='bx bx-log-out'></i> </a>
+              <a href="<?= BASEURL; ?>/Users/logout" class="nav-link"> <i class='bx bx-log-out'></i> </a>
 
             </div>
           </li>
@@ -136,7 +136,7 @@
 
           <li>
             <a href="<?= BASEURL; ?>/Product">
-              <i class='bx bx-book-alt'></i>
+              <i class='bx bx-package'></i>
               <span class="link_name">Product</span>
             </a>
             <ul class="sub-menu blank">
@@ -172,7 +172,7 @@
               <div class="name-job">
                 <div class="profile_name"><?= $_SESSION['username']; ?></div>
               </div>
-              <a href="<?= BASEURL; ?>/users/logout" class="nav-link"> <i class='bx bx-log-out'></i> </a>
+              <a href="<?= BASEURL; ?>/Users/logout" class="nav-link"> <i class='bx bx-log-out'></i> </a>
 
             </div>
           </li>
@@ -187,7 +187,7 @@
 
           <li>
             <a href="<?= BASEURL; ?>/Product">
-              <i class='bx bx-book-alt'></i>
+              <i class='bx bx-package'></i>
               <span class="link_name">Product</span>
             </a>
             <ul class="sub-menu blank">
@@ -197,7 +197,7 @@
 
           <li>
             <a href="<?= BASEURL; ?>/Supplier">
-              <i class='bx bx-package'></i>
+              <i class='bx bx bxs-truck' color="white"></i>
               <span class="link_name">Supplier</span>
             </a>
             <ul class="sub-menu blank">
@@ -227,7 +227,7 @@
               <div class="name-job">
                 <div class="profile_name"><?= $_SESSION['username']; ?></div>
               </div>
-              <a href="<?= BASEURL; ?>/users/logout" class="nav-link"> <i class='bx bx-log-out'></i> </a>
+              <a href="<?= BASEURL; ?>/Users/logout" class="nav-link"> <i class='bx bx-log-out'></i> </a>
 
             </div>
           </li>
@@ -252,7 +252,7 @@
 
           <li>
             <a href="<?= BASEURL; ?>/Product">
-              <i class='bx bx-book-alt'></i>
+              <i class='bx bx-package'></i>
               <span class="link_name">Product</span>
             </a>
             <ul class="sub-menu blank">
@@ -292,7 +292,7 @@
               <div class="name-job">
                 <div class="profile_name"><?= $_SESSION['username']; ?></div>
               </div>
-              <a href="<?= BASEURL; ?>/users/logout" class="nav-link"> <i class='bx bx-log-out'></i> </a>
+              <a href="<?= BASEURL; ?>/Users/logout" class="nav-link"> <i class='bx bx-log-out'></i> </a>
 
             </div>
           </li>
@@ -308,7 +308,7 @@
 
           <li>
             <a href="<?= BASEURL; ?>/Product">
-              <i class='bx bx-book-alt'></i>
+              <i class='bx bx-package'></i>
               <span class="link_name">Product</span>
             </a>
             <ul class="sub-menu blank">
@@ -348,7 +348,7 @@
               <div class="name-job">
                 <div class="profile_name"><?= $_SESSION['username']; ?></div>
               </div>
-              <a href="<?= BASEURL; ?>/users/logout" class="nav-link"> <i class='bx bx-log-out'></i> </a>
+              <a href="<?= BASEURL; ?>/Users/logout" class="nav-link"> <i class='bx bx-log-out'></i> </a>
 
             </div>
           </li>
@@ -369,14 +369,14 @@
           <li class="nav-item active ml-auto">
             <?php if (isset($_SESSION['user_id'])) : ?>
 
-              <a href="<?= BASEURL; ?>/users/logout">
+              <a href="<?= BASEURL; ?>/Users/logout">
                 <i class='bx bx-log-out'></i>
                 <span class="link_name">Logout</span>
               </a>
 
             <?php else : ?>
 
-              <a href="<?= BASEURL; ?>/users/login">
+              <a href="<?= BASEURL; ?>/Users/login">
                 <i class='bx bx-log-out'></i>
                 <span class="link_name">Login</span>
               </a>
@@ -400,14 +400,14 @@
         <li class="nav-item active ml-auto">
           <?php if (isset($_SESSION['user_id'])) : ?>
 
-            <a href="<?= BASEURL; ?>/users/logout">
+            <a href="<?= BASEURL; ?>/Users/logout">
               <i class='bx bx-log-out'></i>
               <span class="link_name">Logout</span>
             </a>
 
           <?php else : ?>
 
-            <a href="<?= BASEURL; ?>/users/login">
+            <a href="<?= BASEURL; ?>/Users/login">
               <i class='bx bx-log-out'></i>
               <span class="link_name">Login</span>
             </a>
