@@ -60,8 +60,8 @@
                 </td>
             </tr>
         </table>
-        <a href="<?= BASEURL; ?>/Customer/custInvoice/<?= $data['cust']["customer_id"]; ?>" class="detailButton" style="margin-left: 0; margin-top: 2ch;" target="_blank">Cek Invoice</a>
-        <a href="<?= BASEURL; ?>/Customer/custPurchase/<?= $data['cust']["customer_id"]; ?>" class="detailButton" style="margin-left: 0; margin-top: 2ch;" target="_blank">Cek Purchase Order</a>
-        <a href="<?= BASEURL; ?>/Customer/custDelivery/<?= $data['cust']["customer_id"]; ?>" class="detailButton" style="margin-left: 0; margin-top: 2ch;" target="_blank">Cek Delivery Order</a>
+        <a href="<?= BASEURL; ?>/Customer/custInvoice/<?= $data['cust']["customer_id"]; ?>" class="detailButton" style="margin-left: 0; margin-top: 2ch;">Cek Invoice</a>
+        <a href="<?= BASEURL; ?>/Customer/custPurchase/<?= $data['cust']["customer_id"]; ?>" class="detailButton" style="margin-left: 0; margin-top: 2ch;">Cek Purchase Order</a>
+        <a href="<?= BASEURL; ?>/Customer/custDelivery/<?= $data['cust']["customer_id"]; ?>" class="detailButton" style="margin-left: 0; margin-top: 2ch;">Cek Delivery Order</a>
     </div>
 </div>
