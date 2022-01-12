@@ -20,7 +20,7 @@ class Purchase extends Controller
         $data['judul'] = "Daftar Purchase Customer";
         $data['jenis'] = "Customer";
         $data['PO'] = $this->model('Purchase_model')->getAllPurchaseCustomer();
-        if ($_SESSION['level_user'] == '1' or $_SESSION['level_user'] == '4' or $_SESSION['level_user'] == '5') {
+        if ($_SESSION['level_user'] == '1' or $_SESSION['level_user'] == '4') {
             $this->view('templates/header', $data);
             $this->view('purchase/index', $data);
             $this->view('templates/footer');

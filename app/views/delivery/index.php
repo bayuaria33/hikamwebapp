@@ -26,7 +26,7 @@
                     <tr>
                         <td>
                             <?=
-                            $output = date('d-m-Y', strtotime($value['DO_date']));
+                            $output = date('d-F-Y', strtotime($value['DO_date']));
                             ?>
                         </td>
                         <td>

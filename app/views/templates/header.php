@@ -323,20 +323,6 @@
           </li>
 
           <li>
-            <div class="iocn-link">
-              <a href="<?= BASEURL; ?>">
-                <i class='bx bx-bus'></i>
-                <span class="link_name">Purchase Order</span>
-              </a>
-              <i class='bx bxs-chevron-down arrow'></i>
-            </div>
-            <ul class="sub-menu">
-              <li><a class="link_name" href="<?= BASEURL; ?>">Purchase Order</a></li>
-              <li><a href="<?= BASEURL; ?>/Purchase/index2">Customer</a></li>
-            </ul>
-          </li>
-
-          <li>
             <a href="<?= BASEURL; ?>/Delivery">
               <i class='bx bx-bus'></i>
               <span class="link_name">Delivery Order</span>

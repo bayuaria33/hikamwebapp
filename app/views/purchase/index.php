@@ -22,7 +22,7 @@
                     <tr>
 
                         <td>
-                            <?= $output = date('d-m-Y', strtotime($value['PO_date'])); ?>
+                            <?= $output = date('d-F-Y', strtotime($value['PO_date'])); ?>
                         </td>
                         <td>
                             <?php

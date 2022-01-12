@@ -25,7 +25,7 @@
                     <tr>
                         <td>
                             <?=
-                            $output = date('d-m-Y', strtotime($value['invoice_date'])); ?>
+                            $output = date('d-F-Y', strtotime($value['invoice_date'])); ?>
                         </td>
                         <td>
                             <?php

@@ -33,7 +33,7 @@
         <label for="PO_date">Tanggal Purchase</label>
         <input type="date" id="PO_date" name="PO_date" autocomplete="off" value="<?= $data['PO']['PO_date']; ?>">
 
-        <label for="other_expenses">Pengeluaran Lain</label>
+        <label for="other_expenses">Catatan Lain</label>
         <input type="text" id="other_expenses" name="other_expenses" autocomplete="off" value="<?= $data['PO']['other_expenses']; ?>">
 
         <label for="status_pembayaran">Status Pembayaran</label>
