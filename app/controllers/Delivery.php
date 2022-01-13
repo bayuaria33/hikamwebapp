@@ -259,12 +259,29 @@ class Delivery extends Controller
         $pdf = new FPDF('P', 'mm', 'A4');
 
         $pdf->AddPage();
+        $pdf->Rect(5, 5, 200, 287, 'D');
+        $pdf->Image('logo_hikam.png',10,10,-200); //letak foto nya di folder public
+        $pdf->SetFont('Times','B',15);
+        // Move to the right
+        $pdf->Cell(35,10,'',0);
+        // Title
+        $pdf->SetTextColor(40, 130, 195);
+        $pdf->Cell(154,10,'PT.HIKAM ABADI INDONESIA',0,1,'C');
+        $pdf->Cell(35,10,'',0);
+        // Subtitle
+        $pdf->SetFont('Times','B',11);
+        $pdf->SetTextColor(0, 149, 255);
+        $pdf->Cell(154,10,'www.hikamabadi.com    ||  www.bahankimiaindustri.com ||   www.kimiapembersih.com',0,0,'L');
+        // Line break
+        $pdf->Ln(10);
+
+        $pdf->SetTextColor(0, 0,0);
         $pdf->SetFont('Arial', 'B', 21);
         //Cell(width , height , text , border , end line , [align] )
 
-        $pdf->Cell(189, 6, '', 1, 1);
-        $pdf->Cell(189, 6, 'Delivery', 1, 1, 'C');
-        $pdf->Cell(189, 6, '', 1, 1);
+
+        $pdf->Cell(189, 18, 'Delivery Order', 1, 1, 'C');
+
         $pdf->Cell(189, 10, '', 0, 1); //end of line
         //set font to arial, regular, 12pt
         $pdf->SetFont('Arial', '', 12);
