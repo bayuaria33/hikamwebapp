@@ -398,6 +398,34 @@ class Delivery extends Controller
 
         $pdf->Cell(20, 5, 'Catatan', 0, 0);
         $pdf->MultiCell(120, 5, ': ' . $data['DO']['other_expenses'], 0, 1);
+        
+        //STEMPEL
+        $pdf->SetFont('Arial', 'B', 11);
+        $pdf->Cell(189, 40, '', 0, 1); //spacer
+        $pdf->Cell(189, 5, '', 'B', 1); //end of line
+        $pdf->SetFont('Arial', '', 6);
+        $pdf->Cell(10, 5, 'PERHATIAN : BARANG HARAP DITELITI DENGAN BAIK OLEH PENERIMA, BARANG YANG TELAH DIBELI TIDAK DAPAT DIKEMBALIKAN KECUALI ADA PERJANJIAN TERLEBIH DAHULU.', 0, 0); //end of line
+        $pdf->Cell(189, 5, '',  0, 1); //end of line
+
+        $pdf->SetFont('Arial', 'B', 11);
+        $pdf->Cell(62, 10, 'Nama Jelas & Stempel', 0, 0, 'C');
+        $pdf->Cell(62, 10, 'Driver / Sopir', 0, 0, 'C');
+        $pdf->Cell(62, 10, 'Hormat Kami,', 0, 1, 'C');
+        $pdf->Cell(189, 20, '', 0, 1);
+
+        $pdf->SetFont('Arial', 'BU', 11);
+        $pdf->Cell(62, 5, '                             ', 0, 0, 'C');
+        $pdf->Cell(62, 5, '                             ', 0, 0, 'C');
+        $pdf->Cell(62, 5, 'PT. HIKAM ABADI INDONESIA', 0, 1, 'C');
+        $pdf->SetFont('Arial', 'B', 11);
+        $pdf->Cell(62, 5, '(Penerima)', 0, 0, 'C');
+        $pdf->Cell(62, 5, '(Pengantar)', 0, 0, 'C');
+        $pdf->Cell(62, 5, '(Pengirim)', 0, 1, 'C');
+
+        $pdf->SetFont('Arial', 'BI', 6);
+        $pdf->Cell(189, 10, '', 0, 1); //spacer
+        $pdf->Cell(10, 5, 'PERHATIAN : MOHON STEMPEL PENERIMA PADA SEMUA LEMBAR (4 LEMBAR), LEMBAR PUTIH DAN MERAH KEMBALI KE PENGIRIM..', 0, 0); //end of line
+        $pdf->Cell(189, 5, '',  0, 1); //end of line
 
         $pdf->Output('I', $filename . '.pdf');
     }
