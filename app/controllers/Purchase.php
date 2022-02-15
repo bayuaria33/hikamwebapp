@@ -323,22 +323,10 @@ class Purchase extends Controller
             $pdf->Cell(50, 5, 'Nomor Purchase Order', 0, 0);
             $pdf->Cell(80, 5, ': ' . $data['PO']['purchase_number'], 0, 0);
 
-            $pdf->Cell(30, 5, 'Nomor Invoice: ', 0, 0);
-            if (!empty($data['invc'])) {
-                $pdf->Cell(80, 5, $data['invc']['invoice_number'], 0, 0);
-            } else {
-                $pdf->Cell(80, 5, '-', 0, 0);
-            }
             $pdf->Cell(59, 5, '', 0, 1); //end of line
             $pdf->Cell(50, 5, 'Nama Customer', 0, 0);
             $pdf->Cell(80, 5, ': ' . $data['cust']['customer_name'], 0, 0);
 
-            $pdf->Cell(30, 5, 'Nomor DO: ', 0, 0);
-            if (!empty($data['DO'])) {
-                $pdf->Cell(80, 5, $data['DO']['delivery_number'], 0, 0);
-            } else {
-                $pdf->Cell(80, 5, '-', 0, 0);
-            }
             $pdf->Cell(59, 5, '', 0, 1); //end of line
         }
 
@@ -360,6 +348,21 @@ class Purchase extends Controller
             $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 1);
             $pdf->Cell(50, 5, '', 0, 0);
             $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp2'], 0, 1);
+
+            $pdf->Cell(50, 5, 'Nomor Invoice', 0, 0);
+            if (!empty($data['invc'])) {
+                $pdf->Cell(80, 5, ": " . $data['invc']['invoice_number'], 0, 1);
+            } else {
+                $pdf->Cell(80, 5, ': -', 0, 1);
+            }
+
+            $pdf->Cell(50, 5, 'Nomor DO', 0, 0);
+            if (!empty($data['DO'])) {
+                $pdf->Cell(80, 5, ": " . $data['DO']['delivery_number'], 0, 0);
+            } else {
+                $pdf->Cell(80, 5, ': -', 0, 0);
+            }
+
         }
 
         //make a dummy empty cell as a vertical spacer

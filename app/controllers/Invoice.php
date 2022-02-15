@@ -404,9 +404,9 @@ class Invoice extends Controller
         $pdf->Cell(20, 5, 'Catatan', 0, 0);
         $pdf->MultiCell(120, 5, ': ' . $data['invc']['other_expenses'], 0, 1);
 
-        $pdf->Cell(189, 30, '', 0, 1);
-        $pdf->Cell(189, 10, date("d F Y", strtotime($data['invc']['invoice_date'])), 0, 1, 'R');
         $pdf->Cell(189, 20, '', 0, 1);
+        $pdf->Cell(189, 10, "Bekasi, ". date("d F Y", strtotime($data['invc']['invoice_date'])), 0, 1, 'R');
+        $pdf->Cell(189, 35, '', 0, 1);
         $pdf->SetFont('Arial', 'B', 12);
         $pdf->Cell(189, 10, '(Budi Ary Friyanto)', 0, 1, 'R');
 

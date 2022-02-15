@@ -322,19 +322,19 @@ class Delivery extends Controller
         $pdf->Cell(50, 5, '', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp2'], 0, 1);
 
-        $pdf->Cell(30, 5, 'Nomor PO: ', 0, 0);
+        $pdf->Cell(50, 5, 'Nomor PO', 0, 0);
         if (!empty($data['PO'])) {
-            $pdf->Cell(80, 5, $data['PO']['purchase_number'], 0, 0);
+            $pdf->Cell(80, 5, ": ". $data['PO']['purchase_number'], 0, 0);
         } else {
-            $pdf->Cell(80, 5, '-', 0, 0);
+            $pdf->Cell(80, 5, ': -', 0, 0);
         }
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(30, 5, 'Nomor Invoice: ', 0, 0);
+        $pdf->Cell(50, 5, 'Nomor Invoice', 0, 0);
         if (!empty($data['invc'])) {
-            $pdf->Cell(80, 5, $data['invc']['invoice_number'], 0, 0);
+            $pdf->Cell(80, 5,": ". $data['invc']['invoice_number'], 0, 0);
         } else {
-            $pdf->Cell(80, 5, '-', 0, 0);
+            $pdf->Cell(80, 5, ': -', 0, 0);
         }
 
         //make a dummy empty cell as a vertical spacer
