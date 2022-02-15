@@ -108,6 +108,26 @@
               <li><a class="link_name" href="<?= BASEURL; ?>/Delivery">Delivery Order</a></li>
             </ul>
           </li>
+          
+          <li>
+            <a href="<?= BASEURL; ?>/PettyCash">
+              <i class='bx bx-money'></i>
+              <span class="link_name">PettyCash</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="<?= BASEURL; ?>/PettyCash">PettyCash</a></li>
+            </ul>
+          </li>
+
+        <!--<li>-->
+        <!--    <a href="<?= BASEURL; ?>/Users">-->
+        <!--      <i class='bx bx-user-plus'></i>-->
+        <!--      <span class="link_name">User</span>-->
+        <!--    </a>-->
+        <!--    <ul class="sub-menu blank">-->
+        <!--      <li><a class="link_name" href="<?= BASEURL; ?>/User">User</a></li>-->
+        <!--    </ul>-->
+        <!--  </li>-->
 
           <li>
             <div class="profile-details">
@@ -169,6 +189,17 @@
               <li><a class="link_name" href="<?= BASEURL; ?>/Delivery">Delivery Order</a></li>
             </ul>
           </li>
+          
+          <li>
+            <a href="<?= BASEURL; ?>/PettyCash">
+              <i class='bx bx-money'></i>
+              <span class="link_name">PettyCash</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="<?= BASEURL; ?>/PettyCash">PettyCash</a></li>
+            </ul>
+          </li>
+
 
           <li>
             <div class="profile-details">
@@ -344,7 +375,39 @@
 
             </div>
           </li>
+          
+          <!-- Driver -->
+        <?php elseif ($_SESSION['level_user'] == '6') : ?>
+          
+          <li>
+            <a href="<?= BASEURL; ?>">
+              <i class="bx bx-tachometer"></i>
+              <span class="link_name">Dashboard</span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="<?= BASEURL; ?>/Delivery">
+              <i class='bx bx-bus'></i>
+              <span class="link_name">Delivery Order</span>
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="<?= BASEURL; ?>/Delivery">Delivery Order</a></li>
+            </ul>
+          </li>
 
+          <li>
+            <div class="profile-details">
+              <div class="profile-content">
+                <!--<img src="image/profile.jpg" alt="profileImg">-->
+              </div>
+              <div class="name-job">
+                <div class="profile_name"><?= $_SESSION['username']; ?></div>
+              </div>
+              <a href="<?= BASEURL; ?>/Users/logout" class="nav-link"> <i class='bx bx-log-out'></i> </a>
+
+            </div>
+          </li>
         <?php else : ?>
           <!-- Default -->
 
