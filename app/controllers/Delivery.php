@@ -315,6 +315,9 @@ class Delivery extends Controller
         $pdf->MultiCell(130, 5, ': ' . $data['cust']['alamat_pengiriman'], 0, 1);
         // $pdf->Cell(59, 5, '', 1, 1); //end of line
 
+        $pdf->Cell(50, 5, 'U.P', 0, 0);
+        $pdf->Cell(80, 5, ': ' . $data['cust']['UP_Pengiriman'], 0, 1);
+
         $pdf->Cell(50, 5, 'Nomor Telepon', 0, 0);
         $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 1);
 
@@ -324,9 +327,13 @@ class Delivery extends Controller
 
         $pdf->Cell(50, 5, 'Nomor PO', 0, 0);
         if (!empty($data['PO'])) {
-            $pdf->Cell(80, 5, ": ". $data['PO']['purchase_number'], 0, 0);
+            $pdf->Cell(80, 5, ": ". $data['PO']['purchase_number'], 0, 1);
+            $pdf->Cell(50, 5, 'Tanggal PO', 0, 0);
+            $pdf->Cell(80, 5, ': ' . date("d F Y", strtotime($data['PO']['PO_date'])), 0, 1);
         } else {
-            $pdf->Cell(80, 5, ': -', 0, 0);
+            $pdf->Cell(80, 5, ': -', 0, 1);
+            $pdf->Cell(50, 5, 'Tanggal PO', 0, 0);
+            $pdf->Cell(80, 5, ': ' . '-', 0, 1);
         }
         $pdf->Cell(59, 5, '', 0, 1); //end of line
 
@@ -358,7 +365,8 @@ class Delivery extends Controller
 
         $pdf->Cell(105, 5, 'Nama Barang', 1, 0);
         $pdf->Cell(25, 5, 'Quantity', 1, 0);
-        $pdf->Cell(25, 5, 'Unit', 1, 1);
+        $pdf->Cell(25, 5, 'Unit', 1, 0);
+        $pdf->Cell(39, 5, 'Keterangan', 1, 1);
         // $pdf->Cell(34, 5, 'Price per Unit', 1, 1); //end of line
 
         $pdf->SetFont('Arial', '', 12);
@@ -370,7 +378,8 @@ class Delivery extends Controller
         foreach ($data['do_item'] as $do_item) {
             $pdf->Cell(105, 5, $do_item['product_name'], 1, 0);
             $pdf->Cell(25, 5, $do_item['quantity'], 1, 0);
-            $pdf->Cell(25, 5, $do_item['unit_item'], 1, 1, 'R');
+            $pdf->Cell(25, 5, $do_item['unit_item'], 1, 0, 'R');
+            $pdf->Cell(39, 5, $do_item['product_desc'], 1, 1, 'R');
             // $pdf->Cell(34, 5, $do_item['price'], 1, 1, 'R'); //end of line
             $sum += $do_item['price'] * $do_item['quantity'];
         }
@@ -421,6 +430,8 @@ class Delivery extends Controller
         $pdf->Cell(62, 5, '(Penerima)', 0, 0, 'C');
         $pdf->Cell(62, 5, '(Pengantar)', 0, 0, 'C');
         $pdf->Cell(62, 5, '(Pengirim)', 0, 1, 'C');
+        $pdf->SetFont('Arial', '', 11);
+        $pdf->Cell(62, 5, '             Jam diterima:', 0, 0);
 
         $pdf->SetFont('Arial', 'BI', 6);
         $pdf->Cell(189, 10, '', 0, 1); //spacer

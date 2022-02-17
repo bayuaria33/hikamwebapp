@@ -11,7 +11,7 @@
         <?php } ?>
         <a href="<?= BASEURL; ?>/Invoice" class="editButton">Kembali</a>
         <a href="<?= BASEURL; ?>/Invoice/editPage/<?= $data['invc']['invoice_id']; ?>" class="editButton">Edit</a>
-        <a href="<?= BASEURL; ?>/Invoice/generatePDF/<?= $data['invc']['invoice_id']; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Generate PDF</a>
+        <!-- <a href="<?= BASEURL; ?>/Invoice/generatePDF/<?= $data['invc']['invoice_id']; ?>" class="detailButton" style="margin-left: 0;" target="_blank">Generate PDF</a> -->
         <!-- button cek PO -->
         <?php
         if (!empty($data['invc']['PO_id'])) { ?>
@@ -184,5 +184,28 @@
             <!-- ------------------------------------------------------------- -->
 
         </table>
+
+        <br>
+        <b>Text tambahan 1</b>
+        <form action="<?= BASEURL; ?>/Invoice/generatePDF/<?= $data['invc']['invoice_id']; ?>" method="POST" target="_blank">
+            <textarea id="textarea1" name="textarea1" rows="5" cols="139" style="resize: none;">
+Transfer FULL AMOUNT
+(Sesuai Nilai PO / Biaya Transfer Ditanggung Buyer)
+BCA KCP JATINEGARA TIMUR
+Acc Name : PT HIKAM ABADI INDONESIA
+No Rek : 496 024 7090
+</textarea>
+            <br><br>
+
+            <b>Text tambahan 2</b>
+            <textarea id="textarea2" name="textarea2" rows="5" cols="139" style="resize: none;">
+Lembar putih dan merah untuk customer / penerima Invoice
+1. Pembayaran dengan CHEQUE / GIRO, Mohon mencantumkan nama perusahaan kami.
+2. Kwitansi ini dinyatakan LUNAS, apabila CHEQUE / GIRO telah cair pada rekening Bank kami.
+</textarea>
+       
+            <input type="submit" value="Generate PDF" >
+        </form>
+
 
     </div>

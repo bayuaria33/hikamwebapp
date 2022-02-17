@@ -256,7 +256,8 @@ class Invoice extends Controller
         $data = $this->getItemDetails($invoice_id);
         $filename = $data['invc']['invoice_id'] . '-' . $data['invc']['customer_name'] . '-Invoice';
         $pdf = new FPDF('P', 'mm', 'A4');
-        // echo '<pre>' , var_dump($data['invc']) , '</pre>';
+        //echo '<pre>' , var_dump($data) , '</pre>';
+        $pdf->SetAutoPageBreak(true, 0);
         $pdf->AddPage();
         $pdf->Rect(5, 5, 200, 287, 'D');
         $pdf->Image('logo_hikam.png', 10, 10, -200); //letak foto nya di folder public
@@ -300,19 +301,14 @@ class Invoice extends Controller
 
         $pdf->Cell(50, 5, 'Alamat Penagihan             :', 0, 0);
         $pdf->MultiCell(112, 5, ': ' . $data['cust']['alamat_penagihan'], 0, 1);
-        $pdf->Cell(59, 5, '', 0, 1); //end of line
 
+        $pdf->Cell(59, 5, '', 0, 1); //end of line
         // $pdf->Cell(50, 5, 'Alamat Pengiriman', 0, 0);
         // $pdf->Cell(50, 5, ': ' . $data['cust']['alamat_pengiriman'], 0, 0);
         // $pdf->Cell(59, 5, '', 0, 1); //end of line
 
-        $pdf->Cell(50, 5, 'Nomor Telepon', 0, 0);
-        $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp1'], 0, 1);
-
-        $pdf->Cell(50, 5, '', 0, 0);
-        $pdf->Cell(80, 5, ': ' . $data['cust']['no_telp2'], 0, 1);
-
-        $pdf->Cell(59, 5, '', 0, 1); //end of line
+        $pdf->Cell(50, 5, 'U.P', 0, 0);
+        $pdf->Cell(45, 5, ': ' . $data['cust']['UP_Penagihan'], 0, 0);
 
         $pdf->Cell(50, 5, 'Nomor PO', 0, 0);
         if (!empty($data['PO'])) {
@@ -321,6 +317,22 @@ class Invoice extends Controller
             $pdf->Cell(80, 5, ': ' . '-', 0, 1);
         }
 
+
+
+        $pdf->Cell(50, 5, 'Nomor Telepon 1', 0, 0);
+        $pdf->Cell(45, 5, ': ' . $data['cust']['no_telp1'], 0, 0);
+
+        $pdf->Cell(50, 5, 'Tanggal PO', 0, 0);
+        if (!empty($data['PO'])) {            
+            $pdf->Cell(80, 5, ': ' . date("d F Y", strtotime($data['PO']['PO_date'])), 0, 1);
+        } else {
+            $pdf->Cell(80, 5, ': ' . '-', 0, 1);
+        }
+
+
+        $pdf->Cell(50, 5, 'Nomor Telepon 2', 0, 0);
+        $pdf->Cell(45, 5, ': ' . $data['cust']['no_telp2'], 0, 0);
+       
         $pdf->Cell(50, 5, 'Nomor DO', 0, 0);
         if (!empty($data['DO'])) {
             $pdf->Cell(80, 5, ': ' . $data['DO']['delivery_number'], 0, 1);
@@ -375,6 +387,7 @@ class Invoice extends Controller
             $pdf->Cell(25, 5, $invc_item['quantity'], 1, 0);
             $pdf->Cell(25, 5, $invc_item['unit_item'], 1, 0);
             $pdf->Cell(34, 5, number_format($invc_item['price']), 1, 1, 'R'); //end of line
+            $pdf->Cell(105, 5, '    -Keterangan: '.$invc_item['product_desc'], 1, 1);
         }
 
         //summary
@@ -384,14 +397,14 @@ class Invoice extends Controller
         $pdf->Cell(34, 5, number_format($sum), 1, 1, 'R'); //end of line
 
         $pdf->Cell(120, 5, '', 0, 0);
-        $pdf->Cell(28, 5, 'Biaya Kirim', 0, 0);
-        $pdf->Cell(7, 5, 'Rp', 1, 0);
-        $pdf->Cell(34, 5, number_format($ongkir), 1, 1, 'R'); //end of line
-
-        $pdf->Cell(120, 5, '', 0, 0);
         $pdf->Cell(28, 5, 'PPN ' . $ppn . ' %', 0, 0);
         $pdf->Cell(7, 5, 'Rp', 1, 0);
         $pdf->Cell(34, 5, number_format($taxed), 1, 1, 'R'); //end of line
+
+        $pdf->Cell(120, 5, '', 0, 0);
+        $pdf->Cell(28, 5, 'Biaya Kirim', 0, 0);
+        $pdf->Cell(7, 5, 'Rp', 1, 0);
+        $pdf->Cell(34, 5, number_format($ongkir), 1, 1, 'R'); //end of line
 
         $pdf->Cell(120, 5, '', 0, 0);
         $pdf->Cell(28, 5, 'Grand Total', 0, 0);
@@ -399,17 +412,27 @@ class Invoice extends Controller
         $pdf->Cell(34, 5, number_format($grandtotal, 2), 1, 1, 'R'); //end of line
 
         //make a dummy empty cell as a vertical spacer
-        $pdf->Cell(189, 10, '', 0, 1); //end of line
+        //$pdf->Cell(189, 10, '', 0, 1); //end of line
 
-        $pdf->Cell(20, 5, 'Catatan', 0, 0);
-        $pdf->MultiCell(120, 5, ': ' . $data['invc']['other_expenses'], 0, 1);
+        $pdf->SetFont('Arial', 'B', 7);
+        $pdf->MultiCell(189, 5, htmlspecialchars($_POST['textarea1']), 1, 1); //
+        $pdf->SetFont('Arial', 'B', 11);
 
-        $pdf->Cell(189, 20, '', 0, 1);
-        $pdf->Cell(189, 10, "Bekasi, ". date("d F Y", strtotime($data['invc']['invoice_date'])), 0, 1, 'R');
-        $pdf->Cell(189, 35, '', 0, 1);
+        $pdf->Cell(189, 10, "Bekasi, " . date("d F Y", strtotime($data['invc']['invoice_date'])), 0, 1, 'R');
+        $pdf->SetFont('Arial', 'BU', 11);
+        $pdf->Cell(28, 5, 'JUMLAH:', 0, 0, 'C'); //
+        $pdf->SetFont('Arial', 'B', 11);
+        $pdf->Cell(28, 5, 'Rp ' . number_format($grandtotal, 2), 0, 1, 'C'); //
+        $pdf->Cell(28, 5, 'Amount', 0, 1, 'C'); //
+        $pdf->Cell(28, 20, '', 0, 1, 'C'); //
+
+        $pdf->SetFont('Arial', '', 7);
+        $pdf->Cell(30, 10, 'PERHATIAN', 0, 0);
         $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(189, 10, '(Budi Ary Friyanto)', 0, 1, 'R');
-
+        $pdf->Cell(159, 10, '(Budi Ary Friyanto)', 0, 1, 'R');
+        $pdf->SetFont('Arial', 'B', 7);
+        $pdf->MultiCell(189, 5, htmlspecialchars($_POST['textarea2']), 1, 1); //
+        
         $pdf->Output('I', $filename . '.pdf');
     }
 }

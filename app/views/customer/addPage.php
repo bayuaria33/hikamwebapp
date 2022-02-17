@@ -22,6 +22,12 @@
         <label for="email">Email Customer</label>
         <input type="email" id="email" name="email" autocomplete="off">
 
+        <label for="UP_Penagihan">U.P Penagihan</label>
+        <input type="text" id="UP_Penagihan" name="UP_Penagihan" autocomplete="off">
+
+        <label for="UP_Pengiriman">U.P Pengiriman</label>
+        <input type="text" id="UP_Pengiriman" name="UP_Pengiriman" autocomplete="off">
+
         <input type="submit" value="Submit">
     </form>
 

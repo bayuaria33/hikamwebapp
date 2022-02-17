@@ -59,6 +59,22 @@
                     <?= $data['cust']['email']; ?>
                 </td>
             </tr>
+            
+            <tr>
+                <td>
+                    <b>UP Penagihan</b>
+                </td>
+                <td>
+                    <?= $data['cust']['UP_Penagihan']; ?>
+                </td>
+                <td>
+                    <b>UP Pengiriman</b>
+                </td>
+                <td>
+                    <?= $data['cust']['UP_Pengiriman']; ?>
+                </td>
+            </tr>
+
         </table>
         <a href="<?= BASEURL; ?>/Customer/custInvoice/<?= $data['cust']["customer_id"]; ?>" class="detailButton" style="margin-left: 0; margin-top: 2ch;">Cek Invoice</a>
         <a href="<?= BASEURL; ?>/Customer/custPurchase/<?= $data['cust']["customer_id"]; ?>" class="detailButton" style="margin-left: 0; margin-top: 2ch;">Cek Purchase Order</a>

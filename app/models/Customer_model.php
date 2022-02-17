@@ -48,7 +48,7 @@ class Customer_model
             $newIdInt = $lastIdInt + 1;
         }
 
-        $query = "INSERT INTO " . $this->table . " VALUES(:customer_id, :customer_name, :alamat_penagihan, :alamat_pengiriman, :no_telp1, :no_telp2, :email) ";
+        $query = "INSERT INTO " . $this->table . " VALUES(:customer_id, :customer_name, :alamat_penagihan, :alamat_pengiriman, :no_telp1, :no_telp2, :email, :UP_Penagihan, :UP_Pengiriman) ";
         $this->db->query($query);
         $this->db->bind('customer_id', $newIdInt);
         $this->db->bind('customer_name', $data['customer_name']);
@@ -57,6 +57,8 @@ class Customer_model
         $this->db->bind('no_telp1', $data['no_telp1']);
         $this->db->bind('no_telp2', $data['no_telp2']);
         $this->db->bind('email', $data['email']);
+        $this->db->bind('UP_Penagihan', $data['UP_Penagihan']);
+        $this->db->bind('UP_Pengiriman', $data['UP_Pengiriman']);
 
         $this->db->execute();
 
@@ -82,7 +84,9 @@ class Customer_model
         alamat_pengiriman =:alamat_pengiriman, 
         no_telp1 =:no_telp1,
         no_telp2 =:no_telp2, 
-        email=:email 
+        email=:email,
+        UP_Penagihan =:UP_Penagihan, 
+        UP_Pengiriman =:UP_Pengiriman 
             WHERE customer_id=:customer_id";
         $this->db->query($query);
         $this->db->bind('customer_id', $data['customer_id']);
@@ -92,18 +96,10 @@ class Customer_model
         $this->db->bind('no_telp1', $data['no_telp1']);
         $this->db->bind('no_telp2', $data['no_telp2']);
         $this->db->bind('email', $data['email']);
+        $this->db->bind('UP_Penagihan', $data['UP_Penagihan']);
+        $this->db->bind('UP_Pengiriman', $data['UP_Pengiriman']);
 
         $this->db->execute();
         return $this->db->rowCount();
-    }
-
-    public function cariDataCustomer()
-    {
-        $keyword = $_POST['keyword'];
-        $query = "SELECT * FROM " . $this->table . " WHERE customer_name LIKE :keyword";
-        $this->db->query($query);
-        $this->db->bind('keyword', "%$keyword%");
-
-        return $this->db->resultSet();
     }
 }

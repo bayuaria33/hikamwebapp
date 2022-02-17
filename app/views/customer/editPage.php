@@ -26,6 +26,12 @@
         <label for="email">Email Customer</label>
         <input type="email" id="email" name="email" autocomplete="off" value="<?= $data['cust']['email']; ?>">
 
+        <label for="UP_Penagihan">U.P Penagihan</label>
+        <input type="text" id="UP_Penagihan" name="UP_Penagihan" autocomplete="off" value="<?= $data['cust']['UP_Penagihan']; ?>">
+
+        <label for="UP_Pengiriman">U.P Pengiriman</label>
+        <input type="text" id="UP_Pengiriman" name="UP_Pengiriman" autocomplete="off" value="<?= $data['cust']['UP_Pengiriman']; ?>">
+
         <input type="submit" value="Submit">
     </form>
 
