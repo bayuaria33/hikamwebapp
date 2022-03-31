@@ -187,24 +187,24 @@
 
         <br>
         <b>Text tambahan 1</b>
-        <form action="<?= BASEURL; ?>/Invoice/generatePDF/<?= $data['invc']['invoice_id']; ?>" method="POST" target="_blank">
-            <textarea id="textarea1" name="textarea1" rows="5" cols="139" style="resize: none;">
-Transfer FULL AMOUNT
-(Sesuai Nilai PO / Biaya Transfer Ditanggung Buyer)
-BCA KCP JATINEGARA TIMUR
-Acc Name : PT HIKAM ABADI INDONESIA
-No Rek : 496 024 7090
-</textarea>
+        <form action="<?= BASEURL; ?>/Invoice/pregenPDF/<?= $data['invc']['invoice_id']; ?>" method="POST" target="_blank">
+        <?php if($data['invc_text'] != false){
+            $value1 =$data['invc_text']['text1'];
+            $value2 =$data['invc_text']['text2'];
+        }else{
+            $value1=
+            "Transfer FULL AMOUNT \n(Sesuai Nilai PO / Biaya Transfer Ditanggung Buyer) \nBCA KCP JATINEGARA TIMUR \nAcc Name : PT HIKAM ABADI INDONESIA \nNo Rek : 496 024 7090";
+            $value2=
+            "Lembar putih dan merah untuk customer / penerima Invoice \n1. Pembayaran dengan CHEQUE / GIRO, Mohon mencantumkan nama perusahaan kami. \n2. Kwitansi ini dinyatakan LUNAS, apabila CHEQUE / GIRO telah cair pada rekening Bank kami.";
+        } ?>
+            <textarea id="text1" name="text1" rows="5" cols="139" style="resize: none;" value="<?$value1 ?>"><?= $value1; ?></textarea>
             <br><br>
 
             <b>Text tambahan 2</b>
-            <textarea id="textarea2" name="textarea2" rows="5" cols="139" style="resize: none;">
-Lembar putih dan merah untuk customer / penerima Invoice
-1. Pembayaran dengan CHEQUE / GIRO, Mohon mencantumkan nama perusahaan kami.
-2. Kwitansi ini dinyatakan LUNAS, apabila CHEQUE / GIRO telah cair pada rekening Bank kami.
-</textarea>
-       
-            <input type="submit" value="Generate PDF" >
+            <textarea id="text2" name="text2" rows="5" cols="139" style="resize: none;" value="<?$value2 ?>"><?= $value2 ?></textarea>
+
+            <label for="" style="color: grey;">*Tekan Generate untuk menyimpan perubahan pada text tambahan.</label>
+            <input type="submit" value="Generate PDF">
         </form>
 
 

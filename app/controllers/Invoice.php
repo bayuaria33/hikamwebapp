@@ -167,6 +167,7 @@ class Invoice extends Controller
         // $data['InvoiceMonth'] = $this->getInvoiceMonth($data['invc']['invoice_id']);
         // $data['AllInvoiceInMonth'] = $this->model('Invoice_model')->getInvoiceInMonth($data['InvoiceMonth']);
         // $data['key'] = $this->findInvoiceIndexInMonth($data['invc']['invoice_id']);
+        $data['invc_text'] = $this->model('Invoice_model')->getInvoiceText($invoice_id);
         return $data;
     }
     public function item($invoice_id)
@@ -251,6 +252,28 @@ class Invoice extends Controller
         }
     }
 
+    public function pregenpdf($invoice_id) //to add, edit additional texts before generating the pdf
+    {
+        $data['invc_text'] = $this->model('Invoice_model')->getInvoiceText($invoice_id);
+        if ($data['invc_text'] == false) {
+            $data['invc_text']['invoice_id'] = $invoice_id;
+            $data['invc_text']['text1'] = $_POST['text1'];
+            $data['invc_text']['text2'] = $_POST['text2'];
+            if ($this->model('Invoice_model')->tambahDataInvoiceText($data['invc_text']) > 0) {
+                $this->generatePDF($invoice_id);
+            }
+        }else{
+            $data['invc_text']['invoice_id'] = $invoice_id;
+            $data['invc_text']['text1'] = $_POST['text1'];
+            $data['invc_text']['text2'] = $_POST['text2'];
+            if ($this->model('Invoice_model')->editDataInvoiceText($data['invc_text']) > 0) {
+                $this->generatePDF($invoice_id);
+            }
+        }
+
+    }
+
+
     public function generatePDF($invoice_id)
     {
         $data = $this->getItemDetails($invoice_id);
@@ -323,7 +346,7 @@ class Invoice extends Controller
         $pdf->Cell(45, 5, ': ' . $data['cust']['no_telp1'], 0, 0);
 
         $pdf->Cell(50, 5, 'Tanggal PO', 0, 0);
-        if (!empty($data['PO'])) {            
+        if (!empty($data['PO'])) {
             $pdf->Cell(80, 5, ': ' . date("d F Y", strtotime($data['PO']['PO_date'])), 0, 1);
         } else {
             $pdf->Cell(80, 5, ': ' . '-', 0, 1);
@@ -332,7 +355,7 @@ class Invoice extends Controller
 
         $pdf->Cell(50, 5, 'Nomor Telepon 2', 0, 0);
         $pdf->Cell(45, 5, ': ' . $data['cust']['no_telp2'], 0, 0);
-       
+
         $pdf->Cell(50, 5, 'Nomor DO', 0, 0);
         if (!empty($data['DO'])) {
             $pdf->Cell(80, 5, ': ' . $data['DO']['delivery_number'], 0, 1);
@@ -387,7 +410,7 @@ class Invoice extends Controller
             $pdf->Cell(25, 5, $invc_item['quantity'], 1, 0);
             $pdf->Cell(25, 5, $invc_item['unit_item'], 1, 0);
             $pdf->Cell(34, 5, number_format($invc_item['price']), 1, 1, 'R'); //end of line
-            $pdf->Cell(105, 5, '    -Keterangan: '.$invc_item['product_desc'], 1, 1);
+            $pdf->Cell(105, 5, '    -Keterangan: ' . $invc_item['product_desc'], 1, 1);
         }
 
         //summary
@@ -415,7 +438,7 @@ class Invoice extends Controller
         //$pdf->Cell(189, 10, '', 0, 1); //end of line
 
         $pdf->SetFont('Arial', 'B', 7);
-        $pdf->MultiCell(189, 5, htmlspecialchars($_POST['textarea1']), 1, 1); //
+        $pdf->MultiCell(189, 5, $data['invc_text']['text1'], 1, 1); //
         $pdf->SetFont('Arial', 'B', 11);
 
         $pdf->Cell(189, 10, "Bekasi, " . date("d F Y", strtotime($data['invc']['invoice_date'])), 0, 1, 'R');
@@ -431,8 +454,8 @@ class Invoice extends Controller
         $pdf->SetFont('Arial', 'B', 12);
         $pdf->Cell(159, 10, '(Budi Ary Friyanto)', 0, 1, 'R');
         $pdf->SetFont('Arial', 'B', 7);
-        $pdf->MultiCell(189, 5, htmlspecialchars($_POST['textarea2']), 1, 1); //
-        
+        $pdf->MultiCell(189, 5, $data['invc_text']['text2'], 1, 1); //
+
         $pdf->Output('I', $filename . '.pdf');
     }
 }

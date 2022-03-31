@@ -4,6 +4,7 @@ class Invoice_model
     private $table = "invoice"; //nama table di db
     private $table2 = "invc_item";
     private $table3 = "customer";
+    private $table4 = "invc_text";
     private $db;
 
     function dd($variable)
@@ -229,6 +230,7 @@ class Invoice_model
         $this->db->execute();
         return $this->db->rowCount();
     }
+
     public function hapusDataInvoiceItem($invc_item_id)
     {
         $query = "DELETE FROM " . $this->table2 . " WHERE invc_item_id = :invc_item_id";
@@ -246,5 +248,41 @@ class Invoice_model
         $this->db->query("select invoice_id from " . $this->table . " where monthname(invoice_date)='" . $month
             . "' order by invoice_date");
         return $this->db->resultSet();
+    }
+
+    public function getInvoiceText($invoice_id)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table4 . ' WHERE invoice_id=:invoice_id');
+        $this->db->bind('invoice_id', $invoice_id);
+        return $this->db->single();
+    }
+
+    public function tambahDataInvoiceText($data)
+    {
+        $query = "INSERT INTO " . $this->table4 .
+            " VALUES(:invoice_id, 
+            :text1, 
+            :text2) ";
+        $this->db->query($query);
+        $this->db->bind('invoice_id', $data['invoice_id']);
+        $this->db->bind('text1', $data['text1']);
+        $this->db->bind('text2', $data['text2']);
+        //$this->dd($data);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
+    public function editDataInvoiceText($data)
+    {
+        $query = "UPDATE " . $this->table4 . " SET  
+        text1 =:text1, 
+        text2 =:text2
+            WHERE invoice_id=:invoice_id";
+        $this->db->query($query);
+        $this->db->bind('invoice_id', $data['invoice_id']);
+        $this->db->bind('text1', $data['text1']);
+        $this->db->bind('text2', $data['text2']);
+        $this->db->execute();
+        return $this->db->rowCount();
     }
 }
