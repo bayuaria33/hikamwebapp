@@ -55,7 +55,7 @@
 
         <label for="ppn">PPN</label>
         <br><select name="ppn" id="ppn">
-            <option value="10">10%</option>
+            <option value="11">11%</option>
             <option value="0">0%</option>
         </select>
 
